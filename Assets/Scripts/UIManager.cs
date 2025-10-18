@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     #region Singleton
-
     public static UIManager Instance { get; private set; }
     
     void Awake()
@@ -24,15 +23,12 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     #endregion
 
     #region UI
-
     private Stack<UI_Popup> popupStack = new Stack<UI_Popup>();
 
     private UI_Scene _sceneUI;
-
     public UI_Scene CurSceneUI
     {
         set { _sceneUI = value; }
@@ -46,6 +42,7 @@ public class UIManager : MonoBehaviour
         RegisterAllUIs();
         
         ChangeSceneUI<UI_Title>();
+        FindUI<UI_UpgradePanel>().SetUp();
     }
 
     private void RegisterAllUIs()
@@ -68,6 +65,11 @@ public class UIManager : MonoBehaviour
 
             UIEntry.Add(key, ui);
         }
+    }
+    
+    public UI_Popup PeekCurPopup()
+    {
+        return popupStack.Count > 0 ? popupStack.Peek() : null;
     }
 
     public T FindUI<T>() where T : UI_Base

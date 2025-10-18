@@ -2,15 +2,8 @@ using UnityEngine;
 
 public class UI_Popup : UI_Base
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void ClosePopupUI()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UIManager.Instance.ClosePopupUI();
     }
 }

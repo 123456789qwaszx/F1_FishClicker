@@ -73,7 +73,7 @@ public class UI_InGame : UI_Scene
         Img_Gem.sprite = Resources.Load<Sprite>("UI_InGame/Img_Gem");
         Btn_Phone.image.sprite = Resources.Load<Sprite>("UI_InGame/Img_Phone");
         
-        BindEvent(Btn_Phone.gameObject, Btn_PhoneClick);
+        BindEvent(Btn_Phone.gameObject, OnShowPhone);
     }
 
     public void UpdateSlots()
@@ -81,9 +81,11 @@ public class UI_InGame : UI_Scene
         
     }
     
-    public void Btn_PhoneClick(PointerEventData _)
+    public void OnShowPhone(PointerEventData _)
     {
+        UIManager.Instance.CloseAllPopupUI();
         UIManager.Instance.ShowPopup<UI_Phone>(popup => { popup.UpdateSlots(); });
-        
+        UIManager.Instance.ShowPopup<UI_AppMenuPanel>(null, UIManager.Instance.FindUI<UI_Phone>()?.AppMenuPanelBox);
     }
+    
 }

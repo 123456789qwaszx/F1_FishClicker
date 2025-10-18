@@ -56,7 +56,7 @@ public class UI_AppMenuPanel : UI_Popup
 
     void OnShowUpgradePanel(PointerEventData eventData)
     {
-        UIManager.Instance.ClosePopupUI();
+        ClosePopupUI();
         UIManager.Instance.ShowPopup<UI_UpgradePanel>(
             popup =>
             {

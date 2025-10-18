@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Phone : UI_Popup
@@ -14,13 +15,6 @@ public class UI_Phone : UI_Popup
     {
         Btn_Home,
         Btn_Back,
-        Btn_Icon00,
-        Btn_Icon00_Pressed,
-        Btn_Icon00_Normal,
-        Btn_Icon01,
-        Btn_Icon02,
-        Btn_Icon02_Pressed,
-        Btn_Icon02_Normal,
     }
 
 
@@ -43,13 +37,6 @@ public class UI_Phone : UI_Popup
     Image Img_RecentAppsButton;
     Button Btn_Home;
     Button Btn_Back;
-    Button Btn_Icon00;
-    Button Btn_Icon00_Pressed;
-    Button Btn_Icon00_Normal;
-    Button Btn_Icon01;
-    Button Btn_Icon02;
-    Button Btn_Icon02_Pressed;
-    Button Btn_Icon02_Normal;
 
     public Transform UpgradePanelBox;
     public Transform AppMenuPanelBox;
@@ -72,17 +59,33 @@ public class UI_Phone : UI_Popup
         Img_RecentAppsButton = GetImage((int)Images.Img_RecentAppsButton);
         Btn_Home = GetButton((int)Buttons.Btn_Home);
         Btn_Back = GetButton((int)Buttons.Btn_Back);
-        Btn_Icon00 = GetButton((int)Buttons.Btn_Icon00);
-        Btn_Icon00_Pressed = GetButton((int)Buttons.Btn_Icon00_Pressed);
-        Btn_Icon00_Normal = GetButton((int)Buttons.Btn_Icon00_Normal);
-        Btn_Icon01 = GetButton((int)Buttons.Btn_Icon01);
-        Btn_Icon02 = GetButton((int)Buttons.Btn_Icon02);
-        Btn_Icon02_Pressed = GetButton((int)Buttons.Btn_Icon02_Pressed);
-        Btn_Icon02_Normal = GetButton((int)Buttons.Btn_Icon02_Normal);
+        
+        BindEvent(Btn_Back.gameObject, OnBackPannel);
+        BindEvent(Btn_Home.gameObject, OnHomeButton);
     }
     
     public void UpdateSlots()
     {
         
     }
+    
+    #region Button
+    void OnBackPannel(PointerEventData eventData)
+    {
+        if (UIManager.Instance.PeekCurPopup() is UI_UpgradePanel)
+        {
+            UIManager.Instance.ClosePopupUI();
+            UIManager.Instance.ShowPopup<UI_AppMenuPanel>(null, AppMenuPanelBox);
+        }
+        else
+        {
+            UIManager.Instance.CloseAllPopupUI();
+        }
+    }
+
+    void OnHomeButton(PointerEventData eventData)
+    {
+        UIManager.Instance.CloseAllPopupUI();
+    }
+    #endregion
 }
