@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Phone : UI_Scene
+public class UI_Phone : UI_Popup
 {
     #region enum
     enum Texts
@@ -73,6 +73,10 @@ public class UI_Phone : UI_Scene
         Btn_Icon02 = GetButton((int)Buttons.Btn_Icon02);
         Btn_Icon02_Pressed = GetButton((int)Buttons.Btn_Icon02_Pressed);
         Btn_Icon02_Normal = GetButton((int)Buttons.Btn_Icon02_Normal);
-
+    }
+    
+    public void UpdateSlots()
+    {
+        
     }
 }

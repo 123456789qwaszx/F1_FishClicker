@@ -8,7 +8,9 @@ public enum UIEventType
     ClosePopup,
     UpdatePopup,
     FadeInStore,
-    FadeOutStore
+    FadeOutStore,
+    
+    ChangeScene,
 }
 
 public enum GameEventType
@@ -64,7 +66,7 @@ public class EventManager
     #region UIHandler
 
     private List<IUIEventHandler> uiHandlers = new();
-    public static Action<UIEventType, object> OnUIEvent;
+    public Action<UIEventType, object> OnUIEvent;
     
     private void OnEnable()
     {
@@ -75,7 +77,24 @@ public class EventManager
     {
         OnUIEvent -= HandleUIEvent;
     }
+    
+    
+    public void Raise(UIEventType eventType, object payload = null)
+    {
+        OnUIEvent?.Invoke(eventType, payload);
+    }
 
+
+    private void HandleUIEvent(UIEventType ui, object payload)
+    {
+        foreach (var handler in uiHandlers)
+        {
+            if (handler.Handle(ui, payload))
+                break;
+        }
+    }
+    
+    
     private void RegisterHandlersForScene(string sceneName)
     {
         uiHandlers.Clear();
@@ -91,15 +110,5 @@ public class EventManager
             // case 
         }
     }
-
-    private void HandleUIEvent(UIEventType ui, object payload)
-    {
-        foreach (var handler in uiHandlers)
-        {
-            if (handler.Handle(ui, payload))
-                break;
-        }
-    }
-
     #endregion
 }

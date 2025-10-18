@@ -1,10 +1,13 @@
 ﻿using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Title : UI_Scene
 {
     #region enum
+
     enum Texts
     {
         Txt_Start,
@@ -56,5 +59,25 @@ public class UI_Title : UI_Scene
         Txt_End = GetText((int)Texts.Txt_End);
         Img_TitleText = GetImage((int)Images.Img_TitleText);
 
+
+        BindEvent(Btn_Start.gameObject, Btn_StartClick);
+        BindEvent(Btn_End.gameObject, Btn_EndClick);
+    }
+
+
+    void Btn_StartClick(PointerEventData _)
+    {
+        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.UpdateSlots(); });
+        
+        //EventManager.Instance.Raise(UIEventType.ChangeScene, "UI_InGame");
+    }
+
+    void Btn_EndClick(PointerEventData _)
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

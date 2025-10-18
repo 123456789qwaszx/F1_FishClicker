@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Init();
         }
         else
         {
@@ -43,6 +44,8 @@ public class UIManager : MonoBehaviour
     public void Init()
     {
         RegisterAllUIs();
+        
+        ChangeSceneUI<UI_Title>();
     }
 
     private void RegisterAllUIs()
@@ -92,6 +95,21 @@ public class UIManager : MonoBehaviour
         CurSceneUI?.gameObject.SetActive(false);
         CurSceneUI = ui as T;
     }
+    
+    
+    public void ChangeSceneUI(string key, Action callback = null)
+    {
+        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        {
+            Debug.LogError($"UI Not registered : {key}");
+        }
+
+        ui?.gameObject.SetActive(true);
+        callback?.Invoke();
+
+        CurSceneUI?.gameObject.SetActive(false);
+        CurSceneUI = ui as UI_Scene;
+    }
 
     public void AddPopupUI<T>() where T : UI_Popup
     {
@@ -113,6 +131,31 @@ public class UIManager : MonoBehaviour
             callback?.Invoke();
             top?.transform.SetParent(parent);
         }
+    }
+
+    public void ShowPopup<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
+    {
+        String key = typeof(T).Name;
+
+        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        {
+            Debug.LogError($"Popup not registered: {key}");
+        }
+
+        T popupUI = ui as T;
+
+        
+        popupStack.Push(popupUI);
+
+        if (popupStack.Count <= 0) return;
+
+        T top = (T)popupStack.Peek();
+        top.gameObject.SetActive(true);
+
+        callback?.Invoke(top);
+
+        if (parent != null)
+            top.transform.SetParent(parent);
     }
 
     public void CloseAllPopupUI()

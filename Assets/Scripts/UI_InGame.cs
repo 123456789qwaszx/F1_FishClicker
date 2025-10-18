@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_InGame : UI_Scene
@@ -71,6 +72,18 @@ public class UI_InGame : UI_Scene
         
         Img_Gem.sprite = Resources.Load<Sprite>("UI_InGame/Img_Gem");
         Btn_Phone.image.sprite = Resources.Load<Sprite>("UI_InGame/Img_Phone");
+        
+        BindEvent(Btn_Phone.gameObject, Btn_PhoneClick);
     }
 
+    public void UpdateSlots()
+    {
+        
+    }
+    
+    public void Btn_PhoneClick(PointerEventData _)
+    {
+        UIManager.Instance.ShowPopup<UI_Phone>(popup => { popup.UpdateSlots(); });
+        
+    }
 }
