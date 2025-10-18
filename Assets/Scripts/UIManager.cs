@@ -131,43 +131,4 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
-    #region UIHandler
-
-    private List<IUIEventHandler> uiHandlers = new();
-    
-    private void OnEnable()
-    {
-        EventBus.OnUIEvent += HandleUIEvent;
-    }
-
-    private void OnDisable()
-    {
-        EventBus.OnUIEvent -= HandleUIEvent;
-    }
-
-    private void RegisterHandlersForScene(string sceneName)
-    {
-        uiHandlers.Clear();
-        
-        //공통 핸들러 (항상 등록)
-        //추가
-
-        switch (sceneName)
-        {
-            // 씬별 핸들러 추가
-            // case 
-        }
-    }
-
-    private void HandleUIEvent(UIEventType ui, object payload)
-    {
-        foreach (var handler in uiHandlers)
-        {
-            if (handler.Handle(ui, payload))
-                break;
-        }
-    }
-
-    #endregion
 }
