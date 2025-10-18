@@ -19,6 +19,10 @@ public enum ETouchEvent
 
 public abstract class UI_Base : MonoBehaviour
 {
+    protected virtual void Awake()
+    {
+    }
+    
     public virtual void Init()
     {
         gameObject.name = GetType().Name;
