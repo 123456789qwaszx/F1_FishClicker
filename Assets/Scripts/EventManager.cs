@@ -13,7 +13,7 @@ public enum UIEventType
     ChangeScene,
 }
 
-public enum GameEventType
+public enum EEventType
 {
     MoneyChanged,
     Upgraded,
@@ -35,9 +35,9 @@ public class EventManager
     }
     #endregion
 
-    private Dictionary<GameEventType, Action> _events = new Dictionary<GameEventType, Action>();
+    private Dictionary<EEventType, Action> _events = new Dictionary<EEventType, Action>();
 
-    public void AddEvent(GameEventType eventType, Action listener)
+    public void AddEvent(EEventType eventType, Action listener)
     {
         if (_events.ContainsKey(eventType) == false)
             _events.Add(eventType, new Action(() => { }));
@@ -45,13 +45,13 @@ public class EventManager
         _events[eventType] += listener;
     }
 
-    public void RemoveEvent(GameEventType eventType, Action listener)
+    public void RemoveEvent(EEventType eventType, Action listener)
     {
         if (_events.ContainsKey(eventType))
             _events[eventType] -= listener;
     }
 
-    public void TriggerEvent(GameEventType eventType)
+    public void TriggerEvent(EEventType eventType)
     {
         if (_events.ContainsKey(eventType))
             _events[eventType].Invoke();

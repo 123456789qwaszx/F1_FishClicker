@@ -51,10 +51,16 @@ public class UI_Phone : UI_Popup
     Button Btn_Icon02_Pressed;
     Button Btn_Icon02_Normal;
 
+    public Transform UpgradePanelBox;
+    public Transform AppMenuPanelBox;
+
 
     protected override void Awake()
     {
         base.Awake();
+        
+        UpgradePanelBox = ComponentHelper.TryFindChild(this, "UpgradePanelBox");
+        AppMenuPanelBox = ComponentHelper.TryFindChild(this, "AppMenuPanelBox");
 
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
