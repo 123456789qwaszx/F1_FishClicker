@@ -96,7 +96,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     
 
 
-    public float GetCurrentValue(UpgradeType stat)
+    public float GetStatValue(UpgradeType stat)
     {
         return _cache.TryGetValue(stat, out UpgradeData ug) ? ug.GetCurStatValue() : -1;
     }
@@ -118,7 +118,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
         UpgradeData upgradeData = _cache[stat];
 
-        GameManager.Instance.UpdateMoney(-upgradeData.GetUpgradeCost());
+        GameManager.Instance.IncreaseUsedMoneyAmount(-upgradeData.GetUpgradeCost());
 
         upgradeData.level++;
         float newValue = upgradeData.GetCurStatValue();

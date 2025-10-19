@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
-    // ===============================
-    // 2. 인벤토리 데이터
-    // ===============================
     private Dictionary<FishData, FishItem> inventory = new Dictionary<FishData, FishItem>();
 
-    // ===============================
-    // 4. 물고기 추가
-    // ===============================
+    
     public void AddFish(FishData fish, int quantity = 1)
     {
         if (inventory.ContainsKey(fish))

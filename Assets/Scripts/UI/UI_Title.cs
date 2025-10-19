@@ -67,7 +67,7 @@ public class UI_Title : UI_Scene
 
     void Btn_StartClick(PointerEventData _)
     {
-        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.UpdateSlots(); });
+        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.RefreshUI(); });
         
         //EventManager.Instance.Raise(UIEventType.ChangeScene, "UI_InGame");
     }

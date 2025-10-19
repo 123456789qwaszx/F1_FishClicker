@@ -76,9 +76,10 @@ public class UI_InGame : UI_Scene
         BindEvent(Btn_Phone.gameObject, OnShowPhone);
     }
 
-    public void UpdateSlots()
+    public void RefreshUI()
     {
-        
+        Txt_GoldGain.text = $"{GameManager.Instance.Money}G";
+        Txt_FishAmount.text = $"{GameManager.Instance.fishCaughtCount}F";
     }
     
     public void OnShowPhone(PointerEventData _)

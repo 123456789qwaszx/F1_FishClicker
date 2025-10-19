@@ -70,8 +70,8 @@ public class ClickManager : Singleton<ClickManager>
     {
         while (true)
         {
-            float autoInterval = UpgradeManager.Instance.GetCurrentValue(UpgradeType.CurrencyGain);
-            float efficiencyBonus = UpgradeManager.Instance.GetCurrentValue(UpgradeType.ExtraChanceRate);
+            float autoInterval = UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
+            float efficiencyBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.ExtraChanceRate);
             
             FishData caughtFish = GetRandomFishFromCurrentMap();
             
