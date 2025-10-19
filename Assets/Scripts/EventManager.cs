@@ -15,6 +15,7 @@ public enum UIEventType
 
 public enum EEventType
 {
+    OnFishCaught,
     MoneyChanged,
     Upgraded,
 }

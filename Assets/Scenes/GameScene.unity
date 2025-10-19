@@ -1453,6 +1453,7 @@ GameObject:
   - component: {fileID: 588027648}
   - component: {fileID: 588027650}
   - component: {fileID: 588027649}
+  - component: {fileID: 588027651}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -1517,6 +1518,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588027647}
   m_CullTransparentMesh: 1
+--- !u!114 &588027651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588027647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 588027649}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1413158865}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: OnClickFishing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &608055729
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,6 +3374,7 @@ GameObject:
   - component: {fileID: 1413158861}
   - component: {fileID: 1413158863}
   - component: {fileID: 1413158862}
+  - component: {fileID: 1413158865}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3364,6 +3422,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _money: 0
+--- !u!114 &1413158865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413158860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b410bf675d0f504c9bbc933ba95dcaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickManager
+  allPools:
+  - {fileID: 11400000, guid: 4b55d69407fda1b43aab4d7662241e2a, type: 2}
+  - {fileID: 11400000, guid: d937f969dad9d0c4688c06bce5e44df0, type: 2}
+  - {fileID: 11400000, guid: 43e727102e9c4064eb5abeb63ac1303c, type: 2}
+  currentMapName: FishPool000 (Fish Pool)
 --- !u!1 &1436059897
 GameObject:
   m_ObjectHideFlags: 0

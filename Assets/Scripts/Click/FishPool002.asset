@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c413129d0dee2b4f8f9d8cc2c24acba, type: 3}
+  m_Name: FishPool002
+  m_EditorClassIdentifier: Assembly-CSharp::FishPool
+  mapName: 
+  fishList:
+  - {fileID: 11400000, guid: 8d4db78dc4e45fa44b100e60e0c535da, type: 2}
+  - {fileID: 11400000, guid: a789cb15b134af745b6cb07c8d2d72a3, type: 2}
+  - {fileID: 11400000, guid: e2c48f98b45a4c64492cbbcf081976ec, type: 2}
+  - {fileID: 11400000, guid: be4b0e7c9a7cfd6488387a58fa92286c, type: 2}

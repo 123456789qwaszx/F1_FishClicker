@@ -85,7 +85,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
         {
             if (ud == null) continue;
             _cache[ud.statType] = ud;
-            GameManager.Instance.UpdateStat(ud.statType, ud.GetCurStatValue());
         }
     }
 
@@ -99,9 +98,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public float GetCurrentValue(UpgradeType stat)
     {
-        if (_cache.TryGetValue(stat, out UpgradeData ug))
-            return ug.GetCurStatValue();
-        return GameManager.Instance.GetStatValue(stat);
+        return _cache.TryGetValue(stat, out UpgradeData ug) ? ug.GetCurStatValue() : -1;
     }
 
 
@@ -125,7 +122,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
         upgradeData.level++;
         float newValue = upgradeData.GetCurStatValue();
-        GameManager.Instance.UpdateStat(stat, newValue);
 
         EventManager.Instance.TriggerEvent(EEventType.Upgraded);
     }
