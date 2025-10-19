@@ -22,7 +22,7 @@ public class UpgradeSlot : MonoBehaviour
                 Txt_UpgradeValue.text = $"{StringNameSpace.CurrencyGain}Lv.({UpgradeManager.Instance.GetLevel(UpgradeType)})\n+{UpgradeManager.Instance.GetStatValue(UpgradeType)}%";
                 Txt_UpgradePrice.text = $"{UpgradeManager.Instance.GetUpgradeCost(UpgradeType)}G";
                 break;
-            case UpgradeType.ExtraChanceRate:
+            case UpgradeType.RareOrAboveChanceBonus:
                 Txt_UpgradeValue.text = $"{StringNameSpace.ExtraChanceRate}Lv.({UpgradeManager.Instance.GetLevel(UpgradeType)})\n+{UpgradeManager.Instance.GetStatValue(UpgradeType)}%";
                 Txt_UpgradePrice.text = $"{UpgradeManager.Instance.GetUpgradeCost(UpgradeType)}G";
                 break;
