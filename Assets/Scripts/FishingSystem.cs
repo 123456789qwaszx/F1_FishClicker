@@ -1,10 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-/// <summary>
-/// 등급별 물고기 잡기 시스템 (UpgradeManager와 연동)
-/// </summary>
-public class FishingSystem : MonoBehaviour
+public class FishingSystem : Singleton<FishingSystem>
 {
     [Header("물고기 리스트")]
     [SerializeField] private List<FishData> commonFishes;

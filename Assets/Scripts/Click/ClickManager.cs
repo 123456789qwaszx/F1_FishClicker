@@ -7,9 +7,11 @@ public class ClickManager : Singleton<ClickManager>
     public List<FishPool> allPools;       // 게임 내 모든 맵
     public string currentMapName = "FishPool000";
 
+    
+    
     void Awake()
     {
-        //Init();
+        Init();
     }
 
     public void Init()
@@ -26,6 +28,10 @@ public class ClickManager : Singleton<ClickManager>
             InventoryManager.Instance.AddFish(caughtFish);
             // 결과 연출
             //UIManager.Instance.ShowCatchPopup(caughtFish);
+            
+            GameManager.Instance.ChangeMoney(caughtFish.baseValue);
+            GameManager.Instance.IncreaseCaughtFishCount();
+            EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
             
             Debug.Log($"{caughtFish.name}");
         }
@@ -66,17 +72,25 @@ public class ClickManager : Singleton<ClickManager>
         autoFishingCoroutine = StartCoroutine(AutoFishingRoutine());
     }
 
+    private float baseAutoInterval = 1.0f;
+    
     private IEnumerator AutoFishingRoutine()
     {
         while (true)
         {
-            float autoInterval = UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
+            float autoIntervalBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
+            float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
+            
             float efficiencyBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
             
             FishData caughtFish = GetRandomFishFromCurrentMap();
             
             InventoryManager.Instance.AddFish(caughtFish);
+            
             Debug.Log($"{caughtFish.name}");
+            
+            GameManager.Instance.ChangeMoney(caughtFish.baseValue);
+            EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
 
             yield return new WaitForSeconds(autoInterval); // 업그레이드 속도 반영
         }

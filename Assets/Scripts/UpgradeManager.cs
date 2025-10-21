@@ -71,7 +71,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
                 level = 0,
                 baseStatValue = 0,
                 valueIncrease = 2,
-                baseCost = 10000,
+                baseCost = 10,
                 costIncrease = 30
             });
         }
@@ -117,7 +117,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
         }
 
         UpgradeData upgradeData = _cache[stat];
-
+        
+        GameManager.Instance.ChangeMoney(-upgradeData.GetUpgradeCost());
         GameManager.Instance.IncreaseUsedMoneyAmount(-upgradeData.GetUpgradeCost());
 
         upgradeData.level++;

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,10 @@ public class UI_InGame : UI_Scene
     {
         Txt_GoldGain,
         Txt_AutoGainPerSec,
-        Txt_FishAmount
+        Txt_FishAmount0,
+        Txt_FishAmount1,
+        Txt_FishAmount2,
+        Txt_FishAmount3,
     }
 
     enum Buttons
@@ -35,7 +39,11 @@ public class UI_InGame : UI_Scene
     
     TextMeshProUGUI Txt_GoldGain;
     TextMeshProUGUI Txt_AutoGainPerSec;
-    TextMeshProUGUI Txt_FishAmount;
+    TextMeshProUGUI Txt_FishAmount0;
+    TextMeshProUGUI Txt_FishAmount1;
+    TextMeshProUGUI Txt_FishAmount2;
+    TextMeshProUGUI Txt_FishAmount3;
+
     
     Button Btn_Phone;
     
@@ -58,7 +66,10 @@ public class UI_InGame : UI_Scene
         
         Txt_GoldGain = GetText((int)Texts.Txt_GoldGain);
         Txt_AutoGainPerSec = GetText((int)Texts.Txt_AutoGainPerSec);
-        Txt_FishAmount = GetText((int)Texts.Txt_FishAmount);
+        Txt_FishAmount0 = GetText((int)Texts.Txt_FishAmount0);
+        Txt_FishAmount1 = GetText((int)Texts.Txt_FishAmount1);
+        Txt_FishAmount2 = GetText((int)Texts.Txt_FishAmount2);
+        Txt_FishAmount3 = GetText((int)Texts.Txt_FishAmount3);
         
         Btn_Phone = GetButton((int)Buttons.Btn_Phone);
         
@@ -76,10 +87,24 @@ public class UI_InGame : UI_Scene
         BindEvent(Btn_Phone.gameObject, OnShowPhone);
     }
 
+    public void OnEnable()
+    {
+        EventManager.Instance.AddEvent(EEventType.MoneyChanged, RefreshUI);
+    }
+    
+    public void OnDisable()
+    {
+        EventManager.Instance.RemoveEvent(EEventType.MoneyChanged, RefreshUI);
+    }
+
     public void RefreshUI()
     {
         Txt_GoldGain.text = $"{GameManager.Instance.Money}G";
-        Txt_FishAmount.text = $"{GameManager.Instance.fishCaughtCount}F";
+        Txt_FishAmount0.text = $"{GameManager.Instance.fishCaughtCount}마리";
+        Txt_FishAmount1.text = $"{GameManager.Instance.fishCaughtCount}마리";
+        Txt_FishAmount2.text = $"{GameManager.Instance.fishCaughtCount}마리";
+        Txt_FishAmount3.text = $"{GameManager.Instance.fishCaughtCount}마리";
+        Txt_AutoGainPerSec.text = $"1 / {1 - UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain)}Sec";
     }
     
     public void OnShowPhone(PointerEventData _)
