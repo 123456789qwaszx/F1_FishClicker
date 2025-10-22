@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ClickManager : Singleton<ClickManager>
 {
-    public List<FishPool> allPools;       // 게임 내 모든 맵
+    public List<FishPool> allPools; // 게임 내 모든 맵
     public string currentMapName = "FishPool000";
 
-    
-    
+    public GameObject floatingTextPrefab;
+    public Canvas canvas; // Canvas 참조 추가
+
     void Awake()
     {
         Init();
@@ -18,7 +20,23 @@ public class ClickManager : Singleton<ClickManager>
     {
         StartAutoFishing();
     }
-    
+
+    void CreateGoldText()
+    {
+        {
+            Vector2 anchoredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                Input.mousePosition,
+                canvas.worldCamera,
+                out anchoredPos
+            );
+            
+            GameObject go = Instantiate(floatingTextPrefab, canvas.transform);
+            go.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+        }
+    }
+
     // 클릭 시 호출
     public void OnClickFishing()
     {
@@ -28,11 +46,13 @@ public class ClickManager : Singleton<ClickManager>
             InventoryManager.Instance.AddFish(caughtFish);
             // 결과 연출
             //UIManager.Instance.ShowCatchPopup(caughtFish);
-            
+
             GameManager.Instance.ChangeMoney(caughtFish.baseValue);
             GameManager.Instance.IncreaseCaughtFishCount();
             EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
-            
+
+            CreateGoldText();
+
             Debug.Log($"{caughtFish.name}");
         }
     }
@@ -60,35 +80,35 @@ public class ClickManager : Singleton<ClickManager>
         // 확률합이 1 미만일 경우 마지막 물고기 반환
         return pool.fishList[pool.fishList.Count - 1];
     }
-    
-    
+
+
     private Coroutine autoFishingCoroutine;
 
     public void StartAutoFishing()
     {
         if (autoFishingCoroutine != null)
             StopCoroutine(autoFishingCoroutine);
-        
+
         autoFishingCoroutine = StartCoroutine(AutoFishingRoutine());
     }
 
     private float baseAutoInterval = 1.0f;
-    
+
     private IEnumerator AutoFishingRoutine()
     {
         while (true)
         {
             float autoIntervalBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
             float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
-            
+
             float efficiencyBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
-            
+
             FishData caughtFish = GetRandomFishFromCurrentMap();
-            
+
             InventoryManager.Instance.AddFish(caughtFish);
-            
+
             Debug.Log($"{caughtFish.name}");
-            
+
             GameManager.Instance.ChangeMoney(caughtFish.baseValue);
             EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
 
