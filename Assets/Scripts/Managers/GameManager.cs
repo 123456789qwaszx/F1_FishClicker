@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     #region Upgrade
-    private readonly Dictionary<UpgradeType, (long value, int level, long cost)> _upgradeInfo = new();
+    private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
 
     public long GetUpgradeAmount(UpgradeType type)
     {
         if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.value;
+            return v.GetCurStatValue();
         
         return 0;
     }
@@ -26,14 +26,15 @@ public class GameManager : Singleton<GameManager>
     public long GetUpgradeCost(UpgradeType type)
     {
         if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.cost;
+            return v.GetCurStatValue();
         
         return 0;
     }
 
-    public void SetUpgradeResult(UpgradeType type, long value, int level, long cost)
+    public void SetUpgradeResult(UpgradeType type, UpgradeData data)
     {
-        _upgradeInfo[type] = (value, level, cost);
+        if (data == null) return;
+        _upgradeInfo[data.statType] = data;
     }
     #endregion
     
