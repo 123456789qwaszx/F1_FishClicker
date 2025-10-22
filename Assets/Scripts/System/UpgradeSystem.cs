@@ -31,7 +31,7 @@ public class UpgradeData
 }
 
 
-public class UpgradeManager : Singleton<UpgradeManager>
+public class UpgradeSystem : Singleton<UpgradeSystem>
 {
     public List<UpgradeData> upgradeData;
 

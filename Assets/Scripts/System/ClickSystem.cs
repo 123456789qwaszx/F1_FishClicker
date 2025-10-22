@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ClickManager : Singleton<ClickManager>
+public class ClickSystem : Singleton<ClickSystem>
 {
     public List<FishPool> allPools; // 게임 내 모든 맵
     public string currentMapName = "FishPool000";
@@ -98,10 +98,10 @@ public class ClickManager : Singleton<ClickManager>
     {
         while (true)
         {
-            float autoIntervalBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
+            float autoIntervalBonus = UpgradeSystem.Instance.GetStatValue(UpgradeType.CurrencyGain);
             float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
 
-            float efficiencyBonus = UpgradeManager.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
+            float efficiencyBonus = UpgradeSystem.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
 
             FishData caughtFish = GetRandomFishFromCurrentMap();
 

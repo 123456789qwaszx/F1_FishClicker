@@ -53,7 +53,7 @@ public class FishingSystem : Singleton<FishingSystem>
     /// </summary>
     private void ApplyRareOrAboveBonus()
     {
-        float extra = UpgradeManager.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
+        float extra = UpgradeSystem.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
 
         // Common을 줄이고, 나머지 등급에 기존 비율을 유지하면서 분배
         Dictionary<string, float> newValues = new Dictionary<string, float>

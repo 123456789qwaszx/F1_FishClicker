@@ -104,7 +104,7 @@ public class UI_InGame : UI_Scene
         Txt_FishAmount1.text = $"{GameManager.Instance.fishCaughtCount}마리";
         Txt_FishAmount2.text = $"{GameManager.Instance.fishCaughtCount}마리";
         Txt_FishAmount3.text = $"{GameManager.Instance.fishCaughtCount}마리";
-        Txt_AutoGainPerSec.text = $"1 / {1 - UpgradeManager.Instance.GetStatValue(UpgradeType.CurrencyGain)}Sec";
+        Txt_AutoGainPerSec.text = $"1 / {1 - UpgradeSystem.Instance.GetStatValue(UpgradeType.CurrencyGain)}Sec";
     }
     
     public void OnShowPhone(PointerEventData _)
