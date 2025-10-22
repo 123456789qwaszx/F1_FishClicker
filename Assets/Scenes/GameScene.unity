@@ -3834,7 +3834,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d937f969dad9d0c4688c06bce5e44df0, type: 2}
   - {fileID: 11400000, guid: 43e727102e9c4064eb5abeb63ac1303c, type: 2}
   currentMapName: FishPool000 (Fish Pool)
-  floatingTextPrefab: {fileID: 5859684425805875419, guid: a244e3d98129b5c4f8e50d07b9c37b59, type: 3}
+  floatingTextPrefab: {fileID: 5415084614657658335, guid: a244e3d98129b5c4f8e50d07b9c37b59, type: 3}
   canvas: {fileID: 423415184}
 --- !u!1 &1436059897
 GameObject:

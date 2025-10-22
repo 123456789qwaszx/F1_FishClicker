@@ -36,6 +36,25 @@ public class GameManager : Singleton<GameManager>
         if (data == null) return;
         _upgradeInfo[data.statType] = data;
     }
+    
+    public double GetTotalClickStat(double baseValue)
+    {
+        double result = baseValue;
+
+        foreach (UpgradeData data in _upgradeInfo.Values)
+        {
+            if (data.effectType == UpgradeEffectType.Additive)
+                result += data.GetCurStatValue();
+        }
+
+        foreach (UpgradeData data in _upgradeInfo.Values)
+        {
+            if (data.effectType == UpgradeEffectType.Multiplicative)
+                result *= (1.0 + data.GetCurStatValue() / 100.0); // 퍼센트 적용 가정
+        }
+
+        return result;
+    }
     #endregion
     
     #region Money

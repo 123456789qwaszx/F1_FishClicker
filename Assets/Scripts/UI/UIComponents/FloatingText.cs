@@ -15,25 +15,21 @@ public class FloatingText : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         originalColor = text.color;
     }
-
-    void OnEnable()
+    
+    public void Setup(long amount)
     {
-        // 처음엔 완전 불투명
+        text.text = $"+{amount}";
         text.color = originalColor;
     }
 
     void Update()
     {
-        // 위로 천천히 이동
         transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-        goldText.text = $"+ {GameManager.Instance.GetUpgradeAmount(UpgradeType.CurrencyGain) +1}";
 
-        // 투명해지기
         Color c = text.color;
         c.a -= fadeSpeed * Time.deltaTime;
         text.color = c;
 
-        // 완전히 사라지면 파괴
         if (text.color.a <= 0f)
             Destroy(gameObject);
     }

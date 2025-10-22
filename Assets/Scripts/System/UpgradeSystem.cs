@@ -12,6 +12,12 @@ public enum UpgradeType
     LotteryDiscountRate
 }
 
+public enum UpgradeEffectType
+{
+    Additive,
+    Multiplicative,
+}
+
 public class UpgradeData
 {
     public UpgradeType statType;
@@ -22,7 +28,8 @@ public class UpgradeData
 
     public long baseCost;
     public long costIncrease;
-
+    
+    public UpgradeEffectType effectType = UpgradeEffectType.Additive;
     public long GetCurStatValue() => baseStatValue + level * valueIncrease;
     public long GetUpgradeCost()
     {
