@@ -8,7 +8,7 @@ public class ClickSystem : Singleton<ClickSystem>
     public List<FishPool> allPools; // 게임 내 모든 맵
     public string currentMapName = "FishPool000";
 
-    public GameObject floatingTextPrefab;
+    public FloatingText floatingTextPrefab;
     public Canvas canvas; // Canvas 참조 추가
 
     void Awake()
@@ -21,7 +21,7 @@ public class ClickSystem : Singleton<ClickSystem>
         StartAutoFishing();
     }
 
-    void CreateGoldText()
+    void CreateGoldText(long moneyToAdd)
     {
         {
             Vector2 anchoredPos;
@@ -31,9 +31,10 @@ public class ClickSystem : Singleton<ClickSystem>
                 canvas.worldCamera,
                 out anchoredPos
             );
-            
-            GameObject go = Instantiate(floatingTextPrefab, canvas.transform);
-            go.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+
+            FloatingText ft = Instantiate(floatingTextPrefab, canvas.transform).GetComponent<FloatingText>();
+            ft.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+            ft.Setup(moneyToAdd);
         }
     }
 
@@ -41,20 +42,19 @@ public class ClickSystem : Singleton<ClickSystem>
     public void OnClickFishing()
     {
         FishData caughtFish = GetRandomFishFromCurrentMap();
-        if (caughtFish != null)
-        {
-            InventoryManager.Instance.AddFish(caughtFish);
-            // 결과 연출
-            //UIManager.Instance.ShowCatchPopup(caughtFish);
+        if (caughtFish == null)
+            return;
 
-            GameManager.Instance.ChangeMoney(caughtFish.baseValue);
-            GameManager.Instance.IncreaseCaughtFishCount();
-            EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
+        InventoryManager.Instance.AddFish(caughtFish);
 
-            CreateGoldText();
+        long totalClickValue = (long)GameManager.Instance.GetTotalClickStat(caughtFish.baseValue);
 
-            Debug.Log($"{caughtFish.name}");
-        }
+        CreateGoldText(totalClickValue);
+        GameManager.Instance.ChangeMoney(totalClickValue);
+        GameManager.Instance.IncreaseCaughtFishCount();
+        EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
+
+        Debug.Log($"{caughtFish.name}");
     }
 
     // 현재 맵에서 랜덤 물고기 선택
@@ -105,9 +105,8 @@ public class ClickSystem : Singleton<ClickSystem>
 
             FishData caughtFish = GetRandomFishFromCurrentMap();
 
-            InventoryManager.Instance.AddFish(caughtFish);
-
-            Debug.Log($"{caughtFish.name}");
+            //InventoryManager.Instance.AddFish(caughtFish);
+            //Debug.Log($"{caughtFish.name}");
 
             GameManager.Instance.ChangeMoney(caughtFish.baseValue);
             EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
