@@ -26,7 +26,7 @@ public class FloatingText : MonoBehaviour
     {
         // 위로 천천히 이동
         transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-        goldText.text = $"+ {GameManager.Instance.GetStatValue(UpgradeType.CurrencyGain) +1}";
+        goldText.text = $"+ {GameManager.Instance.GetUpgradeAmount(UpgradeType.CurrencyGain) +1}";
 
         // 투명해지기
         Color c = text.color;

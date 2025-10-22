@@ -5,27 +5,35 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     #region Upgrade
-    private readonly Dictionary<UpgradeType, (float value, int level)> _stats = new();
+    private readonly Dictionary<UpgradeType, (long value, int level, long cost)> _upgradeInfo = new();
 
-    public float GetStatValue(UpgradeType type)
+    public long GetUpgradeAmount(UpgradeType type)
     {
-        if (_stats.TryGetValue(type, out var v))
+        if (_upgradeInfo.TryGetValue(type, out var v))
             return v.value;
         
-        return 0f;
+        return 0;
     }
     
-    public float GetStatLevel(UpgradeType type)
+    public int GetUpgradeLevel(UpgradeType type)
     {
-        if (_stats.TryGetValue(type, out var v))
+        if (_upgradeInfo.TryGetValue(type, out var v))
             return v.level;
         
-        return 0f;
+        return 0;
+    }
+    
+    public long GetUpgradeCost(UpgradeType type)
+    {
+        if (_upgradeInfo.TryGetValue(type, out var v))
+            return v.cost;
+        
+        return 0;
     }
 
-    public void SetUpgradeResult(UpgradeType type, float value, int level)
+    public void SetUpgradeResult(UpgradeType type, long value, int level, long cost)
     {
-        _stats[type] = (value, level);
+        _upgradeInfo[type] = (value, level, cost);
     }
     #endregion
     

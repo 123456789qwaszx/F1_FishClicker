@@ -98,10 +98,10 @@ public class ClickSystem : Singleton<ClickSystem>
     {
         while (true)
         {
-            float autoIntervalBonus = GameManager.Instance.GetStatValue(UpgradeType.CurrencyGain);
+            float autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.CurrencyGain);
             float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
 
-            float efficiencyBonus = GameManager.Instance.GetStatValue(UpgradeType.RareOrAboveChanceBonus);
+            float efficiencyBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.RareOrAboveChanceBonus);
 
             FishData caughtFish = GetRandomFishFromCurrentMap();
 
