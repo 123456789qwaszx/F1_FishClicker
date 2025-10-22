@@ -85,6 +85,8 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         {
             if (ud == null) continue;
             _cache[ud.statType] = ud;
+            
+            GameManager.Instance.SetUpgradeResult(ud.statType, ud.GetCurStatValue(), ud.level);
         }
     }
 
@@ -95,10 +97,9 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     }
     
 
-
     public float GetStatValue(UpgradeType stat)
     {
-        Debug.Log($"{_cache.TryGetValue(stat, out UpgradeData u)}");
+        Debug.Log($"{_cache[stat].GetCurStatValue()}");
         return _cache.TryGetValue(stat, out UpgradeData ug) ? ug.GetCurStatValue() : -1;
     }
 
@@ -123,6 +124,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         GameManager.Instance.IncreaseUsedMoneyAmount(-upgradeData.GetUpgradeCost());
 
         upgradeData.level++;
+        GameManager.Instance.SetUpgradeResult(stat, upgradeData.GetCurStatValue(), upgradeData.level);
 
         EventManager.Instance.TriggerEvent(EEventType.Upgraded);
     }

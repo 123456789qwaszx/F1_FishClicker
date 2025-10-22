@@ -4,6 +4,31 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    #region Upgrade
+    private readonly Dictionary<UpgradeType, (float value, int level)> _stats = new();
+
+    public float GetStatValue(UpgradeType type)
+    {
+        if (_stats.TryGetValue(type, out var v))
+            return v.value;
+        
+        return 0f;
+    }
+    
+    public float GetStatLevel(UpgradeType type)
+    {
+        if (_stats.TryGetValue(type, out var v))
+            return v.level;
+        
+        return 0f;
+    }
+
+    public void SetUpgradeResult(UpgradeType type, float value, int level)
+    {
+        _stats[type] = (value, level);
+    }
+    #endregion
+    
     #region Money
     private long _money;
     
