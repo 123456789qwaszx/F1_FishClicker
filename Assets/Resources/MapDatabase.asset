@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45bccd462def64449249b0925682855, type: 3}
+  m_Name: MapDatabase
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::MapDatabase
+  mapList:
+  - id: 1
+    mapName: Tropical Bay
+    region: Tropical
+    fishPool:
+    - Clownfish
+    - BlueTang
+    backgroundSprite: Assets/Sprites/Map/tropicalbay
+    description: "\uBC1D\uACE0 \uD3C9\uD654\uB85C\uC6B4 \uC5F4\uB300 \uBC14\uB2E4"
+  - id: 2
+    mapName: Ocean Deep
+    region: Ocean
+    fishPool:
+    - BlueTang
+    - YellowfinTuna
+    - Swordfish
+    backgroundSprite: Assets/Sprites/Map/oceandeep
+    description: "\uAE4A\uACE0 \uB113\uC740 \uBC14\uB2E4"
+  - id: 3
+    mapName: Deep Sea Abyss
+    region: DeepSea
+    fishPool:
+    - Anglerfish
+    - CrystalJellyfish
+    backgroundSprite: Assets/Sprites/Map/deepsea
+    description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uC5B4\uB450\uC6B4 \uACF5\uAC04"
+  - id: 4
+    mapName: Lake Serenity
+    region: Lake
+    fishPool:
+    - GoldenCarp
+    backgroundSprite: Assets/Sprites/Map/lakeserenity
+    description: "\uC870\uC6A9\uD55C \uD638\uC218"
+  - id: 5
+    mapName: River Flow
+    region: River
+    fishPool:
+    - Piranha
+    backgroundSprite: Assets/Sprites/Map/riverflow
+    description: "\uBE60\uB974\uAC8C \uD750\uB974\uB294 \uAC15"
