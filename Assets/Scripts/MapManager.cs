@@ -60,7 +60,7 @@ public class MapManager : Singleton<MapManager>
         Debug.Log($"Current map set to: {_currentMap.mapName}");
         
         
-        List<FishData> mapFishes = GetFishForMap(map);
+        List<FishData> mapFishes = GetFishForMap();
         
         FishingSystem fishingSystem = FishingSystem.Instance;
         if (fishingSystem == null)
@@ -155,13 +155,13 @@ public class MapManager : Singleton<MapManager>
     /// <summary>
     /// MapData의 fishPool에 포함된 FishData 리스트 가져오기
     /// </summary>
-    public List<FishData> GetFishForMap(MapData map)
+    public List<FishData> GetFishForMap()
     {
         List<FishData> result = new List<FishData>();
 
-        if (map == null || map.fishPool == null) return result;
+        if (_currentMap == null || _currentMap.fishPool == null) return result;
 
-        foreach (var fishName in map.fishPool)
+        foreach (var fishName in _currentMap.fishPool)
         {
             if (_fishCache.TryGetValue(fishName, out FishData fish))
             {
