@@ -5,17 +5,22 @@ using UnityEngine;
 public enum UpgradeType
 {
     None,
-    CurrencyGain,
-    RareOrAboveChanceBonus,
-    FeverGaugeFillRateUp,
-    LotteryWinRate,
-    LotteryDiscountRate
+    Aria,
+    Ciel,
+    Reina,
+    Noel,
+    Lumia
 }
 
 public enum UpgradeEffectType
 {
     Additive,
     Multiplicative,
+    
+    AutoFishingAmountAdditive,
+    AutoFishingAmountMultiplicative,
+    
+    RareFishChance,
 }
 
 public class UpgradeData

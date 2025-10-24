@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     public long GetUpgradeCost(UpgradeType type)
     {
         if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.GetCurStatValue();
+            return v.GetUpgradeCost();
         
         return 0;
     }
