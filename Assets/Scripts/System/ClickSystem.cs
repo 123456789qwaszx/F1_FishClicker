@@ -5,21 +5,30 @@ using UnityEngine;
 
 public class ClickSystem : Singleton<ClickSystem>
 {
-    public List<FishPool> allPools; // 게임 내 모든 맵
-    public string currentMapName = "FishPool000";
-
     public FloatingText floatingTextPrefab;
     public Canvas canvas; // Canvas 참조 추가
-
-    void Awake()
+    
+    private bool isInitialized = false;
+    
+    
+    void Start()
     {
-        Init();
+        StartCoroutine(WaitAndInitClickSystem());
+    }
+    
+    private IEnumerator WaitAndInitClickSystem()
+    {
+        // FishingSystem 준비될 때까지 대기
+        while (FishingSystem.Instance == null)
+            yield return null;
+
+        if (autoFishingCoroutine != null)
+            StopCoroutine(autoFishingCoroutine);
+
+        autoFishingCoroutine = StartCoroutine(AutoFishingRoutine());
+        Debug.Log("자동낚시 실행");
     }
 
-    public void Init()
-    {
-        StartAutoFishing();
-    }
 
     void CreateGoldText(long moneyToAdd)
     {
@@ -41,7 +50,7 @@ public class ClickSystem : Singleton<ClickSystem>
     // 클릭 시 호출
     public void OnClickFishing()
     {
-        FishData caughtFish = GetRandomFishFromCurrentMap();
+        FishData caughtFish = FishingSystem.Instance.CatchFish();
         if (caughtFish == null)
             return;
 
@@ -57,41 +66,8 @@ public class ClickSystem : Singleton<ClickSystem>
         Debug.Log($"{caughtFish.fishName}");
     }
 
-    // 현재 맵에서 랜덤 물고기 선택
-    private FishData GetRandomFishFromCurrentMap()
-    {
-        //FishPool pool = allPools.Find(pool => pool.mapName == currentMapName);
-        FishPool pool = allPools[0];
-        if (pool == null || pool.fishList.Count == 0)
-            return null;
-
-        float rand = Random.value; // 0~1 랜덤
-        float cumulative = 0f;
-
-        foreach (FishData fish in pool.fishList)
-        {
-            //cumulative += fish.catchProbability;
-            cumulative += 10;
-            if (rand <= cumulative)
-            {
-                return fish;
-            }
-        }
-
-        // 확률합이 1 미만일 경우 마지막 물고기 반환
-        return pool.fishList[pool.fishList.Count - 1];
-    }
-
 
     private Coroutine autoFishingCoroutine;
-
-    public void StartAutoFishing()
-    {
-        if (autoFishingCoroutine != null)
-            StopCoroutine(autoFishingCoroutine);
-
-        autoFishingCoroutine = StartCoroutine(AutoFishingRoutine());
-    }
 
     private float baseAutoInterval = 1.0f;
 
@@ -99,20 +75,66 @@ public class ClickSystem : Singleton<ClickSystem>
     {
         while (true)
         {
+            // 안전하게 null 체크
+            if (FishingSystem.Instance == null || GameManager.Instance == null || InventoryManager.Instance == null)
+            {
+                yield return null;
+                continue;
+            }
+            Debug.Log("자동 낚시 실행");
+
+            FishData caughtFish = null;
+            try
+            {
+                caughtFish = FishingSystem.Instance.CatchFish();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("CatchFish error: " + ex);
+            }
+
+            if (caughtFish != null)
+            {
+                try
+                {
+                    InventoryManager.Instance.AddFish(caughtFish);
+                    long value = (long)GameManager.Instance.GetTotalClickStat(caughtFish.baseValue);
+                    GameManager.Instance.ChangeMoney(value);
+                    EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
+
+                    Debug.Log($"자동낚시: {caughtFish.fishName} +{value}G");
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError("AutoFishing update error: " + ex);
+                }
+            }
+
+            // 자동낚시 간격 계산
             float autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
-            float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
+            float autoInterval = Mathf.Max(0.1f, baseAutoInterval - autoIntervalBonus * 0.01f);
 
-            float efficiencyBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
-
-            FishData caughtFish = GetRandomFishFromCurrentMap();
-
-            //InventoryManager.Instance.AddFish(caughtFish);
-            //Debug.Log($"{caughtFish.name}");
-
-            GameManager.Instance.ChangeMoney(caughtFish.baseValue);
-            EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
-
-            yield return new WaitForSeconds(autoInterval); // 업그레이드 속도 반영
+            yield return new WaitForSeconds(autoInterval);
         }
     }
+    // private IEnumerator AutoFishingRoutine()
+    // {
+    //     while (true)
+    //     {
+    //         float autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
+    //         float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
+    //
+    //         float efficiencyBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
+    //
+    //         FishData caughtFish = FishingSystem.Instance.CatchFish();
+    //
+    //         //InventoryManager.Instance.AddFish(caughtFish);
+    //         //Debug.Log($"{caughtFish.name}");
+    //
+    //         GameManager.Instance.ChangeMoney(caughtFish.baseValue);
+    //         EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
+    //
+    //         yield return new WaitForSeconds(autoInterval); // 업그레이드 속도 반영
+    //     }
+    // }
 }
