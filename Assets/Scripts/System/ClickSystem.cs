@@ -54,7 +54,7 @@ public class ClickSystem : Singleton<ClickSystem>
         GameManager.Instance.IncreaseCaughtFishCount();
         EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
 
-        Debug.Log($"{caughtFish.name}");
+        Debug.Log($"{caughtFish.fishName}");
     }
 
     // 현재 맵에서 랜덤 물고기 선택
@@ -70,7 +70,8 @@ public class ClickSystem : Singleton<ClickSystem>
 
         foreach (FishData fish in pool.fishList)
         {
-            cumulative += fish.catchProbability;
+            //cumulative += fish.catchProbability;
+            cumulative += 10;
             if (rand <= cumulative)
             {
                 return fish;
