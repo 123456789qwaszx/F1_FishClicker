@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public class FishingSystem : Singleton<FishingSystem>
 {
     [Header("물고기 리스트")]
-    [SerializeField] private List<FishData> commonFishes;
-    [SerializeField] private List<FishData> rareFishes;
-    [SerializeField] private List<FishData> epicFishes;
-    [SerializeField] private List<FishData> legendaryFishes;
+    [SerializeField] public List<FishData> commonFishes;
+    [SerializeField] public List<FishData> rareFishes;
+    [SerializeField] public List<FishData> epicFishes;
+    [SerializeField] public List<FishData> legendaryFishes;
 
     [Header("기본 확률(%)")]
     [Range(0, 100)] public float baseCommonPercent = 60f;
@@ -40,7 +40,7 @@ public class FishingSystem : Singleton<FishingSystem>
     /// <summary>
     /// 기본 확률로 초기화
     /// </summary>
-    private void ResetPercentages()
+    public void ResetPercentages()
     {
         commonPercent = baseCommonPercent;
         rarePercent = baseRarePercent;
@@ -51,7 +51,7 @@ public class FishingSystem : Singleton<FishingSystem>
     /// <summary>
     /// UpgradeManager와 연동하여 Rare 이상 확률 보너스 적용
     /// </summary>
-    private void ApplyRareOrAboveBonus()
+    public void ApplyRareOrAboveBonus()
     {
         float extra = UpgradeSystem.Instance.GetStatValue(UpgradeType.Aria);
 

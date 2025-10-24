@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 636c7dd80ea6461469fa4bdec05a9866, type: 3}
   m_Name: FishDatabase
-  m_EditorClassIdentifier: Assembly-CSharp-Editor::FishDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::FishDatabase
   fishList:
   - id: 1
     fishName: Clownfish

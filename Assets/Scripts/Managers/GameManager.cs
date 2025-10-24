@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    #region FishData
+    public FishDatabase fishDatabase;
+    
+
+    #endregion
+    
     #region Upgrade
     private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
 

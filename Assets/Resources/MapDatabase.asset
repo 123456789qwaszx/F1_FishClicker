@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c45bccd462def64449249b0925682855, type: 3}
   m_Name: MapDatabase
-  m_EditorClassIdentifier: Assembly-CSharp-Editor::MapDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::MapDatabase
   mapList:
   - id: 1
     mapName: Tropical Bay
