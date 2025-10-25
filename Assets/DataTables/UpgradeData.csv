@@ -1,0 +1,8 @@
+id,upgradeName,statType,level,baseStatValue,valueIncrease,baseCost,costIncrease,effectType,isUnlocked,iconPath,description,category
+1,Aria Boost,Aria,0,0,2,10,30,Additive,TRUE,Assets/Sprites/Upgrades/aria_boost,자동낚시 속도를 향상시킵니다.,AutoFishing
+2,Ciel Bonus,Ciel,0,10,5,50,40,Multiplicative,TRUE,Assets/Sprites/Upgrades/ciel_bonus,자동 수익이 증가합니다.,Income
+3,Reina Rare Rate,Reina,0,1,1,100,50,RareFishChance,TRUE,Assets/Sprites/Upgrades/reina_rare,희귀어 출현 확률을 올립니다.,Fishing
+4,Noel Profit,Noel,0,100,50,500,100,AutoFishingAmountAdditive,TRUE,Assets/Sprites/Upgrades/noel_profit,낚시 보너스 수익이 증가합니다.,Profit
+5,Lumia Multiplier,Lumia,0,100,20,1000,200,AutoFishingAmountMultiplicative,TRUE,Assets/Sprites/Upgrades/lumia_multi,자동 수익 배율이 상승합니다.,Income
+6,Poseidon Blessing,None,0,0,10,2000,500,Additive,FALSE,Assets/Sprites/Upgrades/poseidon_bless,신의 축복이 낚시 성공률을 높입니다.,Special
+7,Aqua Fortune,None,0,5,2,3000,700,Multiplicative,FALSE,Assets/Sprites/Upgrades/aqua_fortune,황금 물고기 확률이 상승합니다.,Special

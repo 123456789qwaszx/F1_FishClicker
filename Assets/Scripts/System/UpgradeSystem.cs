@@ -23,22 +23,23 @@ public enum UpgradeEffectType
     RareFishChance,
 }
 
+
+[System.Serializable]
 public class UpgradeData
 {
-    public UpgradeType statType;
-    public int level;
+    public UpgradeType statType;              // 업그레이드 종류
+    public int level;                         // 현재 레벨
+    public long baseStatValue;                // 기본 수치
+    public long valueIncrease;                // 증가량
+    public long baseCost;                     // 기본 비용
+    public long costIncrease;                 // 비용 증가량
+    public UpgradeEffectType effectType;      // 효과 타입
 
-    public long baseStatValue;
-    public long valueIncrease;
-
-    public long baseCost;
-    public long costIncrease;
-    
-    public UpgradeEffectType effectType = UpgradeEffectType.Additive;
     public long GetCurStatValue() => baseStatValue + level * valueIncrease;
+
     public long GetUpgradeCost()
     {
-        return (long)(baseCost * Math.Pow(1.5, level));
+        return (long)(baseCost * Math.Pow(1.5f, level));
     }
 }
 

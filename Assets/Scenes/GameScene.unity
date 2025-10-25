@@ -3833,11 +3833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b410bf675d0f504c9bbc933ba95dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickManager
-  allPools:
-  - {fileID: 11400000, guid: 4b55d69407fda1b43aab4d7662241e2a, type: 2}
-  - {fileID: 11400000, guid: d937f969dad9d0c4688c06bce5e44df0, type: 2}
-  - {fileID: 11400000, guid: 43e727102e9c4064eb5abeb63ac1303c, type: 2}
-  currentMapName: FishPool000 (Fish Pool)
   floatingTextPrefab: {fileID: 5415084614657658335, guid: a244e3d98129b5c4f8e50d07b9c37b59, type: 3}
   canvas: {fileID: 423415184}
 --- !u!114 &1413158866
@@ -6977,7 +6972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1175.1498, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 1800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2542984160119112211
