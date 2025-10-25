@@ -3,7 +3,7 @@ using UnityEngine;
 public class UI_UpgradePanel : UI_Popup
 {
     Transform SlotPanel;
-    public UpgradeSlot[] slots = new UpgradeSlot[5];
+    public UpgradeSlot[] slots = new UpgradeSlot[7];
     int _curIndex = -1;
 
     public void SetUp()
@@ -14,7 +14,7 @@ public class UI_UpgradePanel : UI_Popup
         {
             GameObject go = SlotPanel.GetChild(i).gameObject;
             UpgradeSlot slot = go.GetComponent<UpgradeSlot>();
-            slot.UpgradeType = (UpgradeType)i + 1;
+            slot.UpgradeType = (UpgradeType)i;
             slot.Index = i;
             slot.SetupByUpgradeType();
             slots[i] = slot;

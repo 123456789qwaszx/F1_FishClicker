@@ -4,27 +4,25 @@ using UnityEngine;
 
 public enum UpgradeType
 {
-    None,
     Aria,
     Ciel,
     Reina,
     Noel,
-    Lumia
+    Lumia,
+    Kei,
+    Mio,
 }
 
 public enum UpgradeEffectType
 {
     Additive,
     Multiplicative,
-    
     AutoFishingAmountAdditive,
     AutoFishingAmountMultiplicative,
-    
     RareFishChance,
 }
 
-
-[System.Serializable]
+[Serializable]
 public class UpgradeData
 {
     public UpgradeType statType;              // 업그레이드 종류
@@ -37,34 +35,55 @@ public class UpgradeData
 
     public long GetCurStatValue() => baseStatValue + level * valueIncrease;
 
-    public long GetUpgradeCost()
-    {
-        return (long)(baseCost * Math.Pow(1.5f, level));
-    }
+    public long GetUpgradeCost() => (long)(baseCost * Math.Pow(1.5f, level));
 }
-
 
 public class UpgradeSystem : Singleton<UpgradeSystem>
 {
-    public List<UpgradeData> upgradeData;
+    [SerializeField] private UpgradeDatabase _upgradeDB;
+    [SerializeField] private Dictionary<UpgradeType, UpgradeData> _upgradeCache = new();
+    public List<UpgradeData> upgradeData = new();
 
-    private readonly Dictionary<UpgradeType, UpgradeData> _cache = new Dictionary<UpgradeType, UpgradeData>();
+    private readonly Dictionary<UpgradeType, UpgradeData> _cache = new();
 
-    void Awake()
+    private void Awake()
     {
         Init();
     }
 
-    void Init()
+    private void Init()
     {
+        LoadUpgradeDatabase();
         EnsureAllTypes();
         BuildCache();
     }
 
-
-    void EnsureAllTypes()
+    
+    private void LoadUpgradeDatabase()
     {
-        if (upgradeData == null) upgradeData = new List<UpgradeData>();
+        _upgradeDB = Resources.Load<UpgradeDatabase>("UpgradeDatabase");
+        if (_upgradeDB == null)
+        {
+            return;
+        }
+
+        _upgradeCache.Clear();
+        upgradeData.Clear();
+        
+        foreach (UpgradeData upgrade in _upgradeDB.upgradeList)
+        {
+            if (!_upgradeCache.ContainsKey(upgrade.statType))
+                _upgradeCache.Add(upgrade.statType, upgrade);
+            
+            upgradeData.Add(upgrade);
+        }
+    }
+
+    
+    private void EnsureAllTypes()
+    {
+        if (upgradeData == null)
+            upgradeData = new List<UpgradeData>();
 
         HashSet<UpgradeType> exist = new HashSet<UpgradeType>();
         foreach (UpgradeData ud in upgradeData)
@@ -75,7 +94,6 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 
         foreach (UpgradeType type in Enum.GetValues(typeof(UpgradeType)))
         {
-            if (type == UpgradeType.None) continue;
             if (exist.Contains(type)) continue;
 
             upgradeData.Add(new UpgradeData
@@ -94,47 +112,32 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     {
         _cache.Clear();
         if (upgradeData == null) return;
+
         foreach (UpgradeData ud in upgradeData)
         {
             if (ud == null) continue;
             _cache[ud.statType] = ud;
-            
+
             GameManager.Instance.SetUpgradeResult(ud.statType, ud);
         }
     }
-
-
-    public int GetLevel(UpgradeType stat)
-    {
-        return _cache.TryGetValue(stat, out var u) ? u.level : 0;
-    }
     
-
-    public float GetStatValue(UpgradeType stat)
-    {
-        Debug.Log($"{_cache[stat].GetCurStatValue()}");
-        return _cache.TryGetValue(stat, out UpgradeData ug) ? ug.GetCurStatValue() : -1;
-    }
-
-
-    public long GetUpgradeCost(UpgradeType stat)
-    {
-        return _cache.TryGetValue(stat, out UpgradeData ug) ? ug.GetUpgradeCost() : -1;
-    }
-
 
     public void TryUpgrade(UpgradeType stat)
     {
-        if (GetUpgradeCost(stat) > GameManager.Instance.Money)
+        if (!_cache.TryGetValue(stat, out UpgradeData upgradeData))
         {
-            Debug.Log("돈이 모자랍니다");
             return;
         }
 
-        UpgradeData upgradeData = _cache[stat];
-        
-        GameManager.Instance.ChangeMoney(-upgradeData.GetUpgradeCost());
-        GameManager.Instance.IncreaseUsedMoneyAmount(-upgradeData.GetUpgradeCost());
+        long cost = upgradeData.GetUpgradeCost();
+        if (cost > GameManager.Instance.Money)
+        {
+            return;
+        }
+
+        GameManager.Instance.ChangeMoney(-cost);
+        GameManager.Instance.IncreaseUsedMoneyAmount(-cost);
 
         upgradeData.level++;
         GameManager.Instance.SetUpgradeResult(upgradeData.statType, upgradeData);

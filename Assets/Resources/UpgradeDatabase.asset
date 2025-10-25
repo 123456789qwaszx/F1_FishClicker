@@ -48,14 +48,14 @@ MonoBehaviour:
     baseCost: 1000
     costIncrease: 200
     effectType: 3
-  - statType: 0
+  - statType: 5
     level: 0
     baseStatValue: 0
     valueIncrease: 10
     baseCost: 2000
     costIncrease: 500
     effectType: 0
-  - statType: 0
+  - statType: 6
     level: 0
     baseStatValue: 5
     valueIncrease: 2

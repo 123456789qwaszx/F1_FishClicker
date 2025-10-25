@@ -26,8 +26,6 @@ public class UpgradeDataImporter
             // Enum 파싱 (string → UpgradeType, UpgradeEffectType)
             if (System.Enum.TryParse(row["statType"], out UpgradeType parsedType))
                 upgrade.statType = parsedType;
-            else
-                upgrade.statType = UpgradeType.None;
 
             if (System.Enum.TryParse(row["effectType"], out UpgradeEffectType parsedEffect))
                 upgrade.effectType = parsedEffect;
