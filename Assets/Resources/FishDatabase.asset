@@ -13,83 +13,63 @@ MonoBehaviour:
   m_Name: FishDatabase
   m_EditorClassIdentifier: Assembly-CSharp::FishDatabase
   fishList:
-  - id: 1
+  - id: 0
     fishName: Clownfish
     rarity: Common
-    baseValue: 10
-    isBossFish: 0
+    baseValue: 1
     spritePath: Assets/Sprites/Fish/clownfish
     description: "\uC791\uACE0 \uADC0\uC5EC\uC6B4 \uBB3C\uACE0\uAE30"
-    region: Tropical
-  - id: 2
+  - id: 1
     fishName: BlueTang
     rarity: Common
-    baseValue: 12
-    isBossFish: 0
+    baseValue: 1
     spritePath: Assets/Sprites/Fish/bluetang
     description: "\uBC1D\uC740 \uD30C\uB780\uC0C9 \uBC14\uB2E4\uBB3C\uACE0\uAE30"
-    region: Tropical
-  - id: 3
-    fishName: YellowfinTuna
-    rarity: Rare
-    baseValue: 45
-    isBossFish: 0
-    spritePath: Assets/Sprites/Fish/yellowfin
-    description: "\uBE60\uB978 \uC18D\uB3C4\uC758 \uCC38\uCE58"
-    region: Ocean
-  - id: 4
-    fishName: Swordfish
-    rarity: Rare
-    baseValue: 55
-    isBossFish: 0
-    spritePath: Assets/Sprites/Fish/swordfish
-    description: "\uAE38\uAC8C \uBED7\uC740 \uAC80 \uBAA8\uC591\uC758 \uC785"
-    region: Ocean
-  - id: 5
-    fishName: Anglerfish
-    rarity: Epic
-    baseValue: 120
-    isBossFish: 0
-    spritePath: Assets/Sprites/Fish/angler
-    description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uBB34\uC11C\uC6B4 \uBB3C\uACE0\uAE30"
-    region: DeepSea
-  - id: 6
-    fishName: GoldenCarp
-    rarity: Legendary
-    baseValue: 300
-    isBossFish: 0
-    spritePath: Assets/Sprites/Fish/goldencarp
-    description: "\uD669\uAE08\uBE5B \uC804\uC124\uC758 \uC789\uC5B4"
-    region: Lake
-  - id: 7
-    fishName: Leviathan
-    rarity: Mythic
-    baseValue: 1500
-    isBossFish: 1
-    spritePath: Assets/Sprites/Fish/leviathan
-    description: "\uC2EC\uD574\uC758 \uAD34\uBB3C"
-    region: Abyss
-  - id: 8
+  - id: 2
     fishName: Piranha
     rarity: Common
-    baseValue: 20
-    isBossFish: 0
+    baseValue: 1
     spritePath: Assets/Sprites/Fish/piranha
     description: "\uC791\uC9C0\uB9CC \uBB34\uC11C\uC6B4 \uC5B4\uAE08\uB2C8"
-    region: River
-  - id: 9
+  - id: 100
+    fishName: YellowfinTuna
+    rarity: Rare
+    baseValue: 20
+    spritePath: Assets/Sprites/Fish/yellowfin
+    description: "\uBE60\uB978 \uC18D\uB3C4\uC758 \uCC38\uCE58"
+  - id: 101
+    fishName: Swordfish
+    rarity: Rare
+    baseValue: 20
+    spritePath: Assets/Sprites/Fish/swordfish
+    description: "\uAE38\uAC8C \uBED7\uC740 \uAC80 \uBAA8\uC591\uC758 \uC785"
+  - id: 102
     fishName: Stingray
     rarity: Rare
-    baseValue: 60
-    isBossFish: 0
+    baseValue: 20
     spritePath: Assets/Sprites/Fish/stingray
     description: "\uB113\uC740 \uB0A0\uAC1C\uB97C \uAC00\uC9C4 \uBC14\uB2E4 \uC0DD\uBB3C"
-    region: Ocean
-  - id: 10
+  - id: 200
+    fishName: Anglerfish
+    rarity: Epic
+    baseValue: 100
+    spritePath: Assets/Sprites/Fish/angler
+    description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uBB34\uC11C\uC6B4 \uBB3C\uACE0\uAE30"
+  - id: 201
     fishName: CrystalJellyfish
     rarity: Epic
-    baseValue: 200
-    isBossFish: 0
+    baseValue: 100
     spritePath: Assets/Sprites/Fish/crystaljelly
     description: "\uBE5B\uC744 \uB0B4\uB294 \uC544\uB984\uB2E4\uC6B4 \uD574\uD30C\uB9AC"
-    region: DeepSea
+  - id: 300
+    fishName: GoldenCarp
+    rarity: Legendary
+    baseValue: 1000
+    spritePath: Assets/Sprites/Fish/goldencarp
+    description: "\uD669\uAE08\uBE5B \uC804\uC124\uC758 \uC789\uC5B4"
+  - id: 400
+    fishName: Leviathan
+    rarity: Mythic
+    baseValue: 10000
+    spritePath: Assets/Sprites/Fish/leviathan
+    description: "\uC2EC\uD574\uC758 \uAD34\uBB3C"

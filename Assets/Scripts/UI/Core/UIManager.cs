@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
         
         ChangeSceneUI<UI_Title>();
         //ChangeSceneUI<UI_InGame>();
+        UpgradeSystem.Instance.Init();
         FindUI<UI_UpgradePanel>().SetUp();
     }
 

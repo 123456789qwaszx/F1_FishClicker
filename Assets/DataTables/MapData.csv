@@ -1,6 +1,6 @@
 id,mapName,region,fishPool,backgroundSprite,description
 1,Tropical Bay,Tropical,Clownfish|BlueTang,Assets/Sprites/Map/tropicalbay,밝고 평화로운 열대 바다
 2,Ocean Deep,Ocean,BlueTang|YellowfinTuna|Swordfish,Assets/Sprites/Map/oceandeep,깊고 넓은 바다
-3,Deep Sea Abyss,DeepSea,Anglerfish|CrystalJellyfish,Assets/Sprites/Map/deepsea,깊은 심해의 어두운 공간
+3,Deep Sea Abyss,DeepSea,Anglerfish|CrystalJellyfish|BlueTang|GoldenCarp|YellowfinTuna|Swordfish,Assets/Sprites/Map/deepsea,깊은 심해의 어두운 공간
 4,Lake Serenity,Lake,GoldenCarp,Assets/Sprites/Map/lakeserenity,조용한 호수
 5,River Flow,River,Piranha,Assets/Sprites/Map/riverflow,빠르게 흐르는 강

@@ -48,10 +48,10 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 
     private void Awake()
     {
-        Init();
+        //Init();
     }
 
-    private void Init()
+    public void Init()
     {
         LoadUpgradeDatabase();
         EnsureAllTypes();
@@ -111,6 +111,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     private void BuildCache()
     {
         _cache.Clear();
+        GameManager.Instance.ClearUpgradeInfo();
         if (upgradeData == null) return;
 
         foreach (UpgradeData ud in upgradeData)

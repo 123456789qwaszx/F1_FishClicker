@@ -1,37 +1,60 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UI_UpgradePanel : UI_Popup
 {
-    Transform SlotPanel;
-    public UpgradeSlot[] slots = new UpgradeSlot[7];
-    int _curIndex = -1;
+    [SerializeField] private Transform SlotPanel;        // Slot을 담을 부모
+    [SerializeField] private GameObject slotPrefab;      // UpgradeSlot prefab
 
+    private List<UpgradeSlot> slots = new List<UpgradeSlot>();
+
+    private int _curIndex = -1;
+
+    
     public void SetUp()
     {
-        SlotPanel = ComponentHelper.TryFindChild(this, "SlotPanel");
+        ClearSlots();
+        Debug.Log("??");
 
-        for (int i = 0; i < SlotPanel.childCount; i++)
+        List<UpgradeData> upgrades = GameManager.Instance.GetAllUpgradeData();
+        Debug.Log(upgrades.Count);
+
+        for (int i = 0; i < upgrades.Count; i++)
         {
-            GameObject go = SlotPanel.GetChild(i).gameObject;
+            GameObject go = Instantiate(slotPrefab, SlotPanel);
             UpgradeSlot slot = go.GetComponent<UpgradeSlot>();
-            slot.UpgradeType = (UpgradeType)i;
+            slot.SetUpgradeData(upgrades[i]);
             slot.Index = i;
-            slot.SetupByUpgradeType();
-            slots[i] = slot;
+
+            slots.Add(slot);
         }
     }
 
+    
+    private void ClearSlots()
+    {
+        foreach (var slot in slots)
+        {
+            if (slot != null)
+                Destroy(slot.gameObject);
+        }
+        slots.Clear();
+    }
+
+    
     public void UpdateSlots()
     {
         foreach (UpgradeSlot us in slots)
         {
-            us.SetupByUpgradeType();
+            us.RefreshUI();
         }
     }
-
+    
+    
     public void OnSlotClicked(int slotIndex)
     {
         _curIndex = slotIndex;
+        
         UpgradeSystem.Instance.TryUpgrade(slots[_curIndex].UpgradeType);
         UpdateSlots();
 

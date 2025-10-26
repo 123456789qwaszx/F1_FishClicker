@@ -26,10 +26,8 @@ public class FishDataImporter
             fish.fishName = row["fishName"];
             fish.rarity = row["rarity"];
             fish.baseValue = long.Parse(row["baseValue"]);
-            fish.isBossFish = bool.Parse(row["isBossFish"]);
             fish.spritePath = row["spritePath"];
             fish.description = row["description"];
-            fish.region = row["region"];
 
             database.fishList.Add(fish);
         }

@@ -10,41 +10,30 @@ public class UpgradeSlot : MonoBehaviour
     public UpgradeType UpgradeType;
     public int Index;
 
+    private UpgradeData _upgradeData;
 
-    public void SetupByUpgradeType()
+    
+    public void SetUpgradeData(UpgradeData data)
     {
-        switch (UpgradeType)
-        {
-            case UpgradeType.Aria:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}()";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Ciel:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Reina:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Noel:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Lumia:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Kei:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-            case UpgradeType.Mio:
-                Txt_UpgradeValue.text = $"{UpgradeType}Lv.({GameManager.Instance.GetUpgradeLevel(UpgradeType)})\n+{GameManager.Instance.GetUpgradeAmount(UpgradeType)}";
-                Txt_UpgradePrice.text = $"{GameManager.Instance.GetUpgradeCost(UpgradeType)}G";
-                break;
-        }
+        if (data == null) return;
+
+        _upgradeData = data;
+        UpgradeType = data.statType;
+        RefreshUI();
     }
+
+    
+    public void RefreshUI()
+    {
+        if (_upgradeData == null) return;
+
+        long upgradeAmount = _upgradeData.GetCurStatValue();
+        long upgradeCost = _upgradeData.GetUpgradeCost();
+
+        Txt_UpgradeValue.text = $"{UpgradeType} Lv.({_upgradeData.level})\n+{upgradeAmount} ({_upgradeData.effectType})";
+        Txt_UpgradePrice.text = $"{upgradeCost}G";
+    }
+
     
     public void OnSlotClicked()
     {

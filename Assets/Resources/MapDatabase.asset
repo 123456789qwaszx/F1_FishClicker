@@ -36,6 +36,10 @@ MonoBehaviour:
     fishPool:
     - Anglerfish
     - CrystalJellyfish
+    - BlueTang
+    - GoldenCarp
+    - YellowfinTuna
+    - Swordfish
     backgroundSprite: Assets/Sprites/Map/deepsea
     description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uC5B4\uB450\uC6B4 \uACF5\uAC04"
   - id: 4

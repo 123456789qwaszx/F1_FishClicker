@@ -13,6 +13,11 @@ public class GameManager : Singleton<GameManager>
     
     #region Upgrade
     private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
+    
+    public List<UpgradeData> GetAllUpgradeData()
+    {
+        return new List<UpgradeData>(_upgradeInfo.Values);
+    }
 
     public long GetUpgradeAmount(UpgradeType type)
     {
@@ -61,6 +66,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         return result;
+    }
+
+    public void ClearUpgradeInfo()
+    {
+        _upgradeInfo.Clear();
     }
     #endregion
     
