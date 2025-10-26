@@ -76,12 +76,14 @@ public class FishingSystem : Singleton<FishingSystem>
     }
 
     
-    // 게임매니저의 스탯과 연동하여 Rare 이상 확률 보너스 적용
+    /// <summary>
+    /// 게임매니저의 스탯과 연동하여 Rare 이상 확률 보너스 적용
+    /// Common을 줄이고, 나머지 등급에 기존 비율을 유지하면서 분배
+    /// </summary>
     public void ApplyRareOrAboveBonus()
     {
         float extra = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
 
-        // Common을 줄이고, 나머지 등급에 기존 비율을 유지하면서 분배
         Dictionary<string, float> newValues = new Dictionary<string, float>
         {
             { "Common", Mathf.Max(0f, baseCommonPercent - extra) }

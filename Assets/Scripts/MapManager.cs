@@ -4,24 +4,25 @@ using UnityEngine.UI;
 
 public class MapManager : Singleton<MapManager>
 {
-    [Header("UI")] [SerializeField] private Image mapBackgroundImage; // 배경 이미지 UI
+    [Header("UI")]
+    [SerializeField] private Image mapBackgroundImage; // 배경 이미지 UI
 
     [SerializeField] private MapDatabase _mapDB; // CSV → ScriptableObject로 임포트된 맵 데이터
     [SerializeField] private MapData _currentMap; // 현재 맵
     [SerializeField] private Dictionary<string, MapData> _mapCache = new();
+
+    private int _currentMapIndex = 0;
 
     void Awake()
     {
         Init();
     }
 
-
     public void Init()
     {
         LoadMapDatabase();
         SetCurrentMap("DeepSea");
     }
-
 
     private void LoadMapDatabase()
     {
@@ -43,7 +44,7 @@ public class MapManager : Singleton<MapManager>
     }
 
     /// <summary>
-    /// region 이름으로 현재 맵 설정 및 UI에 배경 표시
+    /// region 이름으로 현재 맵 설정 및 UI 갱신
     /// </summary>
     public void SetCurrentMap(string region)
     {
@@ -54,14 +55,14 @@ public class MapManager : Singleton<MapManager>
         }
 
         _currentMap = map;
+        _currentMapIndex = _mapDB.mapList.IndexOf(map);
+
         UpdateMapUI();
         Debug.Log($"Current map set to: {_currentMap.mapName}");
 
-        //TODO 벤트 매니저로 알려줄 것. FishingSystem UpdateMapFishData()
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
 
-    
     private void UpdateMapUI()
     {
         if (_currentMap == null || mapBackgroundImage == null) return;
@@ -76,8 +77,40 @@ public class MapManager : Singleton<MapManager>
         mapBackgroundImage.sprite = bgSprite;
     }
 
-    public MapData GetCurrentMap()
+    public MapData GetCurrentMap() => _currentMap;
+
+    // -----------------------
+    // 🔽 추가된 부분
+    // -----------------------
+
+    public void OnClickNextMap()
     {
-        return _currentMap;
+        if (_mapDB == null || _mapDB.mapList.Count == 0) return;
+
+        int nextIndex = _currentMapIndex + 1;
+        if (nextIndex >= _mapDB.mapList.Count)
+        {
+            Debug.Log("Already at last map!");
+            return;
+        }
+
+        SetCurrentMap(_mapDB.mapList[nextIndex].region);
     }
+
+    public void OnClickPrevMap()
+    {
+        if (_mapDB == null || _mapDB.mapList.Count == 0) return;
+
+        int prevIndex = _currentMapIndex - 1;
+        if (prevIndex < 0)
+        {
+            Debug.Log("Already at first map!");
+            return;
+        }
+
+        SetCurrentMap(_mapDB.mapList[prevIndex].region);
+    }
+
+    public bool HasNextMap() => _currentMapIndex < _mapDB.mapList.Count - 1;
+    public bool HasPrevMap() => _currentMapIndex > 0;
 }

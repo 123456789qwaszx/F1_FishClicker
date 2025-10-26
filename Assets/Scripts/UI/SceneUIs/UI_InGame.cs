@@ -22,6 +22,8 @@ public class UI_InGame : UI_Scene
     enum Buttons
     {
         Btn_Phone,
+        Btn_PrevStage,
+        Btn_NextStage,
     }
 
     enum Images
@@ -49,6 +51,8 @@ public class UI_InGame : UI_Scene
 
     
     Button Btn_Phone;
+    Button Btn_PrevStage;
+    Button Btn_NextStage;
     
     Image Img_Gem;
     
@@ -77,6 +81,8 @@ public class UI_InGame : UI_Scene
         Txt_CurrentStage = GetText((int)Texts.Txt_CurrentStage);
         
         Btn_Phone = GetButton((int)Buttons.Btn_Phone);
+        Btn_PrevStage = GetButton((int)Buttons.Btn_PrevStage);
+        Btn_NextStage = GetButton((int)Buttons.Btn_NextStage);
         
         Img_Gem = GetImage((int)Images.Img_Gem);
 
@@ -114,6 +120,18 @@ public class UI_InGame : UI_Scene
         Txt_FishAmount3.text = (fishes.Count > 3) ? fishes[3].fishName : "";
         Txt_AutoGainPerSec.text = $"1 / {1 - GameManager.Instance.GetUpgradeAmount(UpgradeType.Ciel)}Sec";
         Txt_CurrentStage.text =  $"현재 지역  {MapManager.Instance.GetCurrentMap().region}";
+    }
+
+
+    public void OnChangeNextMap()
+    {
+        MapManager.Instance.OnClickNextMap();
+    }
+    
+    
+    public void OnChangePrevMap()
+    {
+        MapManager.Instance.OnClickPrevMap();
     }
     
     public void OnShowPhone(PointerEventData _)
