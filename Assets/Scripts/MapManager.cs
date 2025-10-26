@@ -61,6 +61,7 @@ public class MapManager : Singleton<MapManager>
         Debug.Log($"Current map set to: {_currentMap.mapName}");
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChangedWithData, _currentMap);
     }
 
     private void UpdateMapUI()

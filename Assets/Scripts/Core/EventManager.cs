@@ -19,6 +19,7 @@ public enum EEventType
     MoneyChanged,
     Upgraded,
     OnMapChanged,
+    OnMapChangedWithData,
 }
 
 public class EventManager
@@ -38,7 +39,8 @@ public class EventManager
     #endregion
 
     private Dictionary<EEventType, Action> _events = new Dictionary<EEventType, Action>();
-
+    private Dictionary<EEventType, Action<object>> _paramEvents = new();
+    
     public void AddEvent(EEventType eventType, Action listener)
     {
         if (_events.ContainsKey(eventType) == false)
@@ -62,6 +64,34 @@ public class EventManager
     public void Clear()
     {
         _events.Clear();
+    }
+    
+    
+    // -----------------------------
+    // 🔹 리스너 등록 (payload 버전)
+    // -----------------------------
+    public void AddEvent<T>(EEventType eventType, Action<T> listener)
+    {
+        if (!_paramEvents.ContainsKey(eventType))
+            _paramEvents[eventType] = delegate { };
+
+        // object → T 캐스팅
+        _paramEvents[eventType] += (obj) => listener((T)obj);
+    }
+
+    public void RemoveEvent<T>(EEventType eventType, Action<T> listener)
+    {
+        if (_paramEvents.ContainsKey(eventType))
+            _paramEvents[eventType] -= (obj) => listener((T)obj);
+    }
+    
+    // -----------------------------
+    // 🔹 이벤트 호출 (payload 버전)
+    // -----------------------------
+    public void TriggerEvent<T>(EEventType eventType, T payload)
+    {
+        if (_paramEvents.ContainsKey(eventType))
+            _paramEvents[eventType]?.Invoke(payload);
     }
     
     

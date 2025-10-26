@@ -35,12 +35,22 @@ public class FishingSystem : Singleton<FishingSystem>
     {
         EventManager.Instance.AddEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.AddEvent(EEventType.OnMapChanged, ApplyMapFishData);
+        EventManager.Instance.AddEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
     }
 
     private void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, ApplyMapFishData);
+        EventManager.Instance.RemoveEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
+    }
+    
+    
+    
+    private void OnMapChanged(MapData map)
+    {
+        Debug.Log($"Map changed to: {map.mapName}");
+        GetFishForMap();
     }
 
     
@@ -142,7 +152,7 @@ public class FishingSystem : Singleton<FishingSystem>
     public void ApplyMapFishData()
     {
         List<FishData> mapFishes = GetFishForMap();
-        
+    
         commonFishes.Clear();
         rareFishes.Clear();
         epicFishes.Clear();
