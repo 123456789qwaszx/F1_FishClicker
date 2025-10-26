@@ -8,8 +8,6 @@ public class FishData
     public string fishName;
     public string rarity;
     public long baseValue;
-    public bool isBossFish;
     public string spritePath;
     public string description;
-    public string region;
 }
