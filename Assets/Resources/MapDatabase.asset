@@ -16,43 +16,48 @@ MonoBehaviour:
   - id: 1
     mapName: Tropical Bay
     region: Tropical
-    fishPool:
-    - Clownfish
-    - BlueTang
+    fishPool: []
     backgroundSprite: Assets/Sprites/Map/tropicalbay
     description: "\uBC1D\uACE0 \uD3C9\uD654\uB85C\uC6B4 \uC5F4\uB300 \uBC14\uB2E4"
   - id: 2
-    mapName: Ocean Deep
+    mapName: Ocean
     region: Ocean
-    fishPool:
-    - BlueTang
-    - YellowfinTuna
-    - Swordfish
+    fishPool: []
     backgroundSprite: Assets/Sprites/Map/oceandeep
-    description: "\uAE4A\uACE0 \uB113\uC740 \uBC14\uB2E4"
+    description: "\uB113\uC740 \uBC14\uB2E4"
   - id: 3
     mapName: Deep Sea Abyss
     region: DeepSea
-    fishPool:
-    - Anglerfish
-    - CrystalJellyfish
-    - BlueTang
-    - GoldenCarp
-    - YellowfinTuna
-    - Swordfish
+    fishPool: []
     backgroundSprite: Assets/Sprites/Map/deepsea
     description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uC5B4\uB450\uC6B4 \uACF5\uAC04"
   - id: 4
     mapName: Lake Serenity
     region: Lake
-    fishPool:
-    - GoldenCarp
+    fishPool: []
     backgroundSprite: Assets/Sprites/Map/lakeserenity
     description: "\uC870\uC6A9\uD55C \uD638\uC218"
   - id: 5
     mapName: River Flow
     region: River
-    fishPool:
-    - Piranha
+    fishPool: []
     backgroundSprite: Assets/Sprites/Map/riverflow
     description: "\uBE60\uB974\uAC8C \uD750\uB974\uB294 \uAC15"
+  - id: 6
+    mapName: CoralReef
+    region: CoralReef
+    fishPool: []
+    backgroundSprite: Assets/Sprites/Map/coralreef
+    description: "\uC0B0\uD638\uC9C0\uB300"
+  - id: 7
+    mapName: Shore
+    region: Shore
+    fishPool: []
+    backgroundSprite: Assets/Sprites/Map/shore
+    description: "\uC5F0\uC548\uAC00"
+  - id: 8
+    mapName: Polar
+    region: Polar
+    fishPool: []
+    backgroundSprite: Assets/Sprites/Map/polar
+    description: "\uBD81\uADF9"

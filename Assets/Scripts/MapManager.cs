@@ -73,6 +73,7 @@ public class MapManager : Singleton<MapManager>
         fishingSystem.rareFishes.Clear();
         fishingSystem.epicFishes.Clear();
         fishingSystem.legendaryFishes.Clear();
+        fishingSystem.mythicFishes.Clear();
         
         foreach (var fish in mapFishes)
         {
@@ -89,6 +90,9 @@ public class MapManager : Singleton<MapManager>
                     break;
                 case "Legendary":
                     fishingSystem.legendaryFishes.Add(fish);
+                    break;
+                case "Mythic":
+                    fishingSystem.mythicFishes.Add(fish);
                     break;
                 default:
                     Debug.LogWarning($"Unknown fish rarity: {fish.rarity}");
@@ -153,26 +157,24 @@ public class MapManager : Singleton<MapManager>
     }
     
     /// <summary>
-    /// MapData의 fishPool에 포함된 FishData 리스트 가져오기
+    /// MapData의 region과 FishData의 region을 비교하여 해당 지역의 FishData 리스트 가져오기
     /// </summary>
     public List<FishData> GetFishForMap()
     {
         List<FishData> result = new List<FishData>();
 
-        if (_currentMap == null || _currentMap.fishPool == null) return result;
+        if (_currentMap == null) return result;
 
-        foreach (var fishName in _currentMap.fishPool)
+        // FishDatabase에 있는 모든 FishData를 순회하면서 지역이 같은 것만 추가
+        foreach (var fish in _fishCache.Values)
         {
-            if (_fishCache.TryGetValue(fishName, out FishData fish))
+            if (fish.region == _currentMap.region)
             {
                 result.Add(fish);
-            }
-            else
-            {
-                Debug.LogWarning($"Fish '{fishName}' not found in FishDatabase!");
             }
         }
 
         return result;
     }
+
 }
