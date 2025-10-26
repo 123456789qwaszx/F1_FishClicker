@@ -87,6 +87,7 @@ public class MapManager : Singleton<MapManager>
                     break;
                 case "Epic":
                     fishingSystem.epicFishes.Add(fish);
+                    Debug.Log($"fish: {fish.fishName}");
                     break;
                 case "Legendary":
                     fishingSystem.legendaryFishes.Add(fish);

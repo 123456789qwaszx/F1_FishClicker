@@ -2681,14 +2681,17 @@ MonoBehaviour:
   rareFishes: []
   epicFishes: []
   legendaryFishes: []
+  mythicFishes: []
   baseCommonPercent: 60
   baseRarePercent: 25
   baseEpicPercent: 10
   baseLegendaryPercent: 5
+  baseMythicPercent: 1
   commonPercent: 0
   rarePercent: 0
   epicPercent: 0
   legendaryPercent: 0
+  mythicPercent: 0
 --- !u!114 &1413158867
 MonoBehaviour:
   m_ObjectHideFlags: 0

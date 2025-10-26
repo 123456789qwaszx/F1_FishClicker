@@ -7,3 +7,6 @@ id,mapName,region,backgroundSprite,description
 6,CoralReef,CoralReef,Assets/Sprites/Map/coralreef,산호지대
 7,Shore,Shore,Assets/Sprites/Map/shore,연안가
 8,Polar,Polar,Assets/Sprites/Map/polar,북극
+
+//
+문제가 이름이 같은놈이 있나 보구나...

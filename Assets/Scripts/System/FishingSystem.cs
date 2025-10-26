@@ -76,7 +76,7 @@ public class FishingSystem : Singleton<FishingSystem>
             { "Rare", baseRarePercent },
             { "Epic", baseEpicPercent },
             { "Legendary", baseLegendaryPercent },
-            { "Mythic", baseMythicPercent } // Mytic 포함
+            { "Mythic", baseMythicPercent }
         };
 
         var adjusted = new Dictionary<string, float>(baseValues);
