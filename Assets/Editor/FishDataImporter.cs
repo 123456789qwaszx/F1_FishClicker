@@ -28,6 +28,7 @@ public class FishDataImporter
             fish.baseValue = long.Parse(row["baseValue"]);
             fish.spritePath = row["spritePath"];
             fish.description = row["description"];
+            fish.region = row["region"];
 
             database.fishList.Add(fish);
         }

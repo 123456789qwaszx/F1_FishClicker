@@ -25,7 +25,6 @@ public class MapDataImporter
             map.id = int.Parse(row["id"]);
             map.mapName = row["mapName"];
             map.region = row["region"];
-            map.fishPool = new List<string>(row["fishPool"].Split('|'));
             map.backgroundSprite = row["backgroundSprite"];
             map.description = row["description"];
 

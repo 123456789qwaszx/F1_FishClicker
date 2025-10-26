@@ -8,18 +8,21 @@ public class FishingSystem : Singleton<FishingSystem>
     [SerializeField] public List<FishData> rareFishes;
     [SerializeField] public List<FishData> epicFishes;
     [SerializeField] public List<FishData> legendaryFishes;
+    [SerializeField] public List<FishData> mythicFishes; // Mythic 등급 추가
 
     [Header("기본 확률(%)")]
     [Range(0, 100)] public float baseCommonPercent = 60f;
     [Range(0, 100)] public float baseRarePercent = 25f;
     [Range(0, 100)] public float baseEpicPercent = 10f;
-    [Range(0, 100)] public float baseLegendaryPercent = 5f;
+    [Range(0, 100)] public float baseLegendaryPercent = 4f;
+    [Range(0, 100)] public float baseMythicPercent = 1f; // Mythic 기본 확률
 
     [Header("실제 확률(%)")]
     public float commonPercent;
     public float rarePercent;
     public float epicPercent;
     public float legendaryPercent;
+    public float mythicPercent; // Mythic 실제 확률
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class FishingSystem : Singleton<FishingSystem>
         rarePercent = baseRarePercent;
         epicPercent = baseEpicPercent;
         legendaryPercent = baseLegendaryPercent;
+        mythicPercent = baseMythicPercent;
     }
 
     /// <summary>
@@ -64,25 +68,22 @@ public class FishingSystem : Singleton<FishingSystem>
         RedistributeProbabilities(newValues);
     }
 
-    
     private void RedistributeProbabilities(Dictionary<string, float> newValues)
     {
-        // 기존 확률
         var baseValues = new Dictionary<string, float>
         {
             { "Common", baseCommonPercent },
             { "Rare", baseRarePercent },
             { "Epic", baseEpicPercent },
-            { "Legendary", baseLegendaryPercent }
+            { "Legendary", baseLegendaryPercent },
+            { "Mythic", baseMythicPercent } // Mytic 포함
         };
 
-        // 우선 newValues 적용
         var adjusted = new Dictionary<string, float>(baseValues);
         foreach (var kvp in newValues)
             if (adjusted.ContainsKey(kvp.Key))
                 adjusted[kvp.Key] = Mathf.Clamp(kvp.Value, 0f, 100f);
 
-        // 남은 확률 계산
         float totalNew = 0f;
         foreach (var kvp in adjusted)
             if (newValues.ContainsKey(kvp.Key))
@@ -90,13 +91,11 @@ public class FishingSystem : Singleton<FishingSystem>
 
         float remaining = 100f - totalNew;
 
-        // 남은 등급 합계 (기존 baseValues 기준)
         float sumOtherBase = 0f;
         foreach (var kvp in baseValues)
             if (!newValues.ContainsKey(kvp.Key))
                 sumOtherBase += kvp.Value;
 
-        // 남은 확률 비율대로 재분배
         foreach (var kvp in baseValues)
         {
             if (!newValues.ContainsKey(kvp.Key))
@@ -105,13 +104,12 @@ public class FishingSystem : Singleton<FishingSystem>
             }
         }
 
-        // 최종 적용
         commonPercent = adjusted["Common"];
         rarePercent = adjusted["Rare"];
         epicPercent = adjusted["Epic"];
         legendaryPercent = adjusted["Legendary"];
+        mythicPercent = adjusted["Mythic"];
     }
-
 
     /// <summary>
     /// 확률 기반 랜덤 물고기 반환
@@ -125,6 +123,7 @@ public class FishingSystem : Singleton<FishingSystem>
         if ((cumulative += rarePercent) > r) return GetRandomFish(rareFishes);
         if ((cumulative += epicPercent) > r) return GetRandomFish(epicFishes);
         if ((cumulative += legendaryPercent) > r) return GetRandomFish(legendaryFishes);
+        if ((cumulative += mythicPercent) > r) return GetRandomFish(mythicFishes);
 
         return GetRandomFish(commonFishes);
     }

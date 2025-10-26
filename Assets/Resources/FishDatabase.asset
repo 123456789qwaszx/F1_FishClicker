@@ -14,62 +14,2255 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishDatabase
   fishList:
   - id: 0
-    fishName: Clownfish
+    fishName: "\uBD88\uC9C0\uB290\uB7EC\uBBF8"
     rarity: Common
-    baseValue: 1
-    spritePath: Assets/Sprites/Fish/clownfish
-    description: "\uC791\uACE0 \uADC0\uC5EC\uC6B4 \uBB3C\uACE0\uAE30"
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/firefin
+    description: "\uC791\uACE0 \uC0C9\uC774 \uC120\uBA85\uD55C \uC5F4\uB300 \uC0B0\uD638\uCD08
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
   - id: 1
-    fishName: BlueTang
+    fishName: "\uD574\uBB34\uB2AC"
     rarity: Common
-    baseValue: 1
-    spritePath: Assets/Sprites/Fish/bluetang
-    description: "\uBC1D\uC740 \uD30C\uB780\uC0C9 \uBC14\uB2E4\uBB3C\uACE0\uAE30"
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/sunstripe
+    description: "\uD654\uC0AC\uD55C \uBB34\uB2AC\uAC00 \uB3CB\uBCF4\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Tropical
   - id: 2
-    fishName: Piranha
+    fishName: "\uD30C\uB791\uAE00\uB77C\uC774\uB354"
     rarity: Common
-    baseValue: 1
-    spritePath: Assets/Sprites/Fish/piranha
-    description: "\uC791\uC9C0\uB9CC \uBB34\uC11C\uC6B4 \uC5B4\uAE08\uB2C8"
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/blueglider
+    description: "\uD65C\uBC1C\uD558\uAC8C \uBB34\uB9AC\uB97C \uC9C0\uC5B4 \uD5E4\uC5C4\uCE58\uB294
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 3
+    fishName: "\uBB34\uC9C0\uAC1C\uB2E4\uD2B8"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/rainbowdart
+    description: "\uC0B0\uD638\uCD08 \uC0AC\uC774\uB97C \uBE60\uB974\uAC8C \uB204\uBE44\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 4
+    fishName: "\uC0B0\uD638\uD1B1\uB2C8"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/coralnibble
+    description: "\uC0B0\uD638 \uC8FC\uBCC0\uC5D0\uC11C \uBA39\uC774\uB97C \uCC3E\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 5
+    fishName: "\uC5F4\uB300\uC12C\uAD11"
+    rarity: Common
+    baseValue: 14
+    spritePath: Assets/Sprites/Fish/tropicflash
+    description: "\uBC1D\uC740 \uC0C9\uACFC \uBBFC\uCCA9\uD55C \uC6C0\uC9C1\uC784\uC774
+      \uD2B9\uC9D5"
+    region: Tropical
+  - id: 6
+    fishName: "\uC810\uBB34\uB2AC\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/spottedfin
+    description: "\uC791\uC740 \uBC18\uC810 \uBB34\uB2AC\uB97C \uAC00\uC9C4 \uC5F4\uB300\uC5B4"
+    region: Tropical
+  - id: 7
+    fishName: "\uD669\uAE08\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 15
+    spritePath: Assets/Sprites/Fish/goldenstripe
+    description: "\uC0B0\uD638\uCD08 \uC8FC\uBCC0\uC758 \uC18C\uD615 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 8
+    fishName: "\uAF43\uC78E\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/petaltail
+    description: "\uD615\uD615\uC0C9\uC0C9\uC758 \uBD80\uCC44\uAF34 \uAF2C\uB9AC
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 9
+    fishName: "\uB124\uC628\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/neonglint
+    description: "\uBC24\uC5D0\uB3C4 \uC0C9\uC774 \uBC18\uC9DD\uC774\uB294 \uC18C\uD615
+      \uC5F4\uB300\uC5B4"
+    region: Tropical
+  - id: 10
+    fishName: "\uD654\uC5FC\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/flarefin
+    description: "\uD654\uB824\uD55C \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4
+      \uC0B0\uD638\uCD08 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 11
+    fishName: "\uBAA8\uBC29\uB2E4\uD2B8"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/mimicdart
+    description: "\uC8FC\uBCC0 \uC0C9\uACFC \uBE44\uC2B7\uD558\uAC8C \uC704\uC7A5\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 12
+    fishName: "\uC904\uBB34\uB2AC\uBB34\uC6A9\uC218"
+    rarity: Common
+    baseValue: 14
+    spritePath: Assets/Sprites/Fish/stripeddancer
+    description: "\uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uBA70 \uAD70\uBB34\uB97C
+      \uC774\uB8E8\uB294 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 13
+    fishName: "\uAD6C\uB9AC\uBE5B\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/coppergleam
+    description: "\uAD6C\uB9AC\uC0C9 \uAD11\uD0DD\uC774 \uB098\uB294 \uC5F4\uB300\uC5B4"
+    region: Tropical
+  - id: 14
+    fishName: "\uC9C4\uD64D\uBC88\uCA4D"
+    rarity: Common
+    baseValue: 15
+    spritePath: Assets/Sprites/Fish/crimsonblink
+    description: "\uC791\uC9C0\uB9CC \uAC15\uB82C\uD55C \uC0C9\uC0C1\uC744 \uAC00\uC9C4
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
   - id: 100
-    fishName: YellowfinTuna
+    fishName: "\uB4F1\uBD88\uC12C\uAD11"
     rarity: Rare
-    baseValue: 20
-    spritePath: Assets/Sprites/Fish/yellowfin
-    description: "\uBE60\uB978 \uC18D\uB3C4\uC758 \uCC38\uCE58"
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/lanternflare
+    description: "\uBE5B\uC744 \uB0B4\uB294 \uD3EC\uC2DD\uC790 \uC791\uC740 \uC5F4\uB300\uC5B4"
+    region: Tropical
   - id: 101
-    fishName: Swordfish
+    fishName: "\uD30C\uB3C4\uD0C0\uAE30"
     rarity: Rare
-    baseValue: 20
-    spritePath: Assets/Sprites/Fish/swordfish
-    description: "\uAE38\uAC8C \uBED7\uC740 \uAC80 \uBAA8\uC591\uC758 \uC785"
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/waverider
+    description: "\uC0B0\uD638\uCD08\uB97C \uC720\uC601\uD558\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uBB3C\uACE0\uAE30"
+    region: Tropical
   - id: 102
-    fishName: Stingray
+    fishName: "\uD504\uB9AC\uC998\uBE14\uB808\uC774\uB4DC"
     rarity: Rare
-    baseValue: 20
-    spritePath: Assets/Sprites/Fish/stingray
-    description: "\uB113\uC740 \uB0A0\uAC1C\uB97C \uAC00\uC9C4 \uBC14\uB2E4 \uC0DD\uBB3C"
+    baseValue: 55
+    spritePath: Assets/Sprites/Fish/prismblade
+    description: "\uB0A0\uCE74\uB85C\uC6B4 \uC6C0\uC9C1\uC784\uACFC \uD654\uB824\uD55C
+      \uC0C9\uC744 \uAC00\uC9C4 \uC5F4\uB300 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 103
+    fishName: "\uB124\uC628\uC2A4\uD30C\uC774\uD06C"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/neonspike
+    description: "\uBB34\uB9AC \uC9C0\uC5B4 \uC0AC\uB0E5\uD558\uB294 \uD65C\uBC1C\uD55C
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 104
+    fishName: "\uBC18\uC9DD\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/glintfang
+    description: "\uC791\uC9C0\uB9CC \uBBFC\uCCA9\uD55C \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 105
+    fishName: "\uD0DC\uC591\uC12C\uAD11"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/solarflit
+    description: "\uBE5B\uC5D0 \uBC18\uC751\uD558\uBA70 \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 106
+    fishName: "\uBCC4\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/starfin
+    description: "\uBCC4 \uBAA8\uC591 \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4
+      \uD76C\uADC0 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 107
+    fishName: "\uBB3C\uB2E4\uD2B8"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/aquadart
+    description: "\uBE60\uB974\uAC8C \uB3CC\uC9C4\uD558\uB294 \uC791\uC740 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 108
+    fishName: "\uBB3C\uACB0\uBC18\uC9DD"
+    rarity: Rare
+    baseValue: 49
+    spritePath: Assets/Sprites/Fish/tideshimmer
+    description: "\uBB3C\uC0B4\uC5D0 \uBC18\uC9DD\uC774\uB294 \uD76C\uADC0 \uC5F4\uB300\uC5B4"
+    region: Tropical
   - id: 200
-    fishName: Anglerfish
+    fishName: "\uD654\uC5FC\uBAA8\uBC29"
     rarity: Epic
-    baseValue: 100
-    spritePath: Assets/Sprites/Fish/angler
-    description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uBB34\uC11C\uC6B4 \uBB3C\uACE0\uAE30"
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/flaremimic
+    description: "\uBE5B\uACFC \uC0C9\uC73C\uB85C \uBA39\uC774\uB97C \uC720\uD639\uD558\uB294
+      \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: Tropical
   - id: 201
-    fishName: CrystalJellyfish
+    fishName: "\uC0B0\uD638\uCD94\uC801\uC790"
     rarity: Epic
-    baseValue: 100
-    spritePath: Assets/Sprites/Fish/crystaljelly
-    description: "\uBE5B\uC744 \uB0B4\uB294 \uC544\uB984\uB2E4\uC6B4 \uD574\uD30C\uB9AC"
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/coralstalker
+    description: "\uC0B0\uD638 \uD2C8\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC5D0\uD53D\uAE09
+      \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 202
+    fishName: "\uB124\uC628\uBC88\uCA4D"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/neonflash
+    description: "\uBB34\uB9AC\uB97C \uC9C0\uC5B4 \uAC15\uB825\uD55C \uACF5\uACA9\uC744
+      \uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: Tropical
+  - id: 203
+    fishName: "\uD0DC\uC591\uAC80"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/solarblade
+    description: "\uD654\uB824\uD55C \uC0C9\uACFC \uB0A0\uCE74\uB85C\uC6B4 \uC9C0\uB290\uB7EC\uBBF8\uB97C
+      \uAC00\uC9C4 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 204
+    fishName: "\uD504\uB9AC\uC998\uD5CC\uD130"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/prismhunter
+    description: "\uBE5B\uC744 \uC774\uC6A9\uD574 \uBA39\uC774\uB97C \uCAD3\uB294
+      \uC2EC\uD654 \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 205
+    fishName: "\uBC18\uC9DD\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Epic
+    baseValue: 128
+    spritePath: Assets/Sprites/Fish/glintfin
+    description: "\uBE60\uB974\uACE0 \uBBFC\uCCA9\uD55C \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Tropical
   - id: 300
-    fishName: GoldenCarp
+    fishName: "\uBB34\uC9C0\uAC1C\uD669\uC81C"
     rarity: Legendary
-    baseValue: 1000
-    spritePath: Assets/Sprites/Fish/goldencarp
-    description: "\uD669\uAE08\uBE5B \uC804\uC124\uC758 \uC789\uC5B4"
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/rainbowemperor
+    description: "\uC0B0\uD638\uCD08\uB97C \uC9C0\uBC30\uD558\uB294 \uC804\uC124\uC758
+      \uC5F4\uB300\uC5B4"
+    region: Tropical
+  - id: 301
+    fishName: "\uD0DC\uC591\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/solaremperor
+    description: "\uBE5B\uACFC \uC0C9\uC758 \uC870\uD654\uB97C \uC9C0\uB2CC \uC804\uC124\uC801
+      \uD3EC\uC2DD\uC790"
+    region: Tropical
+  - id: 302
+    fishName: "\uD504\uB9AC\uC998\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/prismemperor
+    description: "\uAC15\uB825\uD55C \uCCB4\uB825\uACFC \uC544\uB984\uB2E4\uC6C0\uC744
+      \uAC00\uC9C4 \uC804\uC124 \uBB3C\uACE0\uAE30"
+    region: Tropical
   - id: 400
-    fishName: Leviathan
+    fishName: "\uC2EC\uC5F0\uBC40"
     rarity: Mythic
-    baseValue: 10000
-    spritePath: Assets/Sprites/Fish/leviathan
-    description: "\uC2EC\uD574\uC758 \uAD34\uBB3C"
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/abyssalserpent
+    description: "\uC2EC\uD574\uC5D0\uC11C\uB3C4 \uC0B4\uC544\uB0A8\uB294 \uC2E0\uD654\uC801
+      \uC5F4\uB300\uC5B4"
+    region: Tropical
+  - id: 401
+    fishName: "\uC0B0\uD638\uC6A9"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/coraldragon
+    description: "\uAC70\uB300\uD55C \uC0B0\uD638\uCD08 \uC218\uD638 \uC2E0\uD654
+      \uC0DD\uBB3C"
+    region: Tropical
+  - id: 402
+    fishName: "\uD0DC\uC591\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/solarhydra
+    description: "\uBE5B\uACFC \uBB3C\uACB0\uC744 \uB2E4\uB8E8\uB294 \uC804\uC124\uC801
+      \uC218\uD638\uC790"
+    region: Tropical
+  - id: 500
+    fishName: "\uBD88\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/blazefin
+    description: "\uC0B0\uD638\uCD08 \uC0AC\uC774\uB97C \uC720\uC601\uD558\uBA70
+      \uBC1D\uC740 \uC0C9\uC744 \uB764 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 501
+    fishName: "\uD638\uBC15\uBE5B\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/ambergaleam
+    description: "\uD587\uBE5B\uC5D0 \uBC18\uC9DD\uC774\uB294 \uC0B0\uD638\uCD08
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 502
+    fishName: "\uD574\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/suntail
+    description: "\uBD80\uCC44 \uBAA8\uC591 \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4
+      \uC0B0\uD638\uCD08 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 503
+    fishName: "\uB8E8\uBE44\uC810"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/rubydot
+    description: "\uC810 \uBB34\uB2AC\uAC00 \uB3CB\uBCF4\uC774\uB294 \uC0B0\uD638\uCD08
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 504
+    fishName: "\uC0B0\uD638\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/coralflick
+    description: "\uC0B0\uD638 \uC8FC\uBCC0\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 505
+    fishName: "\uB124\uC628\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/neonglint
+    description: "\uBE5B\uC5D0 \uBC18\uC0AC\uB418\uC5B4 \uBC18\uC9DD\uC774\uB294
+      \uC0B0\uD638\uCD08 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 506
+    fishName: "\uD478\uB978\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/azurestripe
+    description: "\uD478\uB978 \uC904\uBB34\uB2AC\uAC00 \uD2B9\uC9D5\uC778 \uC0B0\uD638\uCD08
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 507
+    fishName: "\uBB3C\uACB0\uC12C\uAD11"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/tideflare
+    description: "\uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC0B0\uD638\uCD08 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 508
+    fishName: "\uAD6C\uB9AC\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/copperfin
+    description: "\uAD6C\uB9AC\uC0C9 \uC9C0\uB290\uB7EC\uBBF8\uAC00 \uD2B9\uC9D5\uC778
+      \uC0B0\uD638\uCD08 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 509
+    fishName: "\uAF43\uC78E\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/petalfins
+    description: "\uBD80\uCC44 \uBAA8\uC591 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC0B0\uD638
+      \uC0AC\uC774\uB97C \uC720\uC601\uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 510
+    fishName: "\uBC18\uC9DD\uB2E4\uD2B8"
+    rarity: Common
+    baseValue: 14
+    spritePath: Assets/Sprites/Fish/gleamdart
+    description: "\uBE5B\uACFC \uBBFC\uCCA9\uC131\uC744 \uAC00\uC9C4 \uC18C\uD615
+      \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 511
+    fishName: "\uBCC4\uBC88\uCA4D"
+    rarity: Common
+    baseValue: 14
+    spritePath: Assets/Sprites/Fish/starblink
+    description: "\uC810\uBB34\uB2AC\uC640 \uBC18\uC9DD\uC784\uC774 \uD2B9\uC9D5\uC778
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 512
+    fishName: "\uBD88\uAF43\uB2E4\uD2B8"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/sparkdart
+    description: "\uC0B0\uD638\uCD08 \uD2C8\uC5D0\uC11C \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 513
+    fishName: "\uD654\uC5FC\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/flaretail
+    description: "\uBC1D\uC740 \uC0C9\uACFC \uBD80\uCC44 \uBAA8\uC591 \uAF2C\uB9AC\uB97C
+      \uAC00\uC9C4 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 514
+    fishName: "\uBE5B\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 14
+    spritePath: Assets/Sprites/Fish/glowfin
+    description: "\uBE5B\uC744 \uBC18\uC0AC\uD558\uBA70 \uC0B0\uD638\uCD08\uB97C
+      \uB204\uBE44\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 600
+    fishName: "\uD504\uB9AC\uC998\uAE00\uB77C\uC774\uB354"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/prismglider
+    description: "\uBE5B\uACFC \uC0C9\uC744 \uC774\uC6A9\uD574 \uC0B0\uD638\uCD08\uC5D0\uC11C
+      \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 601
+    fishName: "\uC9C4\uD64D\uC2A4\uD30C\uC774\uD06C"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/crimsonspike
+    description: "\uC0B0\uD638 \uD2C8\uC5D0\uC11C \uBE60\uB974\uAC8C \uC0AC\uB0E5\uD558\uB294
+      \uC18C\uD615 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 602
+    fishName: "\uC0AC\uD30C\uC774\uC5B4\uD5CC\uD130"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/sapphirehunter
+    description: "\uD478\uB978 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC0B0\uD638\uCD08
+      \uD3EC\uC2DD \uD65C\uB3D9\uC744 \uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 603
+    fishName: "\uB8E8\uBBF8\uB098\uBE14\uB808\uC774\uB4DC"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/luminablade
+    description: "\uBE5B\uACFC \uB0A0\uCE74\uB85C\uC6B4 \uC9C0\uB290\uB7EC\uBBF8\uB97C
+      \uAC00\uC9C4 \uD76C\uADC0 \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 604
+    fishName: "\uC0B0\uD638\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/coralstalker
+    description: "\uC0B0\uD638 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 605
+    fishName: "\uBB3C\uACB0\uBC18\uC9DD"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/tideshimmer
+    description: "\uBB3C\uACB0\uC5D0 \uBC18\uC0AC\uB418\uB294 \uC0C9\uC73C\uB85C
+      \uC0AC\uB0E5\uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 606
+    fishName: "\uB124\uC628\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 49
+    spritePath: Assets/Sprites/Fish/neonfang
+    description: "\uBB34\uB9AC\uB97C \uC9C0\uC5B4 \uC0AC\uB0E5\uD558\uB294 \uD76C\uADC0
+      \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 607
+    fishName: "\uBCC4\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/starfin
+    description: "\uBCC4 \uBAA8\uC591 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBE60\uB974\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 608
+    fishName: "\uD504\uB9AC\uC998\uD5CC\uD130"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/prismhunter
+    description: "\uBE5B\uC744 \uC774\uC6A9\uD574 \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 700
+    fishName: "\uBC18\uC9DD\uC12C\uAD11"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/glintflash
+    description: "\uBE5B\uACFC \uC0C9\uC73C\uB85C \uBA39\uC774\uB97C \uC720\uC778\uD558\uB294
+      \uC0B0\uD638\uCD08 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 701
+    fishName: "\uC0B0\uD638\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/coralrazor
+    description: "\uB0A0\uCE74\uB85C\uC6B4 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC0B0\uD638
+      \uD2C8 \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 702
+    fishName: "\uB124\uC628\uAC80"
+    rarity: Epic
+    baseValue: 128
+    spritePath: Assets/Sprites/Fish/neonblade
+    description: "\uBC1D\uC740 \uC0C9\uACFC \uBBFC\uCCA9\uD55C \uC6C0\uC9C1\uC784\uC73C\uB85C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 703
+    fishName: "\uD504\uB9AC\uC998\uC12C\uAD11"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/prismflare
+    description: "\uBE5B\uACFC \uC0C9\uC744 \uC774\uC6A9\uD574 \uBA39\uC774\uB97C
+      \uACF5\uACA9\uD558\uB294 \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 704
+    fishName: "\uB8E8\uBBF8\uB098\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/luminastrike
+    description: "\uAC15\uB825\uD55C \uC0C9\uACFC \uC6C0\uC9C1\uC784\uC73C\uB85C
+      \uC0B0\uD638\uCD08 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 705
+    fishName: "\uC9C4\uD64D\uAC80"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/crimsonblade
+    description: "\uC0B0\uD638 \uD2C8\uC5D0\uC11C \uD3EC\uC2DD\uD558\uB294 \uD654\uB824\uD55C
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 800
+    fishName: "\uC0B0\uD638\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/coralemperor
+    description: "\uC0B0\uD638\uCD08 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790\uC774\uC790
+      \uC804\uC124\uC801 \uD798\uACFC \uC0C9\uC744 \uAC00\uC9C4 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 801
+    fishName: "\uD504\uB9AC\uC998\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/prismemperor
+    description: "\uBE5B\uACFC \uC0C9\uC744 \uC870\uD569\uD55C \uC804\uC124\uC801
+      \uC0B0\uD638\uCD08 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 802
+    fishName: "\uD0DC\uC591\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/solaremperor
+    description: "\uAC15\uB825\uD55C \uCCB4\uB825\uACFC \uD654\uB824\uD568\uC744
+      \uAC00\uC9C4 \uC804\uC124 \uBB3C\uACE0\uAE30"
+    region: CoralReef
+  - id: 900
+    fishName: "\uC2EC\uC5F0\uBC40"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/abyssalserpent
+    description: "\uC2EC\uD574 \uC0B0\uD638\uCD08\uC5D0\uC11C \uC0B4\uC544\uB0A8\uB294
+      \uC2E0\uD654\uC801 \uC0DD\uBB3C"
+    region: CoralReef
+  - id: 901
+    fishName: "\uC0B0\uD638\uC6A9"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/coraldragon
+    description: "\uAC70\uB300\uD55C \uC0B0\uD638\uCD08 \uC2E0\uD654\uC801 \uD3EC\uC2DD\uC790"
+    region: CoralReef
+  - id: 902
+    fishName: "\uD0DC\uC591\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/solarhydra
+    description: "\uBE5B\uACFC \uBB3C\uACB0\uC744 \uB2E4\uB8E8\uB294 \uC0B0\uD638\uCD08
+      \uC2E0\uD654\uC801 \uC218\uD638\uC790"
+    region: CoralReef
+  - id: 1000
+    fishName: "\uBAA8\uB798\uB3C4\uC57D\uC774"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/sandskipper
+    description: "\uBAA8\uB798 \uD574\uC548\uC5D0\uC11C \uBE60\uB974\uAC8C \uC774\uB3D9\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1001
+    fishName: "\uC870\uAC1C\uB4F1\uC774"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/shellback
+    description: "\uC870\uAC1C\uC640 \uBC14\uC704 \uC0AC\uC774\uC5D0\uC11C \uC740\uC2E0\uD558\uBA70
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1002
+    fishName: "\uC870\uC218\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/tideflicker
+    description: "\uC870\uC218 \uAC04\uB9CC\uC758 \uCC28\uB97C \uB530\uB77C \uC6C0\uC9C1\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1003
+    fishName: "\uBC14\uC704\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/rockfin
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uC228\uC73C\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1004
+    fishName: "\uD30C\uB3C4\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/waveglint
+    description: "\uD587\uBE5B\uC5D0 \uBC18\uC0AC\uB418\uBA70 \uD574\uC548 \uC8FC\uBCC0\uC744
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1005
+    fishName: "\uAD6C\uB9AC\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/copperstripe
+    description: "\uBC1D\uC740 \uC904\uBB34\uB2AC\uB85C \uBAA8\uB798 \uD574\uC548\uC744
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1006
+    fishName: "\uD638\uBC15\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/amberflicker
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uBE5B\uC744 \uBC18\uC0AC\uD558\uBA70
+      \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1007
+    fishName: "\uC740\uBE5B\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/silvertail
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uD574\uC548 \uC595\uC740
+      \uBC14\uB2E4\uB97C \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1008
+    fishName: "\uC870\uC218\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/tideglint
+    description: "\uC870\uC218 \uAC04\uB9CC\uC758 \uCC28\uB97C \uB530\uB77C \uBE60\uB974\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1009
+    fishName: "\uBCC4\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/starfin
+    description: "\uC791\uACE0 \uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4
+      \uD574\uC548 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1010
+    fishName: "\uBAA8\uB798\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/sandflicker
+    description: "\uBAA8\uB798 \uC18D\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1011
+    fishName: "\uD30C\uB3C4\uD654\uC0B4"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/wavedart
+    description: "\uD30C\uB3C4 \uC704\uC5D0\uC11C \uBE60\uB974\uAC8C \uC774\uB3D9\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1012
+    fishName: "\uBC14\uC704\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/rockblink
+    description: "\uBC14\uC704 \uC0AC\uC774\uC5D0\uC11C \uBA39\uC774\uB97C \uCC3E\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1013
+    fishName: "\uC870\uC218\uBD88\uAF43"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/tidespark
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70 \uC6C0\uC9C1\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1014
+    fishName: "\uC870\uAC1C\uBC18\uC9DD"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/shellglint
+    description: "\uC870\uAC1C \uC8FC\uBCC0\uC5D0\uC11C \uC740\uC2E0\uD558\uBA70
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1100
+    fishName: "\uC870\uC218\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/tidehunter
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1101
+    fishName: "\uBC14\uC704\uD131"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/rockjaw
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uBE60\uB974\uAC8C \uBA39\uC774\uB97C
+      \uC7A1\uB294 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1102
+    fishName: "\uD638\uBC15\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/amberfang
+    description: "\uC791\uC9C0\uB9CC \uACF5\uACA9\uC801\uC778 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1103
+    fishName: "\uC740\uBE5B\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/silverstrike
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uCD94\uC801\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1104
+    fishName: "\uC870\uC218\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/tideglider
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uBA39\uC774\uB97C \uC720\uC778\uD558\uACE0
+      \uC0AC\uB0E5\uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: Shore
+  - id: 1105
+    fishName: "\uBCC4\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/starblade
+    description: "\uC791\uC9C0\uB9CC \uBBFC\uCCA9\uD55C \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1106
+    fishName: "\uBAA8\uB798\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/sandrazer
+    description: "\uBAA8\uB798 \uD574\uC548\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC18C\uD615 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1107
+    fishName: "\uBC14\uC704\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/rockstalker
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1108
+    fishName: "\uC870\uC218\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/tidefang
+    description: "\uC870\uC218\uB300 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1200
+    fishName: "\uBAA8\uB798\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/sandblazer
+    description: "\uD574\uC548 \uBAA8\uB798 \uC0AC\uC774\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1201
+    fishName: "\uBC14\uC704\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/rockrazor
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uD3EC\uC2DD\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1202
+    fishName: "\uC870\uC218\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/tidehunter
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1203
+    fishName: "\uC740\uBE5B\uAC80"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/silverblade
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB97C \uD65C\uC6A9\uD574
+      \uBA39\uC774\uB97C \uACF5\uACA9\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1204
+    fishName: "\uD638\uBC15\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/amberstrike
+    description: "\uC870\uC218\uB300 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1205
+    fishName: "\uD30C\uB3C4\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/wavehunter
+    description: "\uD30C\uB3C4\uC640 \uBAA8\uB798\uB97C \uC774\uC6A9\uD574 \uC0AC\uB0E5\uD558\uB294
+      \uC0B0\uD638\uCD08 \uADFC\uC811 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1300
+    fishName: "\uBAA8\uB798\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/sandking
+    description: "\uD574\uC548 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1301
+    fishName: "\uBC14\uC704\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/rockemperor
+    description: "\uBC14\uC704 \uC9C0\uC5ED \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1302
+    fishName: "\uC870\uC218\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/tideemperor
+    description: "\uC870\uC218\uB300 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1400
+    fishName: "\uD574\uC548\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/shoredragon
+    description: "\uC2E0\uD654\uC801 \uD574\uC548 \uC218\uD638\uC790"
+    region: Shore
+  - id: 1401
+    fishName: "\uBAA8\uB798\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/sandhydra
+    description: "\uBAA8\uB798\uC640 \uBC14\uC704\uB97C \uB2E4\uB8E8\uB294 \uC2E0\uD654\uC801
+      \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1402
+    fishName: "\uC870\uC218\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/tideserpent
+    description: "\uC870\uC218\uB300\uC5D0\uC11C \uC2E0\uD654\uC801 \uD798\uC744
+      \uBC1C\uD718\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: Shore
+  - id: 1500
+    fishName: "\uAC08\uB300\uD654\uC0B4"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/reeddart
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1501
+    fishName: "\uB3CC\uB4F1\uC774"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/stoneback
+    description: "\uC554\uBC18 \uD2C8\uC5D0\uC11C \uC740\uC2E0\uD558\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1502
+    fishName: "\uD669\uAE08\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/goldenfin
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBC1D\uC740 \uAE08\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1503
+    fishName: "\uC740\uBE5B\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/silverripple
+    description: "\uD638\uC218 \uD45C\uBA74 \uADFC\uCC98\uC5D0\uC11C \uC740\uBE5B
+      \uBC18\uC0AC\uB97C \uC774\uC6A9\uD574 \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1504
+    fishName: "\uB300\uB9AC\uC11D\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/marbletail
+    description: "\uBAA8\uB798\uC640 \uB3CC \uC8FC\uBCC0\uC5D0\uC11C \uC720\uC601\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1505
+    fishName: "\uC30D\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/twinstripe
+    description: "\uC5F0\uC548 \uC218\uCD08 \uC0AC\uC774\uB97C \uC720\uC601\uD558\uBA70
+      \uBA39\uC774\uB97C \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1506
+    fishName: "\uBC84\uB4DC\uB098\uBB34\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/willowflicker
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uBBFC\uCCA9\uD558\uAC8C \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1507
+    fishName: "\uAD6C\uB984\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/cloudfin
+    description: "\uC5F0\uC548 \uC554\uBC18\uACFC \uBAA8\uB798\uB97C \uC720\uC601\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1508
+    fishName: "\uAC15\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/riverglimmer
+    description: "\uD638\uC218 \uC595\uC740 \uC5F0\uC548\uC5D0\uC11C \uD587\uBE5B\uC5D0
+      \uBC18\uC0AC\uB418\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1509
+    fishName: "\uC30D\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/twinflash
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1510
+    fishName: "\uD638\uBC15\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/ambertail
+    description: "\uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC5F0\uC548 \uC218\uCD08
+      \uC0AC\uC774\uB97C \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1511
+    fishName: "\uB3CC\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/stoneflicker
+    description: "\uC554\uBC18 \uD2C8\uC5D0\uC11C \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1512
+    fishName: "\uAC08\uB300\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/reedglint
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBE5B\uC744 \uBC18\uC0AC\uD558\uBA70
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1513
+    fishName: "\uB2EC\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/moonripple
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1514
+    fishName: "\uC740\uBE5B\uD654\uC0B4"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/silverdart
+    description: "\uD638\uC218 \uC595\uC740 \uC5F0\uC548\uC5D0\uC11C \uBE60\uB974\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1600
+    fishName: "\uAC08\uB300\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/reedhunter
+    description: "\uC218\uCD08 \uADFC\uCC98\uC5D0\uC11C \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1601
+    fishName: "\uB3CC\uD131"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/stonejaw
+    description: "\uC554\uBC18 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uC7A1\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1602
+    fishName: "\uD669\uAE08\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/goldenfang
+    description: "\uC791\uC9C0\uB9CC \uACF5\uACA9\uC801\uC778 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1603
+    fishName: "\uC740\uBE5B\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/silverstrike
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uCD94\uC801\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1604
+    fishName: "\uC5F0\uC548\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/tideglider
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBA39\uC774\uB97C \uC720\uC778\uD558\uBA70
+      \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1605
+    fishName: "\uBCC4\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/starblade
+    description: "\uC218\uCD08\uC640 \uC554\uBC18 \uC0AC\uC774\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1606
+    fishName: "\uB300\uB9AC\uC11D\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/marblerazor
+    description: "\uBAA8\uB798\uC640 \uC554\uBC18 \uC8FC\uBCC0\uC5D0\uC11C \uC0C1\uC704
+      \uD3EC\uC2DD\uC790 \uC5ED\uD560\uC744 \uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1607
+    fishName: "\uAC08\uB300\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/reedstalker
+    description: "\uC218\uCD08 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1608
+    fishName: "\uD638\uBC15\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/amberfang
+    description: "\uC5F0\uC548 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1700
+    fishName: "\uB3CC\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/stoneblazer
+    description: "\uC554\uBC18 \uD2C8\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1701
+    fishName: "\uAC08\uB300\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/reedrazor
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1702
+    fishName: "\uC740\uBE5B\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/silverhunter
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uACF5\uACA9\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1703
+    fishName: "\uD669\uAE08\uAC80"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/goldenblade
+    description: "\uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uC640 \uBE60\uB978 \uC18D\uB3C4\uB85C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1704
+    fishName: "\uC5F0\uC548\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/tidestrike
+    description: "\uC5F0\uC548 \uBAA8\uB798\uC640 \uC218\uCD08\uB97C \uD65C\uC6A9\uD558\uC5EC
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1705
+    fishName: "\uB300\uB9AC\uC11D\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/marblehunter
+    description: "\uC554\uBC18\xB7\uBAA8\uB798\xB7\uC218\uCD08\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1800
+    fishName: "\uD638\uC218\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/lakeking
+    description: "\uD638\uC218 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790\uC774\uC790
+      \uAC15\uB825\uD55C \uD798\uACFC \uD06C\uAE30\uB97C \uC9C0\uB2CC \uBB3C\uACE0\uAE30"
+    region: Lake
+  - id: 1801
+    fishName: "\uB3CC\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/stoneemperor
+    description: "\uC554\uBC18 \uC9C0\uC5ED \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1802
+    fishName: "\uAC08\uB300\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/reedemperor
+    description: "\uC218\uCD08\xB7\uC5F0\uC548 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1900
+    fishName: "\uD638\uC218\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/lakedragon
+    description: "\uD638\uC218 \uC2E0\uD654\uC801 \uC218\uD638\uC790\uC774\uC790
+      \uAC70\uB300\uD55C \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1901
+    fishName: "\uC740\uBE5B\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/silverhydra
+    description: "\uC5F0\uC548 \uC218\uCD08\uC640 \uC554\uBC18\uC744 \uB2E4\uB8E8\uB294
+      \uC2E0\uD654\uC801 \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 1902
+    fishName: "\uD669\uAE08\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/goldenserpent
+    description: "\uD638\uC218\uC5D0\uC11C \uC2E0\uD654\uC801 \uD798\uC744 \uBC1C\uD718\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Lake
+  - id: 2000
+    fishName: "\uBE59\uD558\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/glacierfin
+    description: "\uBE59\uD558 \uC8FC\uBCC0 \uC595\uC740 \uBC14\uB2F7\uBB3C\uC5D0\uC11C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2001
+    fishName: "\uC5BC\uC74C\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/iceflicker
+    description: "\uC5BC\uC74C \uD2C8\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2002
+    fishName: "\uBD81\uADF9\uD654\uC0B4"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/arcticdart
+    description: "\uCC28\uAC00\uC6B4 \uC5F0\uC548\uC5D0\uC11C \uBE60\uB974\uAC8C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2003
+    fishName: "\uC740\uBE5B\uC11C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/silverfrost
+    description: "\uC5BC\uC74C\uACFC \uBC14\uB2F7\uBB3C \uC0AC\uC774\uC5D0\uC11C
+      \uC740\uBE5B \uBC18\uC0AC\uB85C \uC774\uB3D9\uD558\uB294 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2004
+    fishName: "\uD478\uB978\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/bluestripe
+    description: "\uCC28\uAC00\uC6B4 \uC5F0\uC548\uC5D0\uC11C \uC720\uC601\uD558\uBA70
+      \uC791\uC740 \uBA39\uC774\uB97C \uCC3E\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2005
+    fishName: "\uC5BC\uC74C\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/iceglint
+    description: "\uBE59\uD558 \uC8FC\uBCC0\uC5D0\uC11C \uBE5B\uC744 \uBC18\uC0AC\uD558\uBA70
+      \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2006
+    fishName: "\uC11C\uB9AC\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/frostfin
+    description: "\uCC28\uAC00\uC6B4 \uBC14\uB2E4 \uC595\uC740 \uC5F0\uC548\uC5D0\uC11C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2007
+    fishName: "\uBD81\uADF9\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/arcticflash
+    description: "\uC5BC\uC74C \uD2C8\uACFC \uC595\uC740 \uBC14\uB2F7\uC18D\uC5D0\uC11C
+      \uBBFC\uCCA9\uD558\uAC8C \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2008
+    fishName: "\uBC18\uC9DD\uBE44\uB298"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/glintscale
+    description: "\uC740\uBE5B \uBE44\uB298\uB85C \uD574\uBE59 \uC8FC\uBCC0\uC744
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2009
+    fishName: "\uC11C\uB9AC\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/frostripple
+    description: "\uCC28\uAC00\uC6B4 \uC5F0\uC548\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2010
+    fishName: "\uC5BC\uC74C\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/icetail
+    description: "\uC5BC\uC74C \uD2C8\uC744 \uB530\uB77C \uBE60\uB974\uAC8C \uC774\uB3D9\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2011
+    fishName: "\uBC18\uC9DD\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/shimmerfin
+    description: "\uBE59\uD558 \uC8FC\uBCC0\uC5D0\uC11C \uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2012
+    fishName: "\uC11C\uB9AC\uD65C\uACF5"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/frostglider
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2013
+    fishName: "\uD478\uB978\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/blueflash
+    description: "\uCC28\uAC00\uC6B4 \uBC14\uB2E4 \uC595\uC740 \uACF3\uC744 \uBE60\uB974\uAC8C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2014
+    fishName: "\uBD81\uADF9\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/arcticblink
+    description: "\uBE59\uD558 \uC5F0\uC548\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Polar
+  - id: 2100
+    fishName: "\uC5BC\uC74C\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/icehunter
+    description: "\uBE59\uD558 \uADFC\uCC98\uC5D0\uC11C \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2101
+    fishName: "\uC11C\uB9AC\uD131"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/frostjaw
+    description: "\uC5BC\uC74C \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uC7A1\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2102
+    fishName: "\uBE59\uD558\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/glacierfang
+    description: "\uC791\uC9C0\uB9CC \uBBFC\uCCA9\uD55C \uACF5\uACA9 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2103
+    fishName: "\uC740\uBE5B\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/silverstrike
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uCD94\uC801\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2104
+    fishName: "\uC11C\uB9AC\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/frostglider
+    description: "\uBE59\uD558 \uC5F0\uC548\uC5D0\uC11C \uBA39\uC774\uB97C \uC720\uC778\uD558\uBA70
+      \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2105
+    fishName: "\uBD81\uADF9\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/arcticblade
+    description: "\uC5BC\uC74C\uACFC \uBC14\uB2F7\uC18D \uC0AC\uC774\uC5D0\uC11C
+      \uC0AC\uB0E5\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2106
+    fishName: "\uD478\uB978\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/bluerazor
+    description: "\uCC28\uAC00\uC6B4 \uC5F0\uC548 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2107
+    fishName: "\uC5BC\uC74C\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/icestalker
+    description: "\uBE59\uD558 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2108
+    fishName: "\uC11C\uB9AC\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/frostfang
+    description: "\uBE59\uD558 \uADFC\uCC98 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2200
+    fishName: "\uBE59\uD558\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/glacierblazer
+    description: "\uBE59\uD558 \uD2C8\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2201
+    fishName: "\uC11C\uB9AC\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/frostrazor
+    description: "\uC5BC\uC74C \uC8FC\uBCC0\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2202
+    fishName: "\uC740\uBE5B\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/silverhunter
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB97C \uD65C\uC6A9\uD574
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2203
+    fishName: "\uBE59\uD558\uAC80"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/glacierblade
+    description: "\uBE60\uB978 \uC18D\uB3C4\uC640 \uBBFC\uCCA9\uC131\uC73C\uB85C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2204
+    fishName: "\uC11C\uB9AC\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/froststrike
+    description: "\uBE59\uD558 \uC5F0\uC548\uC5D0\uC11C \uD3EC\uC2DD\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2205
+    fishName: "\uD478\uB978\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/bluehunter
+    description: "\uCC28\uAC00\uC6B4 \uC5F0\uC548\uACFC \uC5BC\uC74C \uD2C8\uC5D0\uC11C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2300
+    fishName: "\uD55C\uB300\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/polarking
+    description: "\uD55C\uB300 \uC9C0\uC5ED \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2301
+    fishName: "\uBE59\uD558\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/glacieremperor
+    description: "\uBE59\uD558 \uADFC\uCC98 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2302
+    fishName: "\uC11C\uB9AC\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/frostemperor
+    description: "\uC5F0\uC548 \uC5BC\uC74C \uC8FC\uBCC0 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2400
+    fishName: "\uD55C\uB300\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/polardragon
+    description: "\uD55C\uB300 \uC2E0\uD654\uC801 \uC218\uD638\uC790\uC774\uC790
+      \uAC70\uB300\uD55C \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2401
+    fishName: "\uC11C\uB9AC\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/frosthydra
+    description: "\uBE59\uD558\uC640 \uC5F0\uC548\uC744 \uB2E4\uB8E8\uB294 \uC2E0\uD654\uC801
+      \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2402
+    fishName: "\uBE59\uD558\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/glacierserpent
+    description: "\uD55C\uB300 \uBC14\uB2E4\uC5D0\uC11C \uC2E0\uD654\uC801 \uD798\uC744
+      \uBC1C\uD718\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: Polar
+  - id: 2500
+    fishName: "\uC2DC\uB0C7\uBB3C\uD654\uC0B4"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/streamdart
+    description: "\uC791\uACE0 \uBBFC\uCCA9\uD558\uAC8C \uAC15 \uD750\uB984\uC744
+      \uB530\uB77C \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2501
+    fishName: "\uBC14\uC704\uB4F1"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/rockback
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uC740\uC2E0\uD558\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2502
+    fishName: "\uBC84\uB4DC\uB098\uBB34\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/willowfin
+    description: "\uC218\uCD08 \uC8FC\uBCC0\uC5D0\uC11C \uC720\uC601\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2503
+    fishName: "\uC740\uBE5B\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/silverripple
+    description: "\uAC15 \uC595\uC740 \uC5F0\uC548\uC5D0\uC11C \uC740\uBE5B \uBC18\uC0AC\uB85C
+      \uC774\uB3D9\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2504
+    fishName: "\uC30D\uC904\uBB34\uB2AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/twinstripe
+    description: "\uC5F0\uC548 \uC218\uCD08 \uC0AC\uC774\uB97C \uC720\uC601\uD558\uBA70
+      \uBA39\uC774\uB97C \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2505
+    fishName: "\uD638\uBC15\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/ambertail
+    description: "\uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC595\uC740 \uC5F0\uC548\uC744
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2506
+    fishName: "\uAC08\uB300\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/reedglint
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2507
+    fishName: "\uB2EC\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/moonripple
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2508
+    fishName: "\uB3CC\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/stoneflicker
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2509
+    fishName: "\uD478\uB978\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/blueflash
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2510
+    fishName: "\uAC08\uB300\uCD94\uC801\uC790"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/reedstalker
+    description: "\uC218\uCD08 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2511
+    fishName: "\uC740\uBE5B\uD654\uC0B4"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/silverdart
+    description: "\uC5F0\uC548 \uC595\uC740 \uACF3\uC5D0\uC11C \uBE60\uB974\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2512
+    fishName: "\uC30D\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/twinflash
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uBE5B\uC744 \uBC18\uC0AC\uD558\uBA70
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2513
+    fishName: "\uB3CC\uD65C\uACF5"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/stoneglider
+    description: "\uBC14\uC704\uC640 \uBAA8\uB798 \uC5F0\uC548 \uC0AC\uC774\uC5D0\uC11C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2514
+    fishName: "\uD638\uBC15\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/amberflicker
+    description: "\uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC5F0\uC548 \uC218\uCD08
+      \uC0AC\uC774\uB97C \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: River
+  - id: 2600
+    fishName: "\uC2DC\uB0C7\uBB3C\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/streamhunter
+    description: "\uC218\uCD08\uC640 \uBC14\uC704 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C
+      \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2601
+    fishName: "\uBC14\uC704\uD131"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/rockjaw
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uC7A1\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2602
+    fishName: "\uBC84\uB4DC\uB098\uBB34\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/willowfang
+    description: "\uC791\uC9C0\uB9CC \uACF5\uACA9\uC801\uC778 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2603
+    fishName: "\uC740\uBE5B\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/silverstrike
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uCD94\uC801\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2604
+    fishName: "\uAC08\uB300\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/reedglider
+    description: "\uC5F0\uC548\uC5D0\uC11C \uBA39\uC774\uB97C \uC720\uC778\uD558\uBA70
+      \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2605
+    fishName: "\uC30D\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/twinblade
+    description: "\uC218\uCD08\uC640 \uBC14\uC704 \uD2C8\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2606
+    fishName: "\uB3CC\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/stonerazor
+    description: "\uBAA8\uB798\uC640 \uBC14\uC704 \uC8FC\uBCC0 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2607
+    fishName: "\uD638\uBC15\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/amberfang
+    description: "\uC5F0\uC548 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2608
+    fishName: "\uB2EC\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/moonfang
+    description: "\uC5F0\uC548 \uC218\uCD08 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2700
+    fishName: "\uB3CC\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/stoneblazer
+    description: "\uBC14\uC704 \uD2C8\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2701
+    fishName: "\uAC08\uB300\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/reedrazor
+    description: "\uC218\uCD08 \uC0AC\uC774\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2702
+    fishName: "\uC740\uBE5B\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/silverhunter
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB97C \uD65C\uC6A9\uD574
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2703
+    fishName: "\uD669\uAE08\uAC80"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/goldenblade
+    description: "\uBE60\uB978 \uC18D\uB3C4\uC640 \uBBFC\uCCA9\uC131\uC73C\uB85C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2704
+    fishName: "\uC870\uC218\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/tidestrike
+    description: "\uC5F0\uC548 \uBAA8\uB798\uC640 \uC218\uCD08\uB97C \uD65C\uC6A9\uD574
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2705
+    fishName: "\uB300\uB9AC\uC11D\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/marblehunter
+    description: "\uBC14\uC704\xB7\uBAA8\uB798\xB7\uC218\uCD08\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2800
+    fishName: "\uAC15\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/riverking
+    description: "\uAC15 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2801
+    fishName: "\uBC14\uC704\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/stoneemperor
+    description: "\uBC14\uC704 \uC8FC\uBCC0 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2802
+    fishName: "\uAC08\uB300\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/reedemperor
+    description: "\uC218\uCD08\xB7\uC5F0\uC548 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2900
+    fishName: "\uAC15\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/riverdragon
+    description: "\uAC15 \uC2E0\uD654\uC801 \uC218\uD638\uC790\uC774\uC790 \uAC70\uB300\uD55C
+      \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2901
+    fishName: "\uC740\uBE5B\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/silverhydra
+    description: "\uC5F0\uC548\uACFC \uC218\uCD08\uB97C \uB2E4\uB8E8\uB294 \uC2E0\uD654\uC801
+      \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 2902
+    fishName: "\uD669\uAE08\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/goldenserpent
+    description: "\uAC15\uC5D0\uC11C \uC2E0\uD654\uC801 \uD798\uC744 \uBC1C\uD718\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: River
+  - id: 3000
+    fishName: "\uC0B0\uD638\uD65C\uACF5"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/coralglider
+    description: "\uAC1C\uBC29 \uB300\uC591\uC758 \uC595\uC740 \uC218\uC5ED\uC5D0\uC11C
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3001
+    fishName: "\uD478\uB978\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/blueglimmer
+    description: "\uD587\uBE5B \uC544\uB798 \uC740\uBE5B \uBC18\uC0AC\uB85C \uBE60\uB974\uAC8C
+      \uC774\uB3D9\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3002
+    fishName: "\uAC1C\uBC29\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/openfin
+    description: "\uC5F0\uC548 \uC554\uCD08 \uADFC\uCC98\uB97C \uC720\uC601\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3003
+    fishName: "\uC740\uBE5B\uC12C\uAD11"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/silverflash
+    description: "\uC740\uBE5B \uBE44\uB298\uB85C \uC8FC\uBCC0 \uD658\uACBD\uC5D0
+      \uC11E\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3004
+    fishName: "\uC904\uBB34\uB2AC\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/stripetail
+    description: "\uC5F0\uC548 \uC554\uCD08 \uC0AC\uC774\uB97C \uC720\uC601\uD558\uBA70
+      \uBA39\uC774\uB97C \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3005
+    fishName: "\uBAA8\uB798\uD654\uC0B4"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/sanddart
+    description: "\uBAA8\uB798\uBC14\uB2E5 \uC8FC\uBCC0\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3006
+    fishName: "\uC870\uB958\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/tidefin
+    description: "\uC870\uB958\uC5D0 \uB530\uB77C \uC720\uC601\uD558\uBA70 \uC791\uC740
+      \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3007
+    fishName: "\uD558\uB298\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/azureglint
+    description: "\uD587\uBE5B \uC544\uB798 \uBC18\uC9DD\uC774\uBA70 \uC774\uB3D9\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3008
+    fishName: "\uD0DC\uC591\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/sunripple
+    description: "\uC5F0\uC548\uC5D0\uC11C \uC740\uBE5B \uBC18\uC0AC\uB85C \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3009
+    fishName: "\uD30C\uB3C4\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/waveflicker
+    description: "\uC870\uB958 \uC0AC\uC774\uC5D0\uC11C \uBE60\uB974\uAC8C \uC6C0\uC9C1\uC774\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3010
+    fishName: "\uD478\uB978\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/bluetail
+    description: "\uBC1D\uC740 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC5F0\uC548 \uC8FC\uBCC0\uC744
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3011
+    fishName: "\uC740\uBE5B\uD65C\uACF5"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/silverglider
+    description: "\uD587\uBE5B\uC5D0 \uBC18\uC0AC\uD558\uBA70 \uBE60\uB974\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3012
+    fishName: "\uC870\uB958\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/tideflash
+    description: "\uC870\uB958\uB97C \uB530\uB77C \uBC18\uC9DD\uC774\uBA70 \uC720\uC601\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3013
+    fishName: "\uBAA8\uB798\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/sandglint
+    description: "\uBAA8\uB798 \uC5F0\uC548\uC5D0\uC11C \uC740\uBE5B \uBC18\uC0AC\uB85C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3014
+    fishName: "\uD30C\uB3C4\uD654\uC0B4"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/wavedart
+    description: "\uC5F0\uC548 \uC870\uB958\uB97C \uD0C0\uACE0 \uBBFC\uCCA9\uD558\uAC8C
+      \uC774\uB3D9\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: Ocean
+  - id: 3100
+    fishName: "\uC870\uB958\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/tidehunter
+    description: "\uC5F0\uC548 \uC554\uCD08\uC5D0\uC11C \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3101
+    fishName: "\uD558\uB298\uD131"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/azurejaw
+    description: "\uC5F0\uC548 \uBC14\uC704\uC640 \uC554\uCD08 \uD2C8\uC5D0\uC11C
+      \uBA39\uC774\uB97C \uC7A1\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3102
+    fishName: "\uD478\uB978\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/bluefang
+    description: "\uBBFC\uCCA9\uD558\uC9C0\uB9CC \uACF5\uACA9\uC801\uC778 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3103
+    fishName: "\uC740\uBE5B\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/silverstrike
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uCD94\uC801\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3104
+    fishName: "\uD30C\uB3C4\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/waveglider
+    description: "\uC870\uB958\uB97C \uD65C\uC6A9\uD574 \uBA39\uC774\uB97C \uC720\uC778\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3105
+    fishName: "\uC870\uB958\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/tideblade
+    description: "\uC5F0\uC548 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3106
+    fishName: "\uBAA8\uB798\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/sandrazor
+    description: "\uBAA8\uB798\uC640 \uBC14\uC704 \uC8FC\uBCC0 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3107
+    fishName: "\uD0DC\uC591\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/sunfang
+    description: "\uC5F0\uC548 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3108
+    fishName: "\uD558\uB298\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/azurestalker
+    description: "\uC5F0\uC548 \uC554\uCD08 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3200
+    fishName: "\uC870\uB958\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/tideblazer
+    description: "\uC5F0\uC548\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3201
+    fishName: "\uD478\uB978\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/bluerazor
+    description: "\uC5F0\uC548 \uC554\uCD08\uC640 \uBC14\uC704 \uC0AC\uC774\uC5D0\uC11C
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3202
+    fishName: "\uC740\uBE5B\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/silverhunter
+    description: "\uC740\uBE5B \uC9C0\uB290\uB7EC\uBBF8\uB97C \uD65C\uC6A9\uD574
+      \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3203
+    fishName: "\uC870\uB958\uAC80\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/tidebladehunter
+    description: "\uBE60\uB978 \uC18D\uB3C4\uB85C \uC0AC\uB0E5\uD558\uB294 \uC0C1\uC704
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3204
+    fishName: "\uD30C\uB3C4\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/wavestrike
+    description: "\uC870\uB958\uC640 \uC554\uCD08\uB97C \uD65C\uC6A9\uD574 \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3205
+    fishName: "\uBAA8\uB798\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/sandhunter
+    description: "\uBAA8\uB798\xB7\uC554\uCD08 \uC5F0\uC548\uC5D0\uC11C \uC0AC\uB0E5\uD558\uB294
+      \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3300
+    fishName: "\uB300\uC591\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/oceanking
+    description: "\uB300\uC591 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3301
+    fishName: "\uC870\uB958\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/tideemperor
+    description: "\uC5F0\uC548 \uC554\uCD08 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3302
+    fishName: "\uD478\uB978\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/blueemperor
+    description: "\uB300\uC591 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3400
+    fishName: "\uB300\uC591\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/oceandragon
+    description: "\uB300\uC591 \uC2E0\uD654\uC801 \uC218\uD638\uC790"
+    region: Ocean
+  - id: 3401
+    fishName: "\uC740\uBE5B\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/silverhydra
+    description: "\uC5F0\uC548\uACFC \uC554\uCD08\uB97C \uB2E4\uB8E8\uB294 \uC2E0\uD654\uC801
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3402
+    fishName: "\uD478\uB978\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/blueserpent
+    description: "\uB300\uC591\uC5D0\uC11C \uC2E0\uD654\uC801 \uD798\uC744 \uBC1C\uD718\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: Ocean
+  - id: 3500
+    fishName: "\uC2EC\uD574\uBC1C\uAD11"
+    rarity: Common
+    baseValue: 8
+    spritePath: Assets/Sprites/Fish/abyssglow
+    description: "\uC2EC\uD574 \uC5B4\uB460 \uC18D\uC5D0\uC11C \uBC1C\uAD11\uD558\uBA70
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3501
+    fishName: "\uC2EC\uD574\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/deepfin
+    description: "\uAE4A\uC740 \uC218\uC2EC\uC5D0\uC11C \uC11C\uC2DD\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3502
+    fishName: "\uADF8\uB9BC\uC790\uBE44\uB298"
+    rarity: Common
+    baseValue: 9
+    spritePath: Assets/Sprites/Fish/shadowscale
+    description: "\uC2EC\uD574 \uC554\uD751 \uC18D\uC5D0\uC11C \uC740\uBC00\uD558\uAC8C
+      \uC774\uB3D9\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3503
+    fishName: "\uB4F1\uBD88\uC12C\uAD11"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/lanternblink
+    description: "\uBE5B\uC744 \uBC1C\uD558\uBA70 \uBA39\uC774\uB97C \uC720\uC778\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3504
+    fishName: "\uC720\uB839\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/ghosttail
+    description: "\uAE4A\uC740 \uC218\uC2EC\uC5D0\uC11C \uCC9C\uCC9C\uD788 \uC720\uC601\uD558\uB294
+      \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3505
+    fishName: "\uBA39\uBB3C\uC9C0\uB290\uB7EC\uBBF8"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/inkfin
+    description: "\uC2EC\uD574 \uBC14\uC704\uC640 \uC554\uCD08 \uC8FC\uBCC0\uC5D0\uC11C
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3506
+    fishName: "\uC2EC\uD574\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/deepglint
+    description: "\uBC1C\uAD11 \uC810\uC73C\uB85C \uC704\uCE58\uB97C \uD45C\uC2DC\uD558\uBA70
+      \uC774\uB3D9\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3507
+    fishName: "\uC720\uB839\uBC18\uC9DD\uC774"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/phantomflicker
+    description: "\uC2EC\uD574 \uC5B4\uB460 \uC18D\uC5D0\uC11C \uBC18\uC9DD\uC774\uBA70
+      \uC774\uB3D9\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3508
+    fishName: "\uC2EC\uD574\uBB3C\uACB0"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/abyssripple
+    description: "\uC800\uC870\uB3C4 \uD658\uACBD\uC5D0\uC11C \uC740\uBE5B \uBC18\uC0AC\uB85C
+      \uC720\uC601\uD558\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3509
+    fishName: "\uADF8\uB9BC\uC790\uD65C\uACF5"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/shadowglider
+    description: "\uC554\uD751 \uC18D\uC5D0\uC11C \uC720\uC601\uD558\uBA70 \uBA39\uC774\uB97C
+      \uCC3E\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3510
+    fishName: "\uB4F1\uBD88\uAF2C\uB9AC"
+    rarity: Common
+    baseValue: 10
+    spritePath: Assets/Sprites/Fish/lanterntail
+    description: "\uC2EC\uD574 \uBC1C\uAD11 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC704\uCE58\uB97C
+      \uC54C\uB9AC\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3511
+    fishName: "\uBA39\uBB3C\uD65C\uACF5"
+    rarity: Common
+    baseValue: 11
+    spritePath: Assets/Sprites/Fish/inkglider
+    description: "\uC554\uCD08\uC640 \uBC14\uC704 \uD2C8\uC5D0\uC11C \uC720\uC601\uD558\uB294
+      \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3512
+    fishName: "\uC2EC\uD574\uC12C\uAD11"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/deepflash
+    description: "\uC2EC\uD574 \uC5B4\uB460 \uC18D\uC5D0\uC11C \uBE60\uB974\uAC8C
+      \uC720\uC601\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3513
+    fishName: "\uC720\uB839\uBC18\uC9DD\uC810"
+    rarity: Common
+    baseValue: 12
+    spritePath: Assets/Sprites/Fish/ghostglint
+    description: "\uBC1C\uAD11 \uC810\uC73C\uB85C \uC704\uCE58\uB97C \uD45C\uC2DC\uD558\uBA70
+      \uC774\uB3D9\uD558\uB294 \uC791\uC740 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3514
+    fishName: "\uC2EC\uD574\uD654\uC0B4"
+    rarity: Common
+    baseValue: 13
+    spritePath: Assets/Sprites/Fish/abyssdart
+    description: "\uC800\uC870\uB3C4 \uC2EC\uD574\uC5D0\uC11C \uBBFC\uCCA9\uD558\uAC8C
+      \uC6C0\uC9C1\uC774\uB294 \uC18C\uD615 \uBB3C\uACE0\uAE30"
+    region: DeepSea
+  - id: 3600
+    fishName: "\uC2EC\uD574\uC0AC\uB0E5\uAFBC"
+    rarity: Rare
+    baseValue: 45
+    spritePath: Assets/Sprites/Fish/deephunter
+    description: "\uC2EC\uD574 \uC554\uCD08\uC640 \uBC14\uC704 \uD2C8\uC5D0\uC11C
+      \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3601
+    fishName: "\uADF8\uB9BC\uC790\uD131"
+    rarity: Rare
+    baseValue: 48
+    spritePath: Assets/Sprites/Fish/shadowjaw
+    description: "\uC2EC\uD574 \uD3EC\uC2DD\uC790\uB85C \uC791\uC740 \uBA39\uC774\uB97C
+      \uACF5\uACA9\uD558\uB294 \uD76C\uADC0 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3602
+    fishName: "\uB4F1\uBD88\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/lanternfang
+    description: "\uBC1C\uAD11 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uBA39\uC774\uB97C
+      \uC720\uC778\uD558\uBA70 \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3603
+    fishName: "\uC2EC\uD574\uD0C0\uACA9"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/abyssstrike
+    description: "\uC800\uC870\uB3C4 \uD658\uACBD\uC5D0\uC11C \uC0C1\uC704 \uD3EC\uC2DD\uC790
+      \uC5ED\uD560"
+    region: DeepSea
+  - id: 3604
+    fishName: "\uBA39\uBB3C\uD65C\uACF5"
+    rarity: Rare
+    baseValue: 50
+    spritePath: Assets/Sprites/Fish/inkgliderr
+    description: "\uC2EC\uD574 \uBC14\uC704\xB7\uC554\uCD08 \uC8FC\uBCC0\uC5D0\uC11C
+      \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3605
+    fishName: "\uC720\uB839\uAC80"
+    rarity: Rare
+    baseValue: 53
+    spritePath: Assets/Sprites/Fish/phantomblade
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3606
+    fishName: "\uC2EC\uD574\uCE7C\uB0A0"
+    rarity: Rare
+    baseValue: 51
+    spritePath: Assets/Sprites/Fish/deeprazor
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3607
+    fishName: "\uC720\uB839\uCD94\uC801\uC790"
+    rarity: Rare
+    baseValue: 52
+    spritePath: Assets/Sprites/Fish/ghoststalker
+    description: "\uC2EC\uD574 \uD2C8\uC5D0\uC11C \uBA39\uC774\uB97C \uCD94\uC801\uD558\uB294
+      \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3608
+    fishName: "\uC2EC\uD574\uC1A1\uACF3\uB2C8"
+    rarity: Rare
+    baseValue: 54
+    spritePath: Assets/Sprites/Fish/abyssfang
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3700
+    fishName: "\uADF8\uB9BC\uC790\uD654\uC5FC"
+    rarity: Epic
+    baseValue: 110
+    spritePath: Assets/Sprites/Fish/shadowblazer
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3701
+    fishName: "\uC2EC\uD574\uCE7C\uB0A0"
+    rarity: Epic
+    baseValue: 120
+    spritePath: Assets/Sprites/Fish/deeprazorepic
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3702
+    fishName: "\uB4F1\uBD88\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 125
+    spritePath: Assets/Sprites/Fish/lanternhunter
+    description: "\uBC1C\uAD11 \uC9C0\uB290\uB7EC\uBBF8\uB85C \uC0AC\uB0E5\uD558\uB294
+      \uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3703
+    fishName: "\uC720\uB839\uAC80"
+    rarity: Epic
+    baseValue: 130
+    spritePath: Assets/Sprites/Fish/phantombladeepic
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3704
+    fishName: "\uC2EC\uD574\uD0C0\uACA9"
+    rarity: Epic
+    baseValue: 135
+    spritePath: Assets/Sprites/Fish/abyssstrikeepic
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3705
+    fishName: "\uBA39\uBB3C\uC0AC\uB0E5\uAFBC"
+    rarity: Epic
+    baseValue: 140
+    spritePath: Assets/Sprites/Fish/inkhunter
+    description: "\uC2EC\uD574 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3800
+    fishName: "\uC2EC\uC5F0\uC655"
+    rarity: Legendary
+    baseValue: 500
+    spritePath: Assets/Sprites/Fish/abyssalking
+    description: "\uC2EC\uD574 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790\uC774\uC790
+      \uAE4A\uC740 \uD574\uC800 \uD611\uACE1 \uC9C0\uBC30"
+    region: DeepSea
+  - id: 3801
+    fishName: "\uC720\uB839\uD669\uC81C"
+    rarity: Legendary
+    baseValue: 510
+    spritePath: Assets/Sprites/Fish/phantomemperor
+    description: "\uC2EC\uD574 \uD574\uC800 \uC0B0\uACFC \uD611\uACE1\uC5D0\uC11C
+      \uAD70\uB9BC\uD558\uB294 \uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3802
+    fishName: "\uBC1C\uAD11\uC0AC\uB0E5\uAFBC"
+    rarity: Legendary
+    baseValue: 520
+    spritePath: Assets/Sprites/Fish/glowhunter
+    description: "\uBC1C\uAD11 \uD3EC\uC2DD\uC790\uB85C \uAE4A\uC740 \uC218\uC2EC\uC758
+      \uBA39\uC774\uB97C \uC0AC\uB0E5\uD558\uB294 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3900
+    fishName: "\uC2EC\uD574\uC6A9"
+    rarity: Mythic
+    baseValue: 3000
+    spritePath: Assets/Sprites/Fish/abyssdragon
+    description: "\uC2EC\uD574 \uC2E0\uD654\uC801 \uC874\uC7AC"
+    region: DeepSea
+  - id: 3901
+    fishName: "\uC720\uB839\uD788\uB4DC\uB77C"
+    rarity: Mythic
+    baseValue: 3100
+    spritePath: Assets/Sprites/Fish/phantomhydra
+    description: "\uC2EC\uD574 \uC554\uD751\uACFC \uD611\uACE1\uC744 \uC9C0\uBC30\uD558\uB294
+      \uC2E0\uD654\uC801 \uD3EC\uC2DD\uC790"
+    region: DeepSea
+  - id: 3902
+    fishName: "\uBC1C\uAD11\uBC40"
+    rarity: Mythic
+    baseValue: 3200
+    spritePath: Assets/Sprites/Fish/glowserpent
+    description: "\uBC1C\uAD11\uC73C\uB85C \uC2EC\uD574 \uC0DD\uD0DC\uACC4\uB97C
+      \uC870\uC808\uD558\uB294 \uC2E0\uD654\uC801 \uD3EC\uC2DD\uC790"
+    region: DeepSea

@@ -65,7 +65,7 @@ id,fishName,rarity,baseValue,spritePath,description,region
 703,프리즘섬광,Epic,130,Assets/Sprites/Fish/prismflare,빛과 색을 이용해 먹이를 공격하는 산호초 포식자,CoralReef
 704,루미나타격,Epic,135,Assets/Sprites/Fish/luminastrike,강력한 색과 움직임으로 산호초 상위 포식자,CoralReef
 705,진홍검,Epic,140,Assets/Sprites/Fish/crimsonblade,산호 틈에서 포식하는 화려한 상위 포식자,CoralReef
-800,산호황제,Legendary,500,Assets/Sprites/Fish/coralemperor,"산호초 최상위 포식자, 전설적 힘과 색을 가진 물고기",CoralReef
+800,산호황제,Legendary,500,Assets/Sprites/Fish/coralemperor,산호초 최상위 포식자이자 전설적 힘과 색을 가진 물고기,CoralReef
 801,프리즘황제,Legendary,510,Assets/Sprites/Fish/prismemperor,빛과 색을 조합한 전설적 산호초 포식자,CoralReef
 802,태양황제,Legendary,520,Assets/Sprites/Fish/solaremperor,강력한 체력과 화려함을 가진 전설 물고기,CoralReef
 900,심연뱀,Mythic,3000,Assets/Sprites/Fish/abyssalserpent,심해 산호초에서 살아남는 신화적 생물,CoralReef
@@ -86,7 +86,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 1012,바위반짝,Common,12,Assets/Sprites/Fish/rockblink,바위 사이에서 먹이를 찾는 소형 물고기,Shore
 1013,조수불꽃,Common,12,Assets/Sprites/Fish/tidespark,조수대에서 반짝이며 움직이는 작은 물고기,Shore
 1014,조개반짝,Common,13,Assets/Sprites/Fish/shellglint,조개 주변에서 은신하며 움직이는 소형 물고기,Shore
-,,,,,,
 1100,조수사냥꾼,Rare,45,Assets/Sprites/Fish/tidehunter,조수대에서 먹이를 사냥하는 포식자,Shore
 1101,바위턱,Rare,50,Assets/Sprites/Fish/rockjaw,바위 틈에서 빠르게 먹이를 잡는 포식자,Shore
 1102,호박송곳니,Rare,48,Assets/Sprites/Fish/amberfang,작지만 공격적인 포식자,Shore
@@ -96,18 +95,15 @@ id,fishName,rarity,baseValue,spritePath,description,region
 1106,모래칼날,Rare,50,Assets/Sprites/Fish/sandrazer,모래 해안에서 사냥하는 소형 포식자,Shore
 1107,바위추적자,Rare,52,Assets/Sprites/Fish/rockstalker,바위 틈에서 먹이를 추적하는 희귀 포식자,Shore
 1108,조수송곳니,Rare,54,Assets/Sprites/Fish/tidefang,조수대 상위 포식자,Shore
-,,,,,,
 1200,모래화염,Epic,110,Assets/Sprites/Fish/sandblazer,해안 모래 사이에서 사냥하는 상위 포식자,Shore
 1201,바위칼날,Epic,120,Assets/Sprites/Fish/rockrazor,바위 틈에서 포식하는 상위 포식자,Shore
 1202,조수사냥꾼,Epic,125,Assets/Sprites/Fish/tidehunter,조수대에서 사냥하는 상위 포식자,Shore
 1203,은빛검,Epic,130,Assets/Sprites/Fish/silverblade,은빛 지느러미를 활용해 먹이를 공격하는 상위 포식자,Shore
-1204,호박타격,Epic,135,Assets/Sprites/Fish/amberstrike,"조수대 상위 포식자, 빠른 민첩성",Shore
+1204,호박타격,Epic,135,Assets/Sprites/Fish/amberstrike,조수대 상위 포식자,Shore
 1205,파도사냥꾼,Epic,140,Assets/Sprites/Fish/wavehunter,파도와 모래를 이용해 사냥하는 산호초 근접 포식자,Shore
-,,,,,,
 1300,모래왕,Legendary,500,Assets/Sprites/Fish/sandking,해안 최상위 포식자,Shore
 1301,바위황제,Legendary,510,Assets/Sprites/Fish/rockemperor,바위 지역 최상위 포식자,Shore
 1302,조수황제,Legendary,520,Assets/Sprites/Fish/tideemperor,조수대 최상위 포식자,Shore
-,,,,,,
 1400,해안용,Mythic,3000,Assets/Sprites/Fish/shoredragon,신화적 해안 수호자,Shore
 1401,모래히드라,Mythic,3100,Assets/Sprites/Fish/sandhydra,모래와 바위를 다루는 신화적 포식자,Shore
 1402,조수뱀,Mythic,3200,Assets/Sprites/Fish/tideserpent,조수대에서 신화적 힘을 발휘하는 포식자,Shore
@@ -126,7 +122,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 1512,갈대반짝이,Common,12,Assets/Sprites/Fish/reedglint,수초 사이에서 빛을 반사하며 유영하는 작은 물고기,Lake
 1513,달물결,Common,12,Assets/Sprites/Fish/moonripple,연안에서 반짝이며 먹이를 찾는 작은 물고기,Lake
 1514,은빛화살,Common,13,Assets/Sprites/Fish/silverdart,호수 얕은 연안에서 빠르게 움직이는 소형 물고기,Lake
-,,,,,,
 1600,갈대사냥꾼,Rare,45,Assets/Sprites/Fish/reedhunter,수초 근처에서 먹이를 사냥하는 포식자,Lake
 1601,돌턱,Rare,48,Assets/Sprites/Fish/stonejaw,암반 틈에서 먹이를 잡는 희귀 포식자,Lake
 1602,황금송곳니,Rare,50,Assets/Sprites/Fish/goldenfang,작지만 공격적인 포식자,Lake
@@ -136,22 +131,18 @@ id,fishName,rarity,baseValue,spritePath,description,region
 1606,대리석칼날,Rare,51,Assets/Sprites/Fish/marblerazor,모래와 암반 주변에서 상위 포식자 역할을 하는 물고기,Lake
 1607,갈대추적자,Rare,52,Assets/Sprites/Fish/reedstalker,수초 틈에서 먹이를 추적하는 희귀 포식자,Lake
 1608,호박송곳니,Rare,54,Assets/Sprites/Fish/amberfang,연안 상위 포식자,Lake
-,,,,,,
 1700,돌화염,Epic,110,Assets/Sprites/Fish/stoneblazer,암반 틈에서 사냥하는 상위 포식자,Lake
 1701,갈대칼날,Epic,120,Assets/Sprites/Fish/reedrazor,수초 사이에서 사냥하는 상위 포식자,Lake
 1702,은빛사냥꾼,Epic,125,Assets/Sprites/Fish/silverhunter,은빛 지느러미로 먹이를 공격하는 상위 포식자,Lake
 1703,황금검,Epic,130,Assets/Sprites/Fish/goldenblade,밝은 지느러미와 빠른 속도로 사냥하는 상위 포식자,Lake
 1704,연안타격,Epic,135,Assets/Sprites/Fish/tidestrike,연안 모래와 수초를 활용하여 사냥하는 상위 포식자,Lake
 1705,대리석사냥꾼,Epic,140,Assets/Sprites/Fish/marblehunter,암반·모래·수초에서 사냥하는 상위 포식자,Lake
-,,,,,,
-1800,호수왕,Legendary,500,Assets/Sprites/Fish/lakeking,"호수 최상위 포식자, 강력한 힘과 크기를 지닌 물고기",Lake
+1800,호수왕,Legendary,500,Assets/Sprites/Fish/lakeking,호수 최상위 포식자이자 강력한 힘과 크기를 지닌 물고기,Lake
 1801,돌황제,Legendary,510,Assets/Sprites/Fish/stoneemperor,암반 지역 최상위 포식자,Lake
 1802,갈대황제,Legendary,520,Assets/Sprites/Fish/reedemperor,수초·연안 최상위 포식자,Lake
-,,,,,,
-1900,호수용,Mythic,3000,Assets/Sprites/Fish/lakedragon,"호수 신화적 수호자, 거대한 포식자",Lake
+1900,호수용,Mythic,3000,Assets/Sprites/Fish/lakedragon,호수 신화적 수호자이자 거대한 포식자,Lake
 1901,은빛히드라,Mythic,3100,Assets/Sprites/Fish/silverhydra,연안 수초와 암반을 다루는 신화적 포식자,Lake
 1902,황금뱀,Mythic,3200,Assets/Sprites/Fish/goldenserpent,호수에서 신화적 힘을 발휘하는 포식자,Lake
-,,,,,,
 2000,빙하지느러미,Common,8,Assets/Sprites/Fish/glacierfin,빙하 주변 얕은 바닷물에서 유영하는 작은 물고기,Polar
 2001,얼음반짝이,Common,9,Assets/Sprites/Fish/iceflicker,얼음 틈에서 민첩하게 움직이는 소형 물고기,Polar
 2002,북극화살,Common,9,Assets/Sprites/Fish/arcticdart,차가운 연안에서 빠르게 유영하는 작은 물고기,Polar
@@ -167,7 +158,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 2012,서리활공,Common,12,Assets/Sprites/Fish/frostglider,연안에서 반짝이며 먹이를 찾는 작은 물고기,Polar
 2013,푸른섬광,Common,12,Assets/Sprites/Fish/blueflash,차가운 바다 얕은 곳을 빠르게 유영하는 작은 물고기,Polar
 2014,북극반짝이,Common,13,Assets/Sprites/Fish/arcticblink,빙하 연안에서 반짝이며 움직이는 소형 물고기,Polar
-,,,,,,
 2100,얼음사냥꾼,Rare,45,Assets/Sprites/Fish/icehunter,빙하 근처에서 먹이를 사냥하는 포식자,Polar
 2101,서리턱,Rare,48,Assets/Sprites/Fish/frostjaw,얼음 틈에서 먹이를 잡는 희귀 포식자,Polar
 2102,빙하송곳니,Rare,50,Assets/Sprites/Fish/glacierfang,작지만 민첩한 공격 포식자,Polar
@@ -177,22 +167,18 @@ id,fishName,rarity,baseValue,spritePath,description,region
 2106,푸른칼날,Rare,51,Assets/Sprites/Fish/bluerazor,차가운 연안 상위 포식자,Polar
 2107,얼음추적자,Rare,52,Assets/Sprites/Fish/icestalker,빙하 틈에서 먹이를 추적하는 희귀 포식자,Polar
 2108,서리송곳니,Rare,54,Assets/Sprites/Fish/frostfang,빙하 근처 상위 포식자,Polar
-,,,,,,
 2200,빙하화염,Epic,110,Assets/Sprites/Fish/glacierblazer,빙하 틈에서 사냥하는 상위 포식자,Polar
 2201,서리칼날,Epic,120,Assets/Sprites/Fish/frostrazor,얼음 주변에서 사냥하는 상위 포식자,Polar
 2202,은빛사냥꾼,Epic,125,Assets/Sprites/Fish/silverhunter,은빛 지느러미를 활용해 사냥하는 상위 포식자,Polar
 2203,빙하검,Epic,130,Assets/Sprites/Fish/glacierblade,빠른 속도와 민첩성으로 사냥하는 상위 포식자,Polar
 2204,서리타격,Epic,135,Assets/Sprites/Fish/froststrike,빙하 연안에서 포식하는 상위 포식자,Polar
 2205,푸른사냥꾼,Epic,140,Assets/Sprites/Fish/bluehunter,차가운 연안과 얼음 틈에서 사냥하는 상위 포식자,Polar
-,,,,,,
 2300,한대왕,Legendary,500,Assets/Sprites/Fish/polarking,한대 지역 최상위 포식자,Polar
 2301,빙하황제,Legendary,510,Assets/Sprites/Fish/glacieremperor,빙하 근처 최상위 포식자,Polar
 2302,서리황제,Legendary,520,Assets/Sprites/Fish/frostemperor,연안 얼음 주변 최상위 포식자,Polar
-,,,,,,
-2400,한대용,Mythic,3000,Assets/Sprites/Fish/polardragon,"한대 신화적 수호자, 거대한 포식자",Polar
+2400,한대용,Mythic,3000,Assets/Sprites/Fish/polardragon,한대 신화적 수호자이자 거대한 포식자,Polar
 2401,서리히드라,Mythic,3100,Assets/Sprites/Fish/frosthydra,빙하와 연안을 다루는 신화적 포식자,Polar
 2402,빙하뱀,Mythic,3200,Assets/Sprites/Fish/glacierserpent,한대 바다에서 신화적 힘을 발휘하는 포식자,Polar
-,,,,,,
 2500,시냇물화살,Common,8,Assets/Sprites/Fish/streamdart,작고 민첩하게 강 흐름을 따라 유영하는 소형 물고기,River
 2501,바위등,Common,9,Assets/Sprites/Fish/rockback,바위 틈에서 은신하며 먹이를 찾는 소형 물고기,River
 2502,버드나무지느러미,Common,9,Assets/Sprites/Fish/willowfin,수초 주변에서 유영하는 작은 물고기,River
@@ -208,7 +194,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 2512,쌍섬광,Common,12,Assets/Sprites/Fish/twinflash,수초 사이에서 빛을 반사하며 유영하는 작은 물고기,River
 2513,돌활공,Common,12,Assets/Sprites/Fish/stoneglider,바위와 모래 연안 사이에서 유영하는 작은 물고기,River
 2514,호박반짝이,Common,13,Assets/Sprites/Fish/amberflicker,밝은 지느러미로 연안 수초 사이를 유영하는 작은 물고기,River
-,,,,,,
 2600,시냇물사냥꾼,Rare,45,Assets/Sprites/Fish/streamhunter,수초와 바위 틈에서 먹이를 사냥하는 포식자,River
 2601,바위턱,Rare,48,Assets/Sprites/Fish/rockjaw,바위 틈에서 먹이를 잡는 희귀 포식자,River
 2602,버드나무송곳니,Rare,50,Assets/Sprites/Fish/willowfang,작지만 공격적인 포식자,River
@@ -218,22 +203,18 @@ id,fishName,rarity,baseValue,spritePath,description,region
 2606,돌칼날,Rare,51,Assets/Sprites/Fish/stonerazor,모래와 바위 주변 상위 포식자,River
 2607,호박송곳니,Rare,52,Assets/Sprites/Fish/amberfang,연안 상위 포식자,River
 2608,달송곳니,Rare,54,Assets/Sprites/Fish/moonfang,연안 수초 최상위 포식자,River
-,,,,,,
 2700,돌화염,Epic,110,Assets/Sprites/Fish/stoneblazer,바위 틈에서 사냥하는 상위 포식자,River
 2701,갈대칼날,Epic,120,Assets/Sprites/Fish/reedrazor,수초 사이에서 사냥하는 상위 포식자,River
 2702,은빛사냥꾼,Epic,125,Assets/Sprites/Fish/silverhunter,은빛 지느러미를 활용해 사냥하는 상위 포식자,River
 2703,황금검,Epic,130,Assets/Sprites/Fish/goldenblade,빠른 속도와 민첩성으로 사냥하는 상위 포식자,River
 2704,조수타격,Epic,135,Assets/Sprites/Fish/tidestrike,연안 모래와 수초를 활용해 사냥하는 상위 포식자,River
 2705,대리석사냥꾼,Epic,140,Assets/Sprites/Fish/marblehunter,바위·모래·수초에서 사냥하는 상위 포식자,River
-,,,,,,
 2800,강왕,Legendary,500,Assets/Sprites/Fish/riverking,강 최상위 포식자,River
 2801,바위황제,Legendary,510,Assets/Sprites/Fish/stoneemperor,바위 주변 최상위 포식자,River
 2802,갈대황제,Legendary,520,Assets/Sprites/Fish/reedemperor,수초·연안 최상위 포식자,River
-,,,,,,
-2900,강용,Mythic,3000,Assets/Sprites/Fish/riverdragon,"강 신화적 수호자, 거대한 포식자",River
+2900,강용,Mythic,3000,Assets/Sprites/Fish/riverdragon,강 신화적 수호자이자 거대한 포식자,River
 2901,은빛히드라,Mythic,3100,Assets/Sprites/Fish/silverhydra,연안과 수초를 다루는 신화적 포식자,River
 2902,황금뱀,Mythic,3200,Assets/Sprites/Fish/goldenserpent,강에서 신화적 힘을 발휘하는 포식자,River
-,,,,,,
 3000,산호활공,Common,8,Assets/Sprites/Fish/coralglider,개방 대양의 얕은 수역에서 유영하는 소형 물고기,Ocean
 3001,푸른반짝이,Common,9,Assets/Sprites/Fish/blueglimmer,햇빛 아래 은빛 반사로 빠르게 이동하는 작은 물고기,Ocean
 3002,개방지느러미,Common,9,Assets/Sprites/Fish/openfin,연안 암초 근처를 유영하는 소형 물고기,Ocean
@@ -249,7 +230,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 3012,조류섬광,Common,12,Assets/Sprites/Fish/tideflash,조류를 따라 반짝이며 유영하는 소형 물고기,Ocean
 3013,모래반짝이,Common,12,Assets/Sprites/Fish/sandglint,모래 연안에서 은빛 반사로 유영하는 작은 물고기,Ocean
 3014,파도화살,Common,13,Assets/Sprites/Fish/wavedart,연안 조류를 타고 민첩하게 이동하는 소형 물고기,Ocean
-,,,,,,
 3100,조류사냥꾼,Rare,45,Assets/Sprites/Fish/tidehunter,연안 암초에서 먹이를 사냥하는 포식자,Ocean
 3101,하늘턱,Rare,48,Assets/Sprites/Fish/azurejaw,연안 바위와 암초 틈에서 먹이를 잡는 희귀 포식자,Ocean
 3102,푸른송곳니,Rare,50,Assets/Sprites/Fish/bluefang,민첩하지만 공격적인 포식자,Ocean
@@ -259,22 +239,18 @@ id,fishName,rarity,baseValue,spritePath,description,region
 3106,모래칼날,Rare,51,Assets/Sprites/Fish/sandrazor,모래와 바위 주변 상위 포식자,Ocean
 3107,태양송곳니,Rare,52,Assets/Sprites/Fish/sunfang,연안 상위 포식자,Ocean
 3108,하늘추적자,Rare,54,Assets/Sprites/Fish/azurestalker,연안 암초 최상위 포식자,Ocean
-,,,,,,
 3200,조류화염,Epic,110,Assets/Sprites/Fish/tideblazer,연안에서 사냥하는 상위 포식자,Ocean
 3201,푸른칼날,Epic,120,Assets/Sprites/Fish/bluerazor,연안 암초와 바위 사이에서 사냥하는 상위 포식자,Ocean
 3202,은빛사냥꾼,Epic,125,Assets/Sprites/Fish/silverhunter,은빛 지느러미를 활용해 사냥하는 상위 포식자,Ocean
 3203,조류검사냥꾼,Epic,130,Assets/Sprites/Fish/tidebladehunter,빠른 속도로 사냥하는 상위 포식자,Ocean
 3204,파도타격,Epic,135,Assets/Sprites/Fish/wavestrike,조류와 암초를 활용해 사냥하는 상위 포식자,Ocean
 3205,모래사냥꾼,Epic,140,Assets/Sprites/Fish/sandhunter,모래·암초 연안에서 사냥하는 상위 포식자,Ocean
-,,,,,,
 3300,대양왕,Legendary,500,Assets/Sprites/Fish/oceanking,대양 최상위 포식자,Ocean
 3301,조류황제,Legendary,510,Assets/Sprites/Fish/tideemperor,연안 암초 최상위 포식자,Ocean
 3302,푸른황제,Legendary,520,Assets/Sprites/Fish/blueemperor,대양 상위 포식자,Ocean
-,,,,,,
-3400,대양용,Mythic,3000,Assets/Sprites/Fish/oceandragon,"대양 신화적 수호자, 거대한 포식자",Ocean
+3400,대양용,Mythic,3000,Assets/Sprites/Fish/oceandragon,대양 신화적 수호자,Ocean
 3401,은빛히드라,Mythic,3100,Assets/Sprites/Fish/silverhydra,연안과 암초를 다루는 신화적 포식자,Ocean
 3402,푸른뱀,Mythic,3200,Assets/Sprites/Fish/blueserpent,대양에서 신화적 힘을 발휘하는 포식자,Ocean
-,,,,,,
 3500,심해발광,Common,8,Assets/Sprites/Fish/abyssglow,심해 어둠 속에서 발광하며 유영하는 소형 물고기,DeepSea
 3501,심해지느러미,Common,9,Assets/Sprites/Fish/deepfin,깊은 수심에서 서식하는 소형 물고기,DeepSea
 3502,그림자비늘,Common,9,Assets/Sprites/Fish/shadowscale,심해 암흑 속에서 은밀하게 이동하는 작은 물고기,DeepSea
@@ -290,7 +266,6 @@ id,fishName,rarity,baseValue,spritePath,description,region
 3512,심해섬광,Common,12,Assets/Sprites/Fish/deepflash,심해 어둠 속에서 빠르게 유영하는 작은 물고기,DeepSea
 3513,유령반짝점,Common,12,Assets/Sprites/Fish/ghostglint,발광 점으로 위치를 표시하며 이동하는 작은 물고기,DeepSea
 3514,심해화살,Common,13,Assets/Sprites/Fish/abyssdart,저조도 심해에서 민첩하게 움직이는 소형 물고기,DeepSea
-,,,,,,
 3600,심해사냥꾼,Rare,45,Assets/Sprites/Fish/deephunter,심해 암초와 바위 틈에서 먹이를 사냥하는 포식자,DeepSea
 3601,그림자턱,Rare,48,Assets/Sprites/Fish/shadowjaw,심해 포식자로 작은 먹이를 공격하는 희귀 포식자,DeepSea
 3602,등불송곳니,Rare,50,Assets/Sprites/Fish/lanternfang,발광 지느러미로 먹이를 유인하며 사냥하는 포식자,DeepSea
@@ -300,18 +275,15 @@ id,fishName,rarity,baseValue,spritePath,description,region
 3606,심해칼날,Rare,51,Assets/Sprites/Fish/deeprazor,심해 상위 포식자,DeepSea
 3607,유령추적자,Rare,52,Assets/Sprites/Fish/ghoststalker,심해 틈에서 먹이를 추적하는 포식자,DeepSea
 3608,심해송곳니,Rare,54,Assets/Sprites/Fish/abyssfang,심해 상위 포식자,DeepSea
-,,,,,,
 3700,그림자화염,Epic,110,Assets/Sprites/Fish/shadowblazer,심해 상위 포식자,DeepSea
 3701,심해칼날,Epic,120,Assets/Sprites/Fish/deeprazorepic,심해 상위 포식자,DeepSea
 3702,등불사냥꾼,Epic,125,Assets/Sprites/Fish/lanternhunter,발광 지느러미로 사냥하는 심해 상위 포식자,DeepSea
 3703,유령검,Epic,130,Assets/Sprites/Fish/phantombladeepic,심해 상위 포식자,DeepSea
 3704,심해타격,Epic,135,Assets/Sprites/Fish/abyssstrikeepic,심해 상위 포식자,DeepSea
 3705,먹물사냥꾼,Epic,140,Assets/Sprites/Fish/inkhunter,심해 상위 포식자,DeepSea
-,,,,,,
-3800,심연왕,Legendary,500,Assets/Sprites/Fish/abyssalking,"심해 최상위 포식자, 깊은 해저 협곡 지배",DeepSea
+3800,심연왕,Legendary,500,Assets/Sprites/Fish/abyssalking,심해 최상위 포식자이자 깊은 해저 협곡 지배,DeepSea
 3801,유령황제,Legendary,510,Assets/Sprites/Fish/phantomemperor,심해 해저 산과 협곡에서 군림하는 상위 포식자,DeepSea
 3802,발광사냥꾼,Legendary,520,Assets/Sprites/Fish/glowhunter,발광 포식자로 깊은 수심의 먹이를 사냥하는 최상위 포식자,DeepSea
-,,,,,,
-3900,심해용,Mythic,3000,Assets/Sprites/Fish/abyssdragon,"심해 신화적 존재, 거대한 포식자",DeepSea
+3900,심해용,Mythic,3000,Assets/Sprites/Fish/abyssdragon,심해 신화적 존재,DeepSea
 3901,유령히드라,Mythic,3100,Assets/Sprites/Fish/phantomhydra,심해 암흑과 협곡을 지배하는 신화적 포식자,DeepSea
 3902,발광뱀,Mythic,3200,Assets/Sprites/Fish/glowserpent,발광으로 심해 생태계를 조절하는 신화적 포식자,DeepSea

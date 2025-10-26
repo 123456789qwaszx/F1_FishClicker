@@ -10,4 +10,5 @@ public class FishData
     public long baseValue;
     public string spritePath;
     public string description;
+    public string region;
 }
