@@ -105,7 +105,7 @@ public class UI_InGame : UI_Scene
 
     public void RefreshUI()
     {
-        var fishes = MapManager.Instance.GetFishForMap();
+        var fishes = FishingSystem.Instance.GetFishForMap();
         
         Txt_GoldGain.text = $"{GameManager.Instance.Money}G";
         Txt_FishAmount0.text = (fishes.Count > 0) ? fishes[0].fishName : "";

@@ -18,6 +18,7 @@ public enum EEventType
     OnFishCaught,
     MoneyChanged,
     Upgraded,
+    OnMapChanged,
 }
 
 public class EventManager

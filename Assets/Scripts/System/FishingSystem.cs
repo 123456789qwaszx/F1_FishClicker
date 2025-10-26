@@ -8,41 +8,64 @@ public class FishingSystem : Singleton<FishingSystem>
     [SerializeField] public List<FishData> rareFishes;
     [SerializeField] public List<FishData> epicFishes;
     [SerializeField] public List<FishData> legendaryFishes;
-    [SerializeField] public List<FishData> mythicFishes; // Mythic 등급 추가
+    [SerializeField] public List<FishData> mythicFishes;
 
     [Header("기본 확률(%)")]
     [Range(0, 100)] public float baseCommonPercent = 60f;
     [Range(0, 100)] public float baseRarePercent = 25f;
     [Range(0, 100)] public float baseEpicPercent = 10f;
     [Range(0, 100)] public float baseLegendaryPercent = 4f;
-    [Range(0, 100)] public float baseMythicPercent = 1f; // Mythic 기본 확률
+    [Range(0, 100)] public float baseMythicPercent = 1f;
 
     [Header("실제 확률(%)")]
     public float commonPercent;
     public float rarePercent;
     public float epicPercent;
     public float legendaryPercent;
-    public float mythicPercent; // Mythic 실제 확률
+    public float mythicPercent;
 
     private void Awake()
     {
+        FishDataCashing();
         ResetPercentages();
+        ApplyRareOrAboveBonus();
     }
 
     private void OnEnable()
     {
         EventManager.Instance.AddEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
-        ApplyRareOrAboveBonus(); // 초기 적용
+        EventManager.Instance.AddEvent(EEventType.OnMapChanged, ApplyMapFishData);
     }
 
     private void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
+        EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, ApplyMapFishData);
     }
 
-    /// <summary>
-    /// 기본 확률로 초기화
-    /// </summary>
+    
+    public FishData CatchFish()
+    {
+        float r = Random.value * 100f;
+        float cumulative = 0f;
+
+        if ((cumulative += commonPercent) > r) return GetRandomFish(commonFishes);
+        if ((cumulative += rarePercent) > r) return GetRandomFish(rareFishes);
+        if ((cumulative += epicPercent) > r) return GetRandomFish(epicFishes);
+        if ((cumulative += legendaryPercent) > r) return GetRandomFish(legendaryFishes);
+        if ((cumulative += mythicPercent) > r) return GetRandomFish(mythicFishes);
+
+        return GetRandomFish(commonFishes);
+    }
+
+    private FishData GetRandomFish(List<FishData> list)
+    {
+        if (list == null || list.Count == 0) return null;
+        return list[Random.Range(0, list.Count)];
+    }
+    
+    
+    #region FishingProbability
     public void ResetPercentages()
     {
         commonPercent = baseCommonPercent;
@@ -52,9 +75,8 @@ public class FishingSystem : Singleton<FishingSystem>
         mythicPercent = baseMythicPercent;
     }
 
-    /// <summary>
-    /// UpgradeManager와 연동하여 Rare 이상 확률 보너스 적용
-    /// </summary>
+    
+    // 게임매니저의 스탯과 연동하여 Rare 이상 확률 보너스 적용
     public void ApplyRareOrAboveBonus()
     {
         float extra = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
@@ -68,6 +90,7 @@ public class FishingSystem : Singleton<FishingSystem>
         RedistributeProbabilities(newValues);
     }
 
+    
     private void RedistributeProbabilities(Dictionary<string, float> newValues)
     {
         var baseValues = new Dictionary<string, float>
@@ -110,27 +133,84 @@ public class FishingSystem : Singleton<FishingSystem>
         legendaryPercent = adjusted["Legendary"];
         mythicPercent = adjusted["Mythic"];
     }
+    #endregion
+    
 
-    /// <summary>
-    /// 확률 기반 랜덤 물고기 반환
-    /// </summary>
-    public FishData CatchFish()
+    #region FishData
+    public void ApplyMapFishData()
     {
-        float r = Random.value * 100f;
-        float cumulative = 0f;
-
-        if ((cumulative += commonPercent) > r) return GetRandomFish(commonFishes);
-        if ((cumulative += rarePercent) > r) return GetRandomFish(rareFishes);
-        if ((cumulative += epicPercent) > r) return GetRandomFish(epicFishes);
-        if ((cumulative += legendaryPercent) > r) return GetRandomFish(legendaryFishes);
-        if ((cumulative += mythicPercent) > r) return GetRandomFish(mythicFishes);
-
-        return GetRandomFish(commonFishes);
+        List<FishData> mapFishes = GetFishForMap();
+        
+        commonFishes.Clear();
+        rareFishes.Clear();
+        epicFishes.Clear();
+        legendaryFishes.Clear();
+        mythicFishes.Clear();
+        
+        foreach (FishData fish in mapFishes)
+        {
+            switch (fish.rarity)
+            {
+                case "Common":
+                    commonFishes.Add(fish);
+                    break;
+                case "Rare":
+                    rareFishes.Add(fish);
+                    break;
+                case "Epic":
+                    epicFishes.Add(fish);
+                    break;
+                case "Legendary":
+                    legendaryFishes.Add(fish);
+                    break;
+                case "Mythic":
+                    mythicFishes.Add(fish);
+                    break;
+                default:
+                    Debug.LogWarning($"Unknown fish rarity: {fish.rarity}");
+                    break;
+            }
+        }
+        
+        ResetPercentages();
+        ApplyRareOrAboveBonus();
     }
-
-    private FishData GetRandomFish(List<FishData> list)
+    
+    
+    public List<FishData> GetFishForMap()
     {
-        if (list == null || list.Count == 0) return null;
-        return list[Random.Range(0, list.Count)];
+        List<FishData> result = new List<FishData>();
+
+        // FishDatabase에 있는 모든 FishData를 순회하면서 지역이 같은 것만 추가
+        foreach (var fish in _fishCache.Values)
+        {
+            if (fish.region == MapManager.Instance.GetCurrentMap().region)
+            {
+                result.Add(fish);
+            }
+        }
+
+        return result;
     }
+    
+    
+    private Dictionary<string, FishData> _fishCache = new Dictionary<string, FishData>();
+
+    private void FishDataCashing()
+    {
+        if (GameManager.Instance.fishDatabase == null)
+        {
+            Debug.LogError("FishDatabase is not assigned!");
+            return;
+        }
+
+        // 이름 기준으로 캐시 생성
+        _fishCache.Clear();
+        foreach (var fish in GameManager.Instance.fishDatabase.fishList)
+        {
+            if (!_fishCache.ContainsKey(fish.fishName))
+                _fishCache.Add(fish.fishName, fish);
+        }
+    }
+    #endregion
 }
