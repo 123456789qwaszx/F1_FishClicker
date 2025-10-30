@@ -19,6 +19,7 @@ public enum ETouchEvent
 
 public abstract class UI_Base : MonoBehaviour
 {
+    bool _init;
     protected virtual void Awake()
     {
     }
