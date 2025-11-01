@@ -12,6 +12,7 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private Dictionary<string, MapData> _mapCache = new();
 
     private int _currentMapIndex = 0;
+    private int _currentStageIndex = 0; // 현재 스테이지
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class MapManager : Singleton<MapManager>
     public void Init()
     {
         LoadMapDatabase();
-        SetCurrentMap("DeepSea");
+        SetCurrentMap("DeepSea"); // 기본 맵
     }
 
     private void LoadMapDatabase()
@@ -57,11 +58,15 @@ public class MapManager : Singleton<MapManager>
         _currentMap = map;
         _currentMapIndex = _mapDB.mapList.IndexOf(map);
 
+        // 스테이지 기본값
+        _currentStageIndex = 0;
+
         UpdateMapUI();
         Debug.Log($"Current map set to: {_currentMap.mapName}");
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
         EventManager.Instance.TriggerEvent(EEventType.OnMapChangedWithData, _currentMap);
+        EventManager.Instance.TriggerEvent(EEventType.OnStageChanged, GetCurrentStage());
     }
 
     private void UpdateMapUI()
@@ -81,9 +86,8 @@ public class MapManager : Singleton<MapManager>
     public MapData GetCurrentMap() => _currentMap;
 
     // -----------------------
-    // 🔽 추가된 부분
+    // 🔽 맵 이동
     // -----------------------
-
     public void OnClickNextMap()
     {
         if (_mapDB == null || _mapDB.mapList.Count == 0) return;
@@ -114,4 +118,44 @@ public class MapManager : Singleton<MapManager>
 
     public bool HasNextMap() => _currentMapIndex < _mapDB.mapList.Count - 1;
     public bool HasPrevMap() => _currentMapIndex > 0;
+
+    // -----------------------
+    // 🔽 스테이지 기능 추가
+    // -----------------------
+    public StageData GetCurrentStage()
+    {
+        if (_currentMap == null || _currentMap.stages.Count == 0) return null;
+        return _currentMap.stages[_currentStageIndex];
+    }
+
+    public void OnClickNextStage()
+    {
+        if (_currentMap == null || _currentMap.stages.Count == 0) return;
+
+        if (_currentStageIndex < _currentMap.stages.Count - 1)
+        {
+            _currentStageIndex++;
+            Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
+            EventManager.Instance.TriggerEvent(EEventType.OnStageChanged, GetCurrentStage());
+        }
+        else
+        {
+            Debug.Log("Already at last stage in this map!");
+        }
+    }
+
+    public void OnClickPrevStage()
+    {
+        if (_currentMap == null || _currentMap.stages.Count == 0) return;
+
+        if (_currentStageIndex > 0)
+        {
+            _currentStageIndex--;
+            Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
+            EventManager.Instance.TriggerEvent(EEventType.OnStageChanged, GetCurrentStage());
+        }
+    }
+
+    public bool HasNextStage() => _currentMap != null && _currentStageIndex < _currentMap.stages.Count - 1;
+    public bool HasPrevStage() => _currentMap != null && _currentStageIndex > 0;
 }

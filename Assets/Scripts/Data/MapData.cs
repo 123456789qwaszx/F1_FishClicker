@@ -9,4 +9,5 @@ public class MapData
     public string region;
     public string backgroundSprite;
     public string description;
+    public List<StageData> stages;
 }

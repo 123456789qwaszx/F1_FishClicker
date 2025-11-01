@@ -20,6 +20,8 @@ public enum EEventType
     Upgraded,
     OnMapChanged,
     OnMapChangedWithData,
+    
+    OnStageChanged,
 }
 
 public class EventManager
