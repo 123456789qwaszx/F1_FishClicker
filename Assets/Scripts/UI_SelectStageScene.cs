@@ -9,7 +9,6 @@ public class UI_SelectStageScene : UI_Scene
     enum GameObjects
     { 
         Player,
-        Stand,
         SelectedChapter1,
         SelectedChapter2,
         SelectedChapter3,
@@ -38,10 +37,8 @@ public class UI_SelectStageScene : UI_Scene
     }
 
     UI_StageBlock[] _stageBlockUI = new UI_StageBlock[20];
-    UI_StartStagePopup _startStagePopupUI;
     ScrollRect scroll;
 
-    public ChapterResourceData ChapterData;
 
     public UI_InventoryPopup InventoryPopupUI;
 
@@ -102,28 +99,6 @@ public class UI_SelectStageScene : UI_Scene
 
     void Refresh()
     {
-        // if (Managers.Data.ChapterResources.TryGetValue(_selectedChapter, out ChapterResourceData chapterData) == false)
-        //     return;
-
-        //ChapterData = chapterData;
-        
-        //stage에 따라서 앨리스 위치 지정 필요
-        // Managers.Resource.LoadAsync<Sprite>(chapterData.MapTop, callback: (sprite)=>
-        // {
-        //     GetImage((int)Images.MapTop).sprite = sprite;
-        // });
-        //
-        // Managers.Resource.LoadAsync<Sprite>(chapterData.MapBottom, callback: (sprite) =>
-        // {
-        //     GetImage((int)Images.MapBottom).sprite = sprite;
-        // });
-        //
-        // Managers.Resource.LoadAsync<Sprite>(chapterData.MapCenter, callback: (sprite) =>
-        // {
-        //     GetImage((int)Images.MapCenter1).sprite = sprite;
-        //     GetImage((int)Images.MapCenter2).sprite = sprite;
-        // });
-
         for(int i=0; i< _stageBlockUI.Length; i++)
         {
             _stageBlockUI[i].SetInfo(i + 1, this);
@@ -180,18 +155,11 @@ public class UI_SelectStageScene : UI_Scene
     void MovePlayer(int stage)
     {
         GetObject((int)GameObjects.Player).SetActive(false);
-        GetObject((int)GameObjects.Stand).SetActive(false);
 
         int index = stage - 1;
-        GetObject((int)GameObjects.Stand).transform.position = _stageBlockUI[index].transform.position;
         GetObject((int)GameObjects.Player).transform.position = _stageBlockUI[index].transform.position;
 
         GetObject((int)GameObjects.Player).SetActive(true);
-        GetObject((int)GameObjects.Stand).SetActive(true);
-
-        // GetObject((int)GameObjects.Player).transform.DOKill();
-        // GetObject((int)GameObjects.Player).transform.rotation = Quaternion.Euler(Vector3.zero);
-        // GetObject((int)GameObjects.Player).transform.DOPunchRotation(new Vector3(-90f, 0f, 0f), 1f, 4);
     }    
 
     bool CheckChapter(int chapter)
