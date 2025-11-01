@@ -192,11 +192,12 @@ public class FishingSystem : Singleton<FishingSystem>
     public List<FishData> GetFishForMap()
     {
         List<FishData> result = new List<FishData>();
+        string currentRegion = MapManager.Instance.GetCurrentMap().region;
 
         // FishDatabase에 있는 모든 FishData를 순회하면서 지역이 같은 것만 추가
         foreach (var fish in _fishCache.Values)
         {
-            if (fish.region == MapManager.Instance.GetCurrentMap().region)
+            if (fish.region == currentRegion)
             {
                 result.Add(fish);
             }
