@@ -18,7 +18,6 @@ public class UI_SelectStageSceneBottom : UI_Base
     {
         BindButtons(typeof(Buttons));
 
-        GetButton((int)Buttons.InventoryButton).gameObject.BindEvent(OnClickInventoryButton);
         GetButton((int)Buttons.PlayButton).gameObject.BindEvent(OnClickPlayButton);
         GetButton((int)Buttons.ShopButton).gameObject.BindEvent(OnClickShopButton);
     }

@@ -13,7 +13,7 @@ public class ClickSystem : Singleton<ClickSystem>
     
     void Start()
     {
-        StartCoroutine(WaitAndInitClickSystem());
+        //StartCoroutine(WaitAndInitClickSystem());
     }
     
     private IEnumerator WaitAndInitClickSystem()

@@ -27,7 +27,7 @@ public class UI_StageBlock : UI_Base
     }
     int _stage;
 
-    UI_SelectStageScene _selectStageSceneUI;
+    public UI_SelectStageScene _selectStageSceneUI;
 
     protected override void Awake()
     {
@@ -56,7 +56,7 @@ public class UI_StageBlock : UI_Base
 
     void Refresh()
     {
-        GetText((int)Texts.StageText).text = _stage.ToString();
+        //GetText((int)Texts.StageText).text = _stage.ToString();
 
         // if(Managers.Game.HighestStage == _stage)
         // {
@@ -104,13 +104,15 @@ public class UI_StageBlock : UI_Base
     public void SelectStage(bool selected)
     {
         GetObject((int)Images.Shadow).gameObject.SetActive(!selected);
+        Debug.Log("SelectBtn");
     }
 
     public void OnClickStageButton(PointerEventData evt)
     {
         //(Managers.Scene.CurrentScene as SelectStageScene)?.OnSelectStage(_stage);
-        if (!IsReachableStage())
-            return;
+        // if (!IsReachableStage())
+        //     return;
+        Debug.Log(_selectStageSceneUI.name);
 
         _selectStageSceneUI?.OnSelectStage(_stage);
         SelectStage(true);

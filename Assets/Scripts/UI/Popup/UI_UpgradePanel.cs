@@ -14,8 +14,7 @@ public class UI_UpgradePanel : UI_Popup
     public void SetUp()
     {
         ClearSlots();
-        Debug.Log("??");
-
+        
         List<UpgradeData> upgrades = GameManager.Instance.GetAllUpgradeData();
         Debug.Log(upgrades.Count);
 

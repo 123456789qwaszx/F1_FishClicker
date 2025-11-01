@@ -25,7 +25,6 @@ public class UI_SelectStageScene : UI_Scene
         ChapterButton_4,
         ChapterButton_5,
         ChapterButton_6,
-        OptionButton,
     }
     
     enum Images
@@ -36,7 +35,7 @@ public class UI_SelectStageScene : UI_Scene
         MapCenter2,
     }
 
-    UI_StageBlock[] _stageBlockUI = new UI_StageBlock[20];
+    [SerializeField]UI_StageBlock[] _stageBlockUI = new UI_StageBlock[10];
     ScrollRect scroll;
 
 
@@ -68,23 +67,23 @@ public class UI_SelectStageScene : UI_Scene
         GetButton((int)Buttons.ChapterButton_5).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 5));
         GetButton((int)Buttons.ChapterButton_6).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 6));
 
-        GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
 
-        _topUI = ComponentHelper.FindChildObject<UI_SelectStageSceneTop>(gameObject, "UI_SelectStageSceneTop", true);
-        _topUI.SetInfo(this);
+        // _topUI = ComponentHelper.FindChildObject<UI_SelectStageSceneTop>(gameObject, "UI_SelectStageSceneTop", true);
+        // _topUI.SetInfo(this);
 
-        _bottomUI = ComponentHelper.FindChildObject<UI_SelectStageSceneBottom>(gameObject, "UI_SelectStageSceneBottom", true);
-        _bottomUI.SetInfo(this);
+        // _bottomUI = ComponentHelper.FindChildObject<UI_SelectStageSceneBottom>(gameObject, "UI_SelectStageSceneBottom", true);
+        // _bottomUI.SetInfo(this);
 
         scroll = ComponentHelper.FindChildObject<ScrollRect>(gameObject, recursive: true);
         _selectedStage = 0;
 
         for (int i = 0; i < _stageBlockUI.Length; i++)
         {
-            _stageBlockUI[i] = ComponentHelper.FindChildObject<UI_StageBlock>(gameObject, "UI_StageBlock" + (i + 1), recursive: true);
+            _stageBlockUI[i] = ComponentHelper.FindChildObject<UI_StageBlock>(gameObject, $"UI_StageBlock{i+1}", recursive: true);
         }
 
         Refresh();
+        Debug.Log("Refreshed?");
     }
 
 
@@ -101,6 +100,7 @@ public class UI_SelectStageScene : UI_Scene
     {
         for(int i=0; i< _stageBlockUI.Length; i++)
         {
+            Debug.Log("!!");
             _stageBlockUI[i].SetInfo(i + 1, this);
         }
 
@@ -186,9 +186,10 @@ public class UI_SelectStageScene : UI_Scene
     #region EventHandler
     public void OnSelectStage(int stage)
     {
+        Debug.Log($"{stage}");
         if (_selectedStage == stage)
         {
-            ShowStartStagePopup();            
+            ShowStartStagePopup();
             return;
         }
 
