@@ -8,46 +8,41 @@ public class UI_AppMenuPanel : UI_Popup
     #region enum
     enum Buttons
     {
-        // Btn_Icon00_Pressed,
-        // Btn_Icon00_Normal,
-        // Btn_Icon02_Pressed,
-        // Btn_Icon02_Normal,
-
         Btn_Icon00,
         Btn_Icon01,
-        Btn_Icon02
+        Btn_Icon02,
+        Btn_Icon03,
     }
     #endregion
     
-    // Button Btn_Icon00_Pressed;
-    // Button Btn_Icon00_Normal;
-    // Button Btn_Icon02_Pressed;
-    // Button Btn_Icon02_Normal;
 
     Button Btn_Icon00; //Shop
     Button Btn_Icon01; //UpgradePanel
     Button Btn_Icon02; //Setting
+    Button Btn_Icon03; //Stages
 
     protected override void Awake()
     {
         
         BindButtons(typeof(Buttons));
 
-        // Btn_Icon00_Pressed = GetButton((int)Buttons.Btn_Icon00_Pressed);
-        // Btn_Icon00_Normal = GetButton((int)Buttons.Btn_Icon00_Normal);
-        // Btn_Icon02_Pressed = GetButton((int)Buttons.Btn_Icon02_Pressed);
-        // Btn_Icon02_Normal = GetButton((int)Buttons.Btn_Icon02_Normal);
-
         Btn_Icon00 = GetButton((int)Buttons.Btn_Icon00);
         Btn_Icon01 = GetButton((int)Buttons.Btn_Icon01);
         Btn_Icon02 = GetButton((int)Buttons.Btn_Icon02);
+        Btn_Icon03 = GetButton((int)Buttons.Btn_Icon03);
 
         BindEvent(Btn_Icon00.gameObject, OnShowShop);
         BindEvent(Btn_Icon01.gameObject, OnShowUpgradePanel);
         BindEvent(Btn_Icon02.gameObject, OnShowSetting);
+        BindEvent(Btn_Icon03.gameObject, OnShowStageSelectPopup);
     }
 
     #region Button
+    public void OnShowStageSelectPopup(PointerEventData eventData)
+    {
+        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.ChangeSceneUI<UI_SelectStageScene>();
+    }
     public void OnShowShop(PointerEventData eventData)
     {
         UIManager.Instance.CloseAllPopupUI();

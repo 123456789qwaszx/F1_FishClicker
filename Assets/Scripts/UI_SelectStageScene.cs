@@ -55,6 +55,8 @@ public class UI_SelectStageScene : UI_Scene
 
     protected override void Awake()
     {
+        base.Init();
+        
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
         BindObjects(typeof(GameObjects));
@@ -83,7 +85,6 @@ public class UI_SelectStageScene : UI_Scene
         }
 
         Refresh();
-        Debug.Log("Refreshed?");
     }
 
 
@@ -100,7 +101,6 @@ public class UI_SelectStageScene : UI_Scene
     {
         for(int i=0; i< _stageBlockUI.Length; i++)
         {
-            Debug.Log("!!");
             _stageBlockUI[i].SetInfo(i + 1, this);
         }
 
@@ -212,6 +212,7 @@ public class UI_SelectStageScene : UI_Scene
 		_selectedChapter = chapter;
 		_selectedStage = 0;
 		Refresh();
+        Debug.Log($"Chapter {_selectedChapter}");
 	}
 
     void OnClickOptionButton(PointerEventData eventData)

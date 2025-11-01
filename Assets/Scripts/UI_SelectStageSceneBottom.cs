@@ -7,19 +7,19 @@ public class UI_SelectStageSceneBottom : UI_Base
 {
     enum Buttons
     {
-        InventoryButton,
-        PlayButton,
-        ShopButton,
+        Btn_Back,
     }
 
     UI_SelectStageScene _selectStageSceneUI;
 
+    public override void Init()
+    { }
+
     protected override void Awake()
     {
         BindButtons(typeof(Buttons));
-
-        GetButton((int)Buttons.PlayButton).gameObject.BindEvent(OnClickPlayButton);
-        GetButton((int)Buttons.ShopButton).gameObject.BindEvent(OnClickShopButton);
+        
+        GetButton((int)Buttons.Btn_Back).gameObject.BindEvent(OnClickInventoryButton);
     }
 
     public void SetInfo(UI_SelectStageScene sceneUI)
@@ -30,20 +30,8 @@ public class UI_SelectStageSceneBottom : UI_Base
     #region EventHandler
     void OnClickInventoryButton(PointerEventData eventData)
     {
-        UIManager.Instance.ShowPopup<UI_InventoryPopup>(callback: (popup) =>
-        {
-            _selectStageSceneUI.InventoryPopupUI = popup;
-        });
+        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.RefreshUI(); });
     }
 
-    void OnClickPlayButton(PointerEventData evt)
-    {
-        _selectStageSceneUI.ShowStartStagePopup();
-    }
-
-    void OnClickShopButton(PointerEventData evt)
-    {
-        UIManager.Instance.ShowPopup<UI_ShopPopup>();
-    }
     #endregion
 }

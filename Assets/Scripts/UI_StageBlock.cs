@@ -29,6 +29,10 @@ public class UI_StageBlock : UI_Base
 
     public UI_SelectStageScene _selectStageSceneUI;
 
+    public override void Init()
+    {
+    }
+
     protected override void Awake()
     {
         BindTexts(typeof(Texts));
@@ -104,15 +108,13 @@ public class UI_StageBlock : UI_Base
     public void SelectStage(bool selected)
     {
         GetObject((int)Images.Shadow).gameObject.SetActive(!selected);
-        Debug.Log("SelectBtn");
     }
 
     public void OnClickStageButton(PointerEventData evt)
     {
         //(Managers.Scene.CurrentScene as SelectStageScene)?.OnSelectStage(_stage);
-        // if (!IsReachableStage())
-        //     return;
-        Debug.Log(_selectStageSceneUI.name);
+         if (!IsReachableStage())
+             return;
 
         _selectStageSceneUI?.OnSelectStage(_stage);
         SelectStage(true);
