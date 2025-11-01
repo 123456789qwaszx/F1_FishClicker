@@ -15,6 +15,7 @@ public class UI_SelectStageScene : UI_Scene
         SelectedChapter4,
         SelectedChapter5,
         SelectedChapter6,
+        SelectedChapter7,
     }
 
     enum Buttons
@@ -25,6 +26,7 @@ public class UI_SelectStageScene : UI_Scene
         ChapterButton_4,
         ChapterButton_5,
         ChapterButton_6,
+        ChapterButton_7,
     }
     
     enum Images
@@ -68,6 +70,7 @@ public class UI_SelectStageScene : UI_Scene
         GetButton((int)Buttons.ChapterButton_4).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 4));
         GetButton((int)Buttons.ChapterButton_5).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 5));
         GetButton((int)Buttons.ChapterButton_6).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 6));
+        GetButton((int)Buttons.ChapterButton_7).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, 7));
 
 
         // _topUI = ComponentHelper.FindChildObject<UI_SelectStageSceneTop>(gameObject, "UI_SelectStageSceneTop", true);
@@ -116,6 +119,7 @@ public class UI_SelectStageScene : UI_Scene
         GetObject((int)GameObjects.SelectedChapter4).SetActive(false);
         GetObject((int)GameObjects.SelectedChapter5).SetActive(false);
         GetObject((int)GameObjects.SelectedChapter6).SetActive(false);
+        GetObject((int)GameObjects.SelectedChapter7).SetActive(false);
     }
 
     void EnableButtonSelectedImage()
@@ -139,6 +143,9 @@ public class UI_SelectStageScene : UI_Scene
                 break;
             case 6:
                 GetObject((int)GameObjects.SelectedChapter6).SetActive(true);
+                break;
+            case 7:
+                GetObject((int)GameObjects.SelectedChapter7).SetActive(true);
                 break;
         }
     }
@@ -212,6 +219,8 @@ public class UI_SelectStageScene : UI_Scene
 		_selectedChapter = chapter;
 		_selectedStage = 0;
 		Refresh();
+        
+        MapManager.Instance.SetMapByIndex(_selectedChapter);
         Debug.Log($"Chapter {_selectedChapter}");
 	}
 

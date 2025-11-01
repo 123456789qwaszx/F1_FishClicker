@@ -94,8 +94,13 @@ public class MapManager : Singleton<MapManager>
         Debug.Log($"Current map set to: {_currentMap.mapName}");
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
-        EventManager.Instance.TriggerEvent(EEventType.OnMapChangedWithData, _currentMap);
+        //EventManager.Instance.TriggerEvent(EEventType.OnMapChangedWithData, _currentMap);
         EventManager.Instance.TriggerEvent(EEventType.OnStageChanged);
+    }
+    
+    public void SetMapByIndex(int index)
+    {
+        SetCurrentMap(_mapDB.mapList[index].region);
     }
 
     private void UpdateMapUI()
@@ -114,12 +119,14 @@ public class MapManager : Singleton<MapManager>
 
     public MapData GetCurrentMap() => _currentMap;
 
+
     // -----------------------
     // 🔽 맵 이동
     // -----------------------
     public void OnClickNextMap()
     {
-        if (_mapDB == null || _mapDB.mapList.Count == 0) return;
+        if (_mapDB == null || _mapDB.mapList.Count == 0)
+            return;
 
         int nextIndex = _currentMapIndex + 1;
         if (nextIndex >= _mapDB.mapList.Count)
@@ -133,7 +140,8 @@ public class MapManager : Singleton<MapManager>
 
     public void OnClickPrevMap()
     {
-        if (_mapDB == null || _mapDB.mapList.Count == 0) return;
+        if (_mapDB == null || _mapDB.mapList.Count == 0)
+            return;
 
         int prevIndex = _currentMapIndex - 1;
         if (prevIndex < 0)

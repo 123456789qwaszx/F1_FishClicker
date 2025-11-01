@@ -35,14 +35,14 @@ public class FishingSystem : Singleton<FishingSystem>
     {
         EventManager.Instance.AddEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.AddEvent(EEventType.OnMapChanged, ApplyMapFishData);
-        EventManager.Instance.AddEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
+        //EventManager.Instance.AddEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
     }
 
     private void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, ApplyMapFishData);
-        EventManager.Instance.RemoveEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
+        //EventManager.Instance.RemoveEvent<MapData>(EEventType.OnMapChangedWithData, OnMapChanged);
     }
     
     
