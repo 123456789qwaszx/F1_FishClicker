@@ -3,8 +3,32 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
+public class GameData
+{
+    public int Map = 1;
+    public int Stage = 1;
+}
+
+
 public class GameManager : Singleton<GameManager>
 {
+    GameData _gameData = new GameData();
+    
+    #region Stage
+    public int UnlockedMap 
+    {
+        get { return _gameData.Map; }
+        set { _gameData.Map = value; }
+    }
+	
+    public int HighestStage
+    {
+        get { return _gameData.Stage; }
+        set { _gameData.Stage = value; }
+    }
+    #endregion
+    
     #region FishData
     public FishDatabase fishDatabase;
     
@@ -127,5 +151,8 @@ public class GameManager : Singleton<GameManager>
         fishCaughtCount = 0;
         upgradeCount = 0;
         usedMoney = 0;
+        
+        _gameData.Map = 1;
+        _gameData.Stage = 1;
     }
 }

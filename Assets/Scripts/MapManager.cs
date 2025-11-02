@@ -1,6 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+[System.Serializable]
+
+public class MapData
+{
+    public int id;
+    public string mapName;
+    public string region;
+    public string backgroundSprite;
+    public string description;
+}
 
 [System.Serializable]
 public class StageData
@@ -17,31 +27,22 @@ public class StageData
     }
 }
 
-
 public class MapManager : Singleton<MapManager>
 {
-    [Header("UI")]
-    [SerializeField] private Image mapBackgroundImage; // 배경 이미지 UI
-
-    [SerializeField] private MapDatabase _mapDB; // CSV → ScriptableObject로 임포트된 맵 데이터
-    [SerializeField] private MapData _currentMap; // 현재 맵
-    [SerializeField] private Dictionary<string, MapData> _mapCache = new();
+    private MapDatabase _mapDB;
+    private List<MapData> _mapCache = new();
+    
+    
+    
+    [SerializeField] private MapData _currentMap;
 
     private int _currentMapIndex = 0;
-    private int _currentStageIndex = 0; // 현재 스테이지
+    private int _currentStageIndex = 0;
+
     
-    // StageData는 코드에서 생성
     public List<StageData> stages;
 
-    public void GenerateStages(int stageCount = 10, string mapName = "")
-    {
-        stages = new List<StageData>();
-        for(int i = 0; i < stageCount; i++)
-        {
-            stages.Add(new StageData(i, mapName));
-        }
-    }
-
+    
     void Awake()
     {
         Init();
@@ -50,75 +51,53 @@ public class MapManager : Singleton<MapManager>
     public void Init()
     {
         LoadMapDatabase();
-        SetCurrentMap("DeepSea"); // 기본 맵
+        SetMapByIndex(0); // 기본 맵
     }
+    
 
     private void LoadMapDatabase()
     {
-        _mapDB = Resources.Load<MapDatabase>("MapDatabase");
-        if (_mapDB == null)
-        {
-            Debug.LogError("MapDatabase asset not found in Resources!");
-            return;
-        }
+        MapDatabase _mapDB = Resources.Load<MapDatabase>("MapDatabase");
+        if (_mapDB == null) { Debug.LogError ("MapDatabase asset not found in Resources!"); return; }
 
         _mapCache.Clear();
-        foreach (var map in _mapDB.mapList)
+        foreach (MapData m in _mapDB.mapList)
         {
-            if (!_mapCache.ContainsKey(map.region))
-                _mapCache.Add(map.region, map);
+            if (!_mapCache.Exists(x => x.region == m.region))
+                _mapCache.Add(m);
         }
-
-        Debug.Log($"Loaded {_mapDB.mapList.Count} map entries!");
     }
 
+    public void GenerateStages(int stageCount = 10, string mapName = "")
+    {
+        stages = new List<StageData>();
+        for (int i = 0; i < stageCount; i++)
+        {
+            stages.Add(new StageData(i, mapName));
+        }
+    }
+    
     /// <summary>
     /// region 이름으로 현재 맵 설정 및 UI 갱신
     /// </summary>
-    public void SetCurrentMap(string region)
+    public void SetMapByIndex(int index)
     {
-        if (!_mapCache.TryGetValue(region, out MapData map))
-        {
-            Debug.LogWarning($"Map not found for region: {region}");
-            return;
-        }
+        string region = _mapCache[index].region;
+        MapData map = _mapCache.Find(m => m.region == region);
+        if (map == null) { Debug.LogWarning($"Map not found for region: {region}"); return; }
 
         _currentMap = map;
-        _currentMapIndex = _mapDB.mapList.IndexOf(map);
-
-        // 스테이지 기본값
-        _currentStageIndex = 0;
+        _currentMapIndex = _mapCache.IndexOf(map);
+        _currentStageIndex = 1;
         GenerateStages(10, region);
 
-        UpdateMapUI();
         Debug.Log($"Current map set to: {_currentMap.mapName}");
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
-        //EventManager.Instance.TriggerEvent(EEventType.OnMapChangedWithData, _currentMap);
-        EventManager.Instance.TriggerEvent(EEventType.OnStageChanged);
-    }
-    
-    public void SetMapByIndex(int index)
-    {
-        SetCurrentMap(_mapDB.mapList[index].region);
     }
 
-    private void UpdateMapUI()
-    {
-        if (_currentMap == null || mapBackgroundImage == null) return;
-
-        Sprite bgSprite = Resources.Load<Sprite>(_currentMap.backgroundSprite);
-        if (bgSprite == null)
-        {
-            Debug.LogWarning($"Background sprite not found at path: {_currentMap.backgroundSprite}");
-            return;
-        }
-
-        mapBackgroundImage.sprite = bgSprite;
-    }
 
     public MapData GetCurrentMap() => _currentMap;
-
 
     // -----------------------
     // 🔽 맵 이동
@@ -135,7 +114,7 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        SetCurrentMap(_mapDB.mapList[nextIndex].region);
+        SetMapByIndex(nextIndex);
     }
 
     public void OnClickPrevMap()
@@ -150,14 +129,14 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        SetCurrentMap(_mapDB.mapList[prevIndex].region);
+        SetMapByIndex(prevIndex);
     }
 
     public bool HasNextMap() => _currentMapIndex < _mapDB.mapList.Count - 1;
     public bool HasPrevMap() => _currentMapIndex > 0;
 
     // -----------------------
-    // 🔽 스테이지 기능 추가
+    // 🔽 스테이지 기능
     // -----------------------
     public StageData GetCurrentStage()
     {
@@ -195,23 +174,21 @@ public class MapManager : Singleton<MapManager>
 
     public bool HasNextStage() => _currentMap != null && _currentStageIndex < stages.Count - 1;
     public bool HasPrevStage() => _currentMap != null && _currentStageIndex > 0;
-    
-    
+
     public bool CanGoToNextStage()
     {
         var stage = GetCurrentStage();
-        if(stage == null) return false;
-
+        if (stage == null) return false;
 
         //if(GameManager.Instance.fishCaughtCount < stage.requiredCatchCount)
-            //return false;
+        //    return false;
 
         return HasNextStage();
     }
 
     public void OnTryNextStage()
     {
-        if(CanGoToNextStage())
+        if (CanGoToNextStage())
             ChangeToNextStage();
         else
             Debug.Log("조건을 만족해야 다음 스테이지로 이동 가능합니다.");

@@ -217,8 +217,9 @@ public class UI_SelectStageScene : UI_Scene
 			return;
 
 		_selectedChapter = chapter;
-		_selectedStage = 0;
+		_selectedStage = 1;
 		Refresh();
+        MovePlayer(_selectedStage);
         
         MapManager.Instance.SetMapByIndex(_selectedChapter);
         Debug.Log($"Chapter {_selectedChapter}");
