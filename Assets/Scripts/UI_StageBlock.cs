@@ -112,10 +112,10 @@ public class UI_StageBlock : UI_Base
 
     public void OnClickStageButton(PointerEventData evt)
     {
-        //(Managers.Scene.CurrentScene as SelectStageScene)?.OnSelectStage(_stage);
          if (!IsReachableStage())
              return;
 
+         MapManager.Instance.ChangeStage(_stage);
         _selectStageSceneUI?.OnSelectStage(_stage);
         SelectStage(true);
     }

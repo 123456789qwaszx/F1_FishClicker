@@ -11,7 +11,6 @@ public class MapData
     public string backgroundSprite;
     public string description;
     
-    
     public List<StageData> stages;
     public int lastCleared = -1;
     
@@ -36,14 +35,14 @@ public class MapData
 [System.Serializable]
 public class StageData
 {
-    public int stageId;
-    public string stageName;
+    public int StageId { get; private set; }
+    public string StageName { get; private set; }
     public int requiredCatchCount;
 
     public StageData(int id, string mapName)
     {
-        stageId = id;
-        stageName = $"{mapName} Stage {id + 1}";
+        StageId = id;
+        StageName = $"{mapName} Stage {id + 1}";
         requiredCatchCount = 100 + id * 500;
     }
 }
@@ -58,8 +57,7 @@ public class MapManager : Singleton<MapManager>
     public MapData GetCurrentMap() => _currentMap;
     
     private int _currentStageIndex = 0;
-    private StageData _currentStage;
-    public StageData GetCurrentStage() => _currentStage;
+    public StageData CurrentStage() => _currentMap.stages[_currentStageIndex];
 
     
     void Awake()
@@ -109,7 +107,6 @@ public class MapManager : Singleton<MapManager>
         _currentMap = _mapCache[index];
         _currentMapIndex = index;
         _currentStageIndex = _currentMap.lastCleared + 1;
-        _currentStage = _currentMap.stages[_currentStageIndex];
         
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
         
@@ -120,11 +117,12 @@ public class MapManager : Singleton<MapManager>
     public void ChangeStage(int index)
     {
         if (_currentMap == null) return;
-        if (index < 0 || index >= _currentMap.stages.Count) { Debug.Log("Stage index out of range!"); return; }
+        int targetIndex = index - 1;
+        if (targetIndex < 0 || targetIndex >= _currentMap.stages.Count) { Debug.Log("Stage index out of range!"); return; }
 
-        _currentStageIndex = index;
+        _currentStageIndex = targetIndex;
         
-        Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
+        Debug.Log($"Moved to stage: {CurrentStage().StageName}");
     }
     
 
@@ -133,7 +131,7 @@ public class MapManager : Singleton<MapManager>
         if (_currentStageIndex < _currentMap.stages.Count - 1)
             return false;
         
-        if(GameManager.Instance.fishCaughtCount < _currentStage.requiredCatchCount)
+        if(GameManager.Instance.fishCaughtCount < CurrentStage().requiredCatchCount)
             return false;
         
         return true;
@@ -158,15 +156,17 @@ public class MapManager : Singleton<MapManager>
     
     public void ChangeStageToNext()
     {
-        if (_currentMap == null || _currentStageIndex >= _currentMap.stages.Count - 1) { Debug.Log("Already at last stage!"); return; }
+        int nextIndex = _currentStageIndex + 1;
+        if (nextIndex >= _currentMap.stages.Count) { Debug.Log("Already at last stage!"); return; }
 
-        ChangeStage(_currentStageIndex + 1);
+        ChangeStage(nextIndex);
     }
 
     public void ChangeStageToPrev()
     {
-        if (_currentMap == null || _currentStageIndex <= 0) { Debug.Log("Already at first stage!"); return; }
+        int prevIndex = _currentStageIndex;
+        if (prevIndex <= 0) { Debug.Log("Already at first stage!"); return; }
 
-        ChangeStage(_currentStageIndex - 1);
+        ChangeStage(prevIndex - 1);
     }
 }

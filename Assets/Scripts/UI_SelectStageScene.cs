@@ -181,29 +181,14 @@ public class UI_SelectStageScene : UI_Scene
         return true;
     }
 
-    public void ShowStartStagePopup()
-    {
-        // UIManager.Instance.ShowPopupUI<UI_StartStagePopup>(callback: (popup) =>
-        // {
-        //     int templateID = (_selectedChapter - 1) * 20 + _selectedStage;
-        //     popup.SetInfo(Managers.Data.Stages[templateID]);
-        // });
-    }
 
     #region EventHandler
     public void OnSelectStage(int stage)
     {
-        Debug.Log($"{stage}");
-        if (_selectedStage == stage)
-        {
-            ShowStartStagePopup();
-            return;
-        }
-
         for (int i = 0; i < _stageBlockUI.Length; i++)
         {
-            if(i+1 != stage)
-            _stageBlockUI[i].SelectStage(false);
+            if( i+1 != stage )
+                _stageBlockUI[i].SelectStage(false);
         }
 
         _selectedStage = stage;
@@ -222,7 +207,6 @@ public class UI_SelectStageScene : UI_Scene
         MovePlayer(_selectedStage);
         
         MapManager.Instance.ChangeMap(_selectedChapter);
-        Debug.Log($"Chapter {_selectedChapter}");
 	}
 
     void OnClickOptionButton(PointerEventData eventData)
