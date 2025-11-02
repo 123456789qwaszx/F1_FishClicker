@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UpgradeDatabase
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDatabase
   upgradeList:
-  - Type:
+  - type:
       id: Aria
       effectType: 0
     level: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
     valueIncrease: 2
     baseCost: 10
     costIncrease: 30
-  - Type:
+  - type:
       id: Ciel
       effectType: 1
     level: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     valueIncrease: 5
     baseCost: 50
     costIncrease: 40
-  - Type:
+  - type:
       id: Reina
       effectType: 2
     level: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     valueIncrease: 1
     baseCost: 100
     costIncrease: 50
-  - Type:
+  - type:
       id: Noel
       effectType: 0
     level: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
     valueIncrease: 50
     baseCost: 500
     costIncrease: 100
-  - Type:
+  - type:
       id: Lumia
       effectType: 0
     level: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     valueIncrease: 20
     baseCost: 1000
     costIncrease: 200
-  - Type:
+  - type:
       id: None
       effectType: 0
     level: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
     valueIncrease: 10
     baseCost: 2000
     costIncrease: 500
-  - Type:
+  - type:
       id: None
       effectType: 1
     level: 0

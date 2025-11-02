@@ -18,7 +18,7 @@ public class UpgradeSlot : MonoBehaviour
         if (data == null) return;
 
         _upgradeData = data;
-        UpgradeType = data.Type;
+        UpgradeType = data.type;
         RefreshUI();
     }
 
@@ -30,7 +30,7 @@ public class UpgradeSlot : MonoBehaviour
         long upgradeAmount = _upgradeData.GetCurStatValue();
         long upgradeCost = _upgradeData.GetUpgradeCost();
 
-        Txt_UpgradeValue.text = $"{UpgradeType.id} Lv.({_upgradeData.level})\n+{upgradeAmount} ({_upgradeData.Type.effectType})";
+        Txt_UpgradeValue.text = $"{UpgradeType.id} Lv.({_upgradeData.level})\n+{upgradeAmount} ({_upgradeData.type.effectType})";
         Txt_UpgradePrice.text = $"{upgradeCost}G";
     }
 

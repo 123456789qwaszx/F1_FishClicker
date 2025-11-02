@@ -27,7 +27,7 @@ public class UpgradeData
         }
     }
 
-    public UpgradeType Type = new UpgradeType(); // 항상 null-safe
+    public UpgradeType type = new ();
     public int level;
     public long baseStatValue;
     public long valueIncrease;
@@ -41,64 +41,67 @@ public class UpgradeData
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     private UpgradeDatabase _upgradeDB;
-    private readonly List<UpgradeData> _upgradeData = new();
-    private readonly List<UpgradeData.UpgradeType> _upgradeType = new();
+    private readonly List<UpgradeData> _upgradeDataList = new();
+    private readonly List<UpgradeData.UpgradeType> _upgradeTypes = new();
     private readonly Dictionary<string, UpgradeData> _upgradeCache = new();
+    
     public IEnumerable<UpgradeData> GetAllUpgrades() => _upgradeCache.Values;
 
+    
     public void Init()
     {
         LoadUpgradeSheet();
         CollectUpgradeTypes();
-        AddMissingUpgradeTypes();
+        EnsureAllType();
         BuildUpgradeCache();
-        Debug.Log($"Collected {_upgradeType.Count} upgrade types.");
     }
 
+    
     private void LoadUpgradeSheet()
     {
         _upgradeDB = Resources.Load<UpgradeDatabase>(StringNameSpace.ResourcePaths.UpgradeDataPath);
-        if (_upgradeDB == null)
-            Debug.LogWarning("UpgradeDatabase is null or empty!");
+        if (!_upgradeDB) { Debug.LogWarning("UpgradeDatabase not found!"); }
     }
 
+    
     public void CollectUpgradeTypes()
     {
         if (_upgradeDB == null) return;
 
-        _upgradeType.Clear();
+        _upgradeTypes.Clear();
         var existingIds = new HashSet<string>();
 
-        foreach (var upgradeData in _upgradeDB.upgradeList)
+        foreach (UpgradeData upgrade in _upgradeDB.upgradeList)
         {
-            if (upgradeData == null || upgradeData.Type == null)
+            if (upgrade == null || upgrade.type == null)
                 continue;
 
-            if (existingIds.Contains(upgradeData.Type.id))
+            if (existingIds.Contains(upgrade.type.id))
                 continue;
 
-            _upgradeType.Add(upgradeData.Type);
-            existingIds.Add(upgradeData.Type.id);
+            _upgradeTypes.Add(upgrade.type);
+            existingIds.Add(upgrade.type.id);
         }
     }
 
-    private void AddMissingUpgradeTypes()
+    
+    private void EnsureAllType()
     {
-        var existIds = new HashSet<string>();
-        foreach (var ud in _upgradeData)
+        HashSet<string> existIds = new HashSet<string>();
+        foreach (UpgradeData ud in _upgradeDataList)
         {
-            if (ud?.Type != null && !string.IsNullOrEmpty(ud.Type.id))
-                existIds.Add(ud.Type.id);
+            if (ud?.type != null && !string.IsNullOrEmpty(ud.type.id))
+                existIds.Add(ud.type.id);
         }
 
-        foreach (var type in _upgradeType)
+        foreach (UpgradeData.UpgradeType type in _upgradeTypes)
         {
             if (string.IsNullOrEmpty(type.id) || existIds.Contains(type.id))
                 continue;
 
-            _upgradeData.Add(new UpgradeData
+            _upgradeDataList.Add(new UpgradeData
             {
-                Type = new UpgradeData.UpgradeType(type.id, type.effectType),
+                type = new UpgradeData.UpgradeType(type.id, type.effectType),
                 level = 0,
                 baseStatValue = 0,
                 valueIncrease = 2,
@@ -108,21 +111,23 @@ public class UpgradeManager : Singleton<UpgradeManager>
         }
     }
 
+    
     private void BuildUpgradeCache()
     {
         _upgradeCache.Clear();
-        foreach (var upgrade in _upgradeData)
+        foreach (UpgradeData upgrade in _upgradeDataList)
         {
-            if (upgrade?.Type != null && !string.IsNullOrEmpty(upgrade.Type.id))
-                _upgradeCache[upgrade.Type.id] = upgrade;
+            if (upgrade?.type != null && !string.IsNullOrEmpty(upgrade.type.id))
+                _upgradeCache[upgrade.type.id] = upgrade;
         }
     }
 
+    
     public void TryUpgrade(UpgradeData.UpgradeType upgradeType)
     {
         if (upgradeType == null || string.IsNullOrEmpty(upgradeType.id)) return;
 
-        if (!_upgradeCache.TryGetValue(upgradeType.id, out var upgradeData)) return;
+        if (!_upgradeCache.TryGetValue(upgradeType.id, out UpgradeData upgradeData)) return;
 
         long cost = upgradeData.GetUpgradeCost();
         if (cost > GameManager.Instance.Money) return;

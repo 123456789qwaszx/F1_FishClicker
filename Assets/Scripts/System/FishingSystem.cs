@@ -201,7 +201,7 @@ public class FishingSystem : Singleton<FishingSystem>
     }
     
     
-    public List<FishData> GetFishForMap()
+    public List<FishData> GetCurrentMapFishList()
     {
         List<FishData> fishes = new List<FishData>(
             _commonFishes.Count +

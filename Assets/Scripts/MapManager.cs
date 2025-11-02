@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-[System.Serializable]
 
+
+[System.Serializable]
 public class MapData
 {
     public int id;
@@ -32,6 +33,7 @@ public class MapData
     }
 }
 
+
 [System.Serializable]
 public class StageData
 {
@@ -47,6 +49,7 @@ public class StageData
     }
 }
 
+
 public class MapManager : Singleton<MapManager>
 {
     private MapDatabase _mapDB;
@@ -58,6 +61,7 @@ public class MapManager : Singleton<MapManager>
     
     private int _currentStageIndex = 0;
     public StageData CurrentStage() => _currentMap.stages[_currentStageIndex];
+    
     
     public bool CanGoToNextMap()
     {
@@ -74,6 +78,7 @@ public class MapManager : Singleton<MapManager>
 
         return true;
     }
+    
     
     public bool CanGoToNextStage()
     {
@@ -108,12 +113,13 @@ public class MapManager : Singleton<MapManager>
 
         int defaultStageCount = 10;
         int defaultStageCleared = 0;
-        foreach (MapData m in _mapDB.mapList)
+        foreach (MapData map in _mapDB.mapList)
         {
-            m.GenerateStages(defaultStageCount);
-            m.SetHighestClearedStage(defaultStageCleared);
+            map.GenerateStages(defaultStageCount);
+            map.SetHighestClearedStage(defaultStageCleared);
         }
     }
+    
     
     private void BuildMapCache()
     {
@@ -153,6 +159,7 @@ public class MapManager : Singleton<MapManager>
         
         Debug.Log($"Moved to stage: {CurrentStage().StageName}");
     }
+    
     
     #region Button
     public void OnChangeMapToNext()

@@ -68,8 +68,8 @@ public class GameManager : Singleton<GameManager>
 
     public void SetUpgradeResult(UpgradeData data)
     {
-        if (data == null || string.IsNullOrEmpty(data.Type.id)) return;
-        _upgradeInfo[data.Type.id] = data;
+        if (data == null || string.IsNullOrEmpty(data.type.id)) return;
+        _upgradeInfo[data.type.id] = data;
     }
     
     public double GetTotalClickStat(double baseValue)
@@ -78,13 +78,13 @@ public class GameManager : Singleton<GameManager>
 
         foreach (UpgradeData data in _upgradeInfo.Values)
         {
-            if (data.Type.effectType == UpgradeEffectType.Additive)
+            if (data.type.effectType == UpgradeEffectType.Additive)
                 result += data.GetCurStatValue();
         }
 
         foreach (UpgradeData data in _upgradeInfo.Values)
         {
-            if (data.Type.effectType == UpgradeEffectType.Multiplicative)
+            if (data.type.effectType == UpgradeEffectType.Multiplicative)
                 result *= (1.0 + data.GetCurStatValue() / 100.0); // 퍼센트 적용 가정
         }
 

@@ -39,7 +39,7 @@ public class UpgradeDataImporter
                 }
             }
 
-            upgrade.Type = new UpgradeData.UpgradeType(statType, effect);
+            upgrade.type = new UpgradeData.UpgradeType(statType, effect);
 
             // 숫자 값 파싱
             upgrade.level = ParseInt(row, "level", 0);
