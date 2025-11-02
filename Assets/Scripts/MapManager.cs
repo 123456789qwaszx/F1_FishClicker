@@ -10,6 +10,27 @@ public class MapData
     public string region;
     public string backgroundSprite;
     public string description;
+    
+    
+    public List<StageData> stages;
+    public int lastCleared = -1;
+    
+    public void GenerateStages(int stageCount = 10)
+    {
+        stages = new List<StageData>();
+        for (int i = 0; i < stageCount; i++)
+        {
+            stages.Add(new StageData(i, mapName));
+        }
+    }
+    
+    public void MarkStageCleared(int stageIndex)
+    {
+        if (stageIndex < 0 || stageIndex >= stages.Count) return;
+
+        if (stageIndex > lastCleared)
+            lastCleared = stageIndex;
+    }
 }
 
 [System.Serializable]
@@ -32,15 +53,13 @@ public class MapManager : Singleton<MapManager>
     private MapDatabase _mapDB;
     private List<MapData> _mapCache = new();
     
-    
-    
-    [SerializeField] private MapData _currentMap;
-
     private int _currentMapIndex = 0;
-    private int _currentStageIndex = 0;
-
+    private MapData _currentMap;
+    public MapData GetCurrentMap() => _currentMap;
     
-    public List<StageData> stages;
+    private int _currentStageIndex = 0;
+    private StageData _currentStage;
+    public StageData GetCurrentStage() => _currentStage;
 
     
     void Awake()
@@ -51,146 +70,103 @@ public class MapManager : Singleton<MapManager>
     public void Init()
     {
         LoadMapDatabase();
-        SetMapByIndex(0); // 기본 맵
+        BuildCache();
+        ChangeMap(0); // 기본 맵
     }
     
 
     private void LoadMapDatabase()
     {
-        MapDatabase _mapDB = Resources.Load<MapDatabase>("MapDatabase");
+        _mapDB = Resources.Load<MapDatabase>("MapDatabase");
         if (_mapDB == null) { Debug.LogError ("MapDatabase asset not found in Resources!"); return; }
 
+        int TT_StageCount = 10;
+        int TT_StageCleared = 0;
+        foreach (MapData m in _mapDB.mapList)
+        {
+            m.GenerateStages(TT_StageCount);
+            m.MarkStageCleared(TT_StageCleared);
+        }
+    }
+    
+    private void BuildCache()
+    {
         _mapCache.Clear();
         foreach (MapData m in _mapDB.mapList)
         {
+            if (m == null) continue;
             if (!_mapCache.Exists(x => x.region == m.region))
                 _mapCache.Add(m);
         }
     }
 
-    public void GenerateStages(int stageCount = 10, string mapName = "")
+    
+    public void ChangeMap(int index)
     {
-        stages = new List<StageData>();
-        for (int i = 0; i < stageCount; i++)
-        {
-            stages.Add(new StageData(i, mapName));
-        }
+        if (_mapCache == null || _mapCache.Count == 0) return;
+        if (index < 0 || index >= _mapCache.Count) { Debug.Log($"Map index {index} out of range!"); return; }
+        
+        _currentMap = _mapCache[index];
+        _currentMapIndex = index;
+        _currentStageIndex = _currentMap.lastCleared + 1;
+        _currentStage = _currentMap.stages[_currentStageIndex];
+        
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+        
+        Debug.Log($"Current map set to: {_currentMap.mapName}");
     }
     
-    /// <summary>
-    /// region 이름으로 현재 맵 설정 및 UI 갱신
-    /// </summary>
-    public void SetMapByIndex(int index)
+
+    public void ChangeStage(int index)
     {
-        string region = _mapCache[index].region;
-        MapData map = _mapCache.Find(m => m.region == region);
-        if (map == null) { Debug.LogWarning($"Map not found for region: {region}"); return; }
+        if (_currentMap == null) return;
+        if (index < 0 || index >= _currentMap.stages.Count) { Debug.Log("Stage index out of range!"); return; }
 
-        _currentMap = map;
-        _currentMapIndex = _mapCache.IndexOf(map);
-        _currentStageIndex = 1;
-        GenerateStages(10, region);
-
-        Debug.Log($"Current map set to: {_currentMap.mapName}");
-
-        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+        _currentStageIndex = index;
+        
+        Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
     }
-
-
-    public MapData GetCurrentMap() => _currentMap;
-
-    // -----------------------
-    // 🔽 맵 이동
-    // -----------------------
-    public void OnClickNextMap()
-    {
-        if (_mapDB == null || _mapDB.mapList.Count == 0)
-            return;
-
-        int nextIndex = _currentMapIndex + 1;
-        if (nextIndex >= _mapDB.mapList.Count)
-        {
-            Debug.Log("Already at last map!");
-            return;
-        }
-
-        SetMapByIndex(nextIndex);
-    }
-
-    public void OnClickPrevMap()
-    {
-        if (_mapDB == null || _mapDB.mapList.Count == 0)
-            return;
-
-        int prevIndex = _currentMapIndex - 1;
-        if (prevIndex < 0)
-        {
-            Debug.Log("Already at first map!");
-            return;
-        }
-
-        SetMapByIndex(prevIndex);
-    }
-
-    public bool HasNextMap() => _currentMapIndex < _mapDB.mapList.Count - 1;
-    public bool HasPrevMap() => _currentMapIndex > 0;
-
-    // -----------------------
-    // 🔽 스테이지 기능
-    // -----------------------
-    public StageData GetCurrentStage()
-    {
-        if (_currentMap == null || stages.Count == 0) return null;
-        return stages[_currentStageIndex];
-    }
-
-    public void ChangeToNextStage()
-    {
-        if (_currentMap == null || stages.Count == 0) return;
-
-        if (_currentStageIndex < stages.Count - 1)
-        {
-            _currentStageIndex++;
-            Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
-            EventManager.Instance.TriggerEvent(EEventType.OnStageChanged, GetCurrentStage());
-        }
-        else
-        {
-            Debug.Log("Already at last stage in this map!");
-        }
-    }
-
-    public void ChangeToPrevStage()
-    {
-        if (_currentMap == null || stages.Count == 0) return;
-
-        if (_currentStageIndex > 0)
-        {
-            _currentStageIndex--;
-            Debug.Log($"Moved to stage: {GetCurrentStage().stageName}");
-            EventManager.Instance.TriggerEvent(EEventType.OnStageChanged, GetCurrentStage());
-        }
-    }
-
-    public bool HasNextStage() => _currentMap != null && _currentStageIndex < stages.Count - 1;
-    public bool HasPrevStage() => _currentMap != null && _currentStageIndex > 0;
+    
 
     public bool CanGoToNextStage()
     {
-        var stage = GetCurrentStage();
-        if (stage == null) return false;
+        if (_currentStageIndex < _currentMap.stages.Count - 1)
+            return false;
+        
+        if(GameManager.Instance.fishCaughtCount < _currentStage.requiredCatchCount)
+            return false;
+        
+        return true;
+    }
+    
+    
+    public void ChangeMapToNext()
+    {
+        int nextIndex = _currentMapIndex + 1;
+        if (nextIndex > _mapCache.Count) { Debug.Log("Already at last map!"); return; }
 
-        //if(GameManager.Instance.fishCaughtCount < stage.requiredCatchCount)
-        //    return false;
-
-        return HasNextStage();
+        ChangeMap(nextIndex);
     }
 
-    public void OnTryNextStage()
+    public void ChangeMapToPrev()
     {
-        if (CanGoToNextStage())
-            ChangeToNextStage();
-        else
-            Debug.Log("조건을 만족해야 다음 스테이지로 이동 가능합니다.");
+        int prevIndex = _currentMapIndex - 1;
+        if (prevIndex < 0) { Debug.Log("Already at first map!"); return; }
+
+        ChangeMap(prevIndex);
+    }
+    
+    public void ChangeStageToNext()
+    {
+        if (_currentMap == null || _currentStageIndex >= _currentMap.stages.Count - 1) { Debug.Log("Already at last stage!"); return; }
+
+        ChangeStage(_currentStageIndex + 1);
+    }
+
+    public void ChangeStageToPrev()
+    {
+        if (_currentMap == null || _currentStageIndex <= 0) { Debug.Log("Already at first stage!"); return; }
+
+        ChangeStage(_currentStageIndex - 1);
     }
 }

@@ -121,17 +121,16 @@ public class UI_InGame : UI_Scene
         Txt_AutoGainPerSec.text = $"1 / {1 - GameManager.Instance.GetUpgradeAmount(UpgradeType.Ciel)}Sec";
         Txt_CurrentStage.text =  $"현재 지역  {MapManager.Instance.GetCurrentMap().region}";
     }
-
-
+    
+    
     public void OnChangeNextMap()
     {
-        MapManager.Instance.OnClickNextMap();
+        MapManager.Instance.ChangeMapToNext();
     }
-    
     
     public void OnChangePrevMap()
     {
-        MapManager.Instance.OnClickPrevMap();
+        MapManager.Instance.ChangeMapToPrev();
     }
     
     public void OnShowPhone(PointerEventData _)
