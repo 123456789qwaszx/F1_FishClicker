@@ -26,4 +26,14 @@ public class StringNameSpace : MonoBehaviour
         int index = Random.Range(0, dialogues.Length);
         return dialogues[index];
     }
+    
+    public static class ResourcePaths
+    {
+        public const string MapDataPath = "MapDatabase";
+        public const string UpgradeDataPath = "UpgradeDatabase";
+        public const string FishDataPath = "FishDatabase";
+        public const string PlayerProfile = "Player/Profile";
+        // 필요하면 추가
+    }
+
 }

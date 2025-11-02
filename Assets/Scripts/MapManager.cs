@@ -23,7 +23,7 @@ public class MapData
         }
     }
     
-    public void MarkStageCleared(int stageIndex)
+    public void SetHighestClearedStage(int stageIndex)
     {
         if (stageIndex < 0 || stageIndex >= stages.Count) return;
 
@@ -89,36 +89,33 @@ public class MapManager : Singleton<MapManager>
 
         return true;
     }
-
     
-    void Awake()
-    {
-        Init();
-    }
 
     public void Init()
     {
-        LoadMapDatabase();
-        BuildCache();
-        ChangeMap(0); // 기본 맵
+        LoadMapSheet();
+        BuildMapCache();
+        
+        int defaultIndex = 0;
+        ChangeMap(defaultIndex); // 기본 맵
     }
     
 
-    private void LoadMapDatabase()
+    private void LoadMapSheet()
     {
-        _mapDB = Resources.Load<MapDatabase>("MapDatabase");
+        _mapDB = Resources.Load<MapDatabase>(StringNameSpace.ResourcePaths.MapDataPath);
         if (_mapDB == null) { Debug.LogError ("MapDatabase asset not found in Resources!"); return; }
 
-        int TT_StageCount = 10;
-        int TT_StageCleared = 0;
+        int defaultStageCount = 10;
+        int defaultStageCleared = 0;
         foreach (MapData m in _mapDB.mapList)
         {
-            m.GenerateStages(TT_StageCount);
-            m.MarkStageCleared(TT_StageCleared);
+            m.GenerateStages(defaultStageCount);
+            m.SetHighestClearedStage(defaultStageCleared);
         }
     }
     
-    private void BuildCache()
+    private void BuildMapCache()
     {
         _mapCache.Clear();
         foreach (MapData m in _mapDB.mapList)

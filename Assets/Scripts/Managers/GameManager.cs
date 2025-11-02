@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
         return 0;
     }
 
-    public void SetUpgradeResult(UpgradeType type, UpgradeData data)
+    public void SetUpgradeResult(UpgradeData data)
     {
         if (data == null) return;
         _upgradeInfo[data.statType] = data;

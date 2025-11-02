@@ -45,6 +45,9 @@ public class UIManager : MonoBehaviour
         //ChangeSceneUI<UI_InGame>();
         UpgradeSystem.Instance.Init();
         FindUI<UI_UpgradePanel>().SetUp();
+        
+        MapManager.Instance.Init();
+        FishingSystem.Instance.Init();
     }
 
     private void RegisterAllUIs()

@@ -50,20 +50,19 @@ public class ClickSystem : Singleton<ClickSystem>
     // 클릭 시 호출
     public void OnClickFishing()
     {
-        FishData caughtFish = FishingSystem.Instance.CatchFish();
-        if (caughtFish == null)
-            return;
+        FishData fishCaught = FishingSystem.Instance.CatchFish();
+        if (fishCaught == null) return;
 
-        InventoryManager.Instance.AddFish(caughtFish);
+        InventoryManager.Instance.AddFish(fishCaught);
 
-        long totalClickValue = (long)GameManager.Instance.GetTotalClickStat(caughtFish.baseValue);
+        long totalClickValue = (long)GameManager.Instance.GetTotalClickStat(fishCaught.baseValue);
 
         CreateGoldText(totalClickValue);
         GameManager.Instance.ChangeMoney(totalClickValue);
         GameManager.Instance.IncreaseCaughtFishCount();
         EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
 
-        Debug.Log($"{caughtFish.fishName}");
+        Debug.Log($"{fishCaught.fishName}");
     }
 
 
@@ -117,24 +116,4 @@ public class ClickSystem : Singleton<ClickSystem>
             yield return new WaitForSeconds(autoInterval);
         }
     }
-    // private IEnumerator AutoFishingRoutine()
-    // {
-    //     while (true)
-    //     {
-    //         float autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
-    //         float autoInterval = baseAutoInterval - autoIntervalBonus * 0.01f;
-    //
-    //         float efficiencyBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
-    //
-    //         FishData caughtFish = FishingSystem.Instance.CatchFish();
-    //
-    //         //InventoryManager.Instance.AddFish(caughtFish);
-    //         //Debug.Log($"{caughtFish.name}");
-    //
-    //         GameManager.Instance.ChangeMoney(caughtFish.baseValue);
-    //         EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
-    //
-    //         yield return new WaitForSeconds(autoInterval); // 업그레이드 속도 반영
-    //     }
-    // }
 }

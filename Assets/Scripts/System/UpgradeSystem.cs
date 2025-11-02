@@ -40,11 +40,11 @@ public class UpgradeData
 
 public class UpgradeSystem : Singleton<UpgradeSystem>
 {
-    [SerializeField] private UpgradeDatabase _upgradeDB;
-    [SerializeField] private Dictionary<UpgradeType, UpgradeData> _upgradeCache = new();
-    public List<UpgradeData> upgradeData = new();
+    private UpgradeDatabase _upgradeDB;
+    //private Dictionary<UpgradeType, UpgradeData> _upgradeCache = new();
+    public List<UpgradeData> upgradeDatas = new();
 
-    private readonly Dictionary<UpgradeType, UpgradeData> _cache = new();
+    private readonly Dictionary<UpgradeType, UpgradeData> _upgradeCache = new();
 
     private void Awake()
     {
@@ -53,40 +53,36 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 
     public void Init()
     {
-        LoadUpgradeDatabase();
-        EnsureAllTypes();
-        BuildCache();
+        LoadUpgradeSheet();
+        AddMissingUpgradeTypes();
+        BuildUpgradeCache();
+        SyncUpgradesToGameManager();
     }
 
     
-    private void LoadUpgradeDatabase()
+    private void LoadUpgradeSheet()
     {
-        _upgradeDB = Resources.Load<UpgradeDatabase>("UpgradeDatabase");
-        if (_upgradeDB == null)
-        {
-            return;
-        }
+        _upgradeDB = Resources.Load<UpgradeDatabase>(StringNameSpace.ResourcePaths.UpgradeDataPath);
+        if (_upgradeDB == null) return;
 
-        _upgradeCache.Clear();
-        upgradeData.Clear();
-        
-        foreach (UpgradeData upgrade in _upgradeDB.upgradeList)
-        {
-            if (!_upgradeCache.ContainsKey(upgrade.statType))
-                _upgradeCache.Add(upgrade.statType, upgrade);
-            
-            upgradeData.Add(upgrade);
-        }
+        // _upgradeCache.Clear();
+        // upgradeData.Clear();
+        //
+        // foreach (UpgradeData upgrade in _upgradeDB.upgradeList)
+        // {
+        //     if (!_upgradeCache.ContainsKey(upgrade.statType))
+        //         _upgradeCache.Add(upgrade.statType, upgrade);
+        //     
+        //     upgradeData.Add(upgrade);
+        // }
     }
-
     
-    private void EnsureAllTypes()
+    private void AddMissingUpgradeTypes()
     {
-        if (upgradeData == null)
-            upgradeData = new List<UpgradeData>();
+        if (upgradeDatas == null) upgradeDatas = new List<UpgradeData>();
 
         HashSet<UpgradeType> exist = new HashSet<UpgradeType>();
-        foreach (UpgradeData ud in upgradeData)
+        foreach (UpgradeData ud in upgradeDatas)
         {
             if (ud == null) continue;
             exist.Add(ud.statType);
@@ -96,7 +92,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         {
             if (exist.Contains(type)) continue;
 
-            upgradeData.Add(new UpgradeData
+            upgradeDatas.Add(new UpgradeData
             {
                 statType = type,
                 level = 0,
@@ -107,26 +103,33 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
             });
         }
     }
-
-    private void BuildCache()
+    
+    private void BuildUpgradeCache()
     {
-        _cache.Clear();
-        GameManager.Instance.ClearUpgradeInfo();
-        if (upgradeData == null) return;
+        _upgradeCache.Clear();
+        if (upgradeDatas == null) return;
 
-        foreach (UpgradeData ud in upgradeData)
+        foreach (UpgradeData upgrade in upgradeDatas)
         {
-            if (ud == null) continue;
-            _cache[ud.statType] = ud;
-
-            GameManager.Instance.SetUpgradeResult(ud.statType, ud);
+            if (upgrade == null) continue;
+            _upgradeCache[upgrade.statType] = upgrade;
+        }
+    }
+    
+    private void SyncUpgradesToGameManager()
+    {
+        GameManager.Instance.ClearUpgradeInfo();
+        
+        foreach (UpgradeData upgrade in _upgradeCache.Values)
+        {
+            GameManager.Instance.SetUpgradeResult(upgrade);
         }
     }
     
 
-    public void TryUpgrade(UpgradeType stat)
+    public void TryUpgrade(UpgradeType upgradeType)
     {
-        if (!_cache.TryGetValue(stat, out UpgradeData upgradeData))
+        if (!_upgradeCache.TryGetValue(upgradeType, out UpgradeData upgradeData))
         {
             return;
         }
@@ -141,7 +144,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         GameManager.Instance.IncreaseUsedMoneyAmount(-cost);
 
         upgradeData.level++;
-        GameManager.Instance.SetUpgradeResult(upgradeData.statType, upgradeData);
+        GameManager.Instance.SetUpgradeResult(upgradeData);
 
         EventManager.Instance.TriggerEvent(EEventType.Upgraded);
     }
