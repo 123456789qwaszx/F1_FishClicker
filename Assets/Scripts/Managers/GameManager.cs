@@ -36,41 +36,40 @@ public class GameManager : Singleton<GameManager>
     #endregion
     
     #region Upgrade
-    private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
+    //private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
+    private readonly Dictionary<string, UpgradeData> _upgradeInfo = new();
     
     public List<UpgradeData> GetAllUpgradeData()
     {
         return new List<UpgradeData>(_upgradeInfo.Values);
     }
+    
+    public long GetUpgradeAmount(string upgradeId)
+    {
+        if (_upgradeInfo.TryGetValue(upgradeId, out var data))
+            return data.GetCurStatValue();
 
-    public long GetUpgradeAmount(UpgradeType type)
-    {
-        if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.GetCurStatValue();
-        
         return 0;
     }
     
-    public int GetUpgradeLevel(UpgradeType type)
+    public int GetUpgradeLevel(string upgradeId)
     {
-        if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.level;
-        
+        if (_upgradeInfo.TryGetValue(upgradeId, out UpgradeData upgrade))
+            return upgrade.level;
         return 0;
     }
     
-    public long GetUpgradeCost(UpgradeType type)
+    public long GetUpgradeCost(string upgradeId)
     {
-        if (_upgradeInfo.TryGetValue(type, out var v))
-            return v.GetUpgradeCost();
-        
+        if (_upgradeInfo.TryGetValue(upgradeId, out UpgradeData upgrade))
+            return upgrade.GetUpgradeCost();
         return 0;
     }
 
     public void SetUpgradeResult(UpgradeData data)
     {
-        if (data == null) return;
-        _upgradeInfo[data.statType] = data;
+        if (data == null || string.IsNullOrEmpty(data.Type.id)) return;
+        _upgradeInfo[data.Type.id] = data;
     }
     
     public double GetTotalClickStat(double baseValue)
@@ -79,13 +78,13 @@ public class GameManager : Singleton<GameManager>
 
         foreach (UpgradeData data in _upgradeInfo.Values)
         {
-            if (data.effectType == UpgradeEffectType.Additive)
+            if (data.Type.effectType == UpgradeEffectType.Additive)
                 result += data.GetCurStatValue();
         }
 
         foreach (UpgradeData data in _upgradeInfo.Values)
         {
-            if (data.effectType == UpgradeEffectType.Multiplicative)
+            if (data.Type.effectType == UpgradeEffectType.Multiplicative)
                 result *= (1.0 + data.GetCurStatValue() / 100.0); // 퍼센트 적용 가정
         }
 
@@ -129,7 +128,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (money < 0)
         {
-            usedMoney -= money; // 음수니 빼서 양수로
+            usedMoney = money; // 음수니 빼서 양수로
         }
     }
     

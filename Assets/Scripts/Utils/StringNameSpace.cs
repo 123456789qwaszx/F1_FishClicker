@@ -35,5 +35,12 @@ public class StringNameSpace : MonoBehaviour
         public const string PlayerProfile = "Player/Profile";
         // 필요하면 추가
     }
+    
+    public static class UpgradeIDs
+    {
+        public const string Aria = "Aria";
+        public const string Ciel = "Ciel";
+        // 필요한 만큼 추가
+    }
 
 }

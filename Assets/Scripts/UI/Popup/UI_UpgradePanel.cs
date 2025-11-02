@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class UI_UpgradePanel : UI_Popup
 {
-    [SerializeField] private Transform SlotPanel;        // Slot을 담을 부모
-    [SerializeField] private GameObject slotPrefab;      // UpgradeSlot prefab
+    [SerializeField] private Transform SlotPanel;
+    [SerializeField] private GameObject slotPrefab;
 
     private List<UpgradeSlot> slots = new List<UpgradeSlot>();
 

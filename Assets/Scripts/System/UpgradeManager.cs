@@ -2,84 +2,103 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UpgradeType
-{
-    Aria,
-    Ciel,
-    Reina,
-    Noel,
-    Lumia,
-    Kei,
-    Mio,
-}
-
 public enum UpgradeEffectType
 {
     Additive,
     Multiplicative,
-    AutoFishingAmountAdditive,
-    AutoFishingAmountMultiplicative,
     RareFishChance,
+    AutoFishingAmount,
 }
 
 [Serializable]
 public class UpgradeData
 {
-    public UpgradeType statType;              // 업그레이드 종류
-    public int level;                         // 현재 레벨
-    public long baseStatValue;                // 기본 수치
-    public long valueIncrease;                // 증가량
-    public long baseCost;                     // 기본 비용
-    public long costIncrease;                 // 비용 증가량
-    public UpgradeEffectType effectType;      // 효과 타입
+    [Serializable]
+    public class UpgradeType
+    {
+        public string id;
+        public UpgradeEffectType effectType;
+
+        public UpgradeType() { id = ""; effectType = UpgradeEffectType.Additive; }
+        public UpgradeType(string id, UpgradeEffectType effectType)
+        {
+            this.id = id;
+            this.effectType = effectType;
+        }
+    }
+
+    public UpgradeType Type = new UpgradeType(); // 항상 null-safe
+    public int level;
+    public long baseStatValue;
+    public long valueIncrease;
+    public long baseCost;
+    public long costIncrease;
 
     public long GetCurStatValue() => baseStatValue + level * valueIncrease;
-
     public long GetUpgradeCost() => (long)(baseCost * Math.Pow(1.5f, level));
 }
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     private UpgradeDatabase _upgradeDB;
-    public List<UpgradeData> upgradeDatas = new();
-
-    private readonly Dictionary<UpgradeType, UpgradeData> _upgradeCache = new();
-    
+    private readonly List<UpgradeData> _upgradeData = new();
+    private readonly List<UpgradeData.UpgradeType> _upgradeType = new();
+    private readonly Dictionary<string, UpgradeData> _upgradeCache = new();
     public IEnumerable<UpgradeData> GetAllUpgrades() => _upgradeCache.Values;
-
 
     public void Init()
     {
         LoadUpgradeSheet();
+        CollectUpgradeTypes();
         AddMissingUpgradeTypes();
         BuildUpgradeCache();
+        Debug.Log($"Collected {_upgradeType.Count} upgrade types.");
     }
 
-    
     private void LoadUpgradeSheet()
     {
         _upgradeDB = Resources.Load<UpgradeDatabase>(StringNameSpace.ResourcePaths.UpgradeDataPath);
-        if (_upgradeDB == null) return;
+        if (_upgradeDB == null)
+            Debug.LogWarning("UpgradeDatabase is null or empty!");
     }
-    
+
+    public void CollectUpgradeTypes()
+    {
+        if (_upgradeDB == null) return;
+
+        _upgradeType.Clear();
+        var existingIds = new HashSet<string>();
+
+        foreach (var upgradeData in _upgradeDB.upgradeList)
+        {
+            if (upgradeData == null || upgradeData.Type == null)
+                continue;
+
+            if (existingIds.Contains(upgradeData.Type.id))
+                continue;
+
+            _upgradeType.Add(upgradeData.Type);
+            existingIds.Add(upgradeData.Type.id);
+        }
+    }
+
     private void AddMissingUpgradeTypes()
     {
-        if (upgradeDatas == null) upgradeDatas = new List<UpgradeData>();
-
-        HashSet<UpgradeType> exist = new HashSet<UpgradeType>();
-        foreach (UpgradeData ud in upgradeDatas)
+        var existIds = new HashSet<string>();
+        foreach (var ud in _upgradeData)
         {
-            if (ud == null) continue;
-            exist.Add(ud.statType);
+            if (ud?.Type != null && !string.IsNullOrEmpty(ud.Type.id))
+                existIds.Add(ud.Type.id);
         }
 
-        foreach (UpgradeType type in Enum.GetValues(typeof(UpgradeType)))
+        foreach (var type in _upgradeType)
         {
-            if (exist.Contains(type)) continue;
+            if (string.IsNullOrEmpty(type.id) || existIds.Contains(type.id))
+                continue;
 
-            upgradeDatas.Add(new UpgradeData
+            _upgradeData.Add(new UpgradeData
             {
-                statType = type,
+                Type = new UpgradeData.UpgradeType(type.id, type.effectType),
                 level = 0,
                 baseStatValue = 0,
                 valueIncrease = 2,
@@ -88,35 +107,28 @@ public class UpgradeManager : Singleton<UpgradeManager>
             });
         }
     }
-    
+
     private void BuildUpgradeCache()
     {
         _upgradeCache.Clear();
-        if (upgradeDatas == null) return;
-
-        foreach (UpgradeData upgrade in upgradeDatas)
+        foreach (var upgrade in _upgradeData)
         {
-            if (upgrade == null) continue;
-            _upgradeCache[upgrade.statType] = upgrade;
+            if (upgrade?.Type != null && !string.IsNullOrEmpty(upgrade.Type.id))
+                _upgradeCache[upgrade.Type.id] = upgrade;
         }
     }
-    
 
-    public void TryUpgrade(UpgradeType upgradeType)
+    public void TryUpgrade(UpgradeData.UpgradeType upgradeType)
     {
-        if (!_upgradeCache.TryGetValue(upgradeType, out UpgradeData upgradeData))
-        {
-            return;
-        }
+        if (upgradeType == null || string.IsNullOrEmpty(upgradeType.id)) return;
+
+        if (!_upgradeCache.TryGetValue(upgradeType.id, out var upgradeData)) return;
 
         long cost = upgradeData.GetUpgradeCost();
-        if (cost > GameManager.Instance.Money)
-        {
-            return;
-        }
+        if (cost > GameManager.Instance.Money) return;
 
         GameManager.Instance.ChangeMoney(-cost);
-        GameManager.Instance.IncreaseUsedMoneyAmount(-cost);
+        GameManager.Instance.IncreaseUsedMoneyAmount(cost);
 
         upgradeData.level++;
         GameManager.Instance.SetUpgradeResult(upgradeData);

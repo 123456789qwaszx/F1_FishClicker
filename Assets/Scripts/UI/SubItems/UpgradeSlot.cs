@@ -7,7 +7,7 @@ public class UpgradeSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI Txt_UpgradeValue;
     [SerializeField] TextMeshProUGUI Txt_UpgradePrice;
 
-    public UpgradeType UpgradeType;
+    public UpgradeData.UpgradeType UpgradeType;
     public int Index;
 
     private UpgradeData _upgradeData;
@@ -18,7 +18,7 @@ public class UpgradeSlot : MonoBehaviour
         if (data == null) return;
 
         _upgradeData = data;
-        UpgradeType = data.statType;
+        UpgradeType = data.Type;
         RefreshUI();
     }
 
@@ -30,7 +30,7 @@ public class UpgradeSlot : MonoBehaviour
         long upgradeAmount = _upgradeData.GetCurStatValue();
         long upgradeCost = _upgradeData.GetUpgradeCost();
 
-        Txt_UpgradeValue.text = $"{UpgradeType} Lv.({_upgradeData.level})\n+{upgradeAmount} ({_upgradeData.effectType})";
+        Txt_UpgradeValue.text = $"{UpgradeType.id} Lv.({_upgradeData.level})\n+{upgradeAmount} ({_upgradeData.Type.effectType})";
         Txt_UpgradePrice.text = $"{upgradeCost}G";
     }
 

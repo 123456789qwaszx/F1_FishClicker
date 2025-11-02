@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region UI
-    private Stack<UI_Popup> popupStack = new Stack<UI_Popup>();
+    private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
 
     private UI_Scene _sceneUI;
     public UI_Scene CurSceneUI
@@ -35,14 +35,13 @@ public class UIManager : MonoBehaviour
         get { return _sceneUI; }
     }
 
-    public Dictionary<string, UI_Base> UIEntry = new();
+    private readonly Dictionary<string, UI_Base> _uIEntry = new();
 
     public void Init()
     {
         RegisterAllUIs();
         
         ChangeSceneUI<UI_Title>();
-        //ChangeSceneUI<UI_InGame>();
         UpgradeManager.Instance.Init();
         GameManager.Instance.SyncUpgrades(UpgradeManager.Instance.GetAllUpgrades());
         FindUI<UI_UpgradePanel>().SetUp();
@@ -53,7 +52,7 @@ public class UIManager : MonoBehaviour
 
     private void RegisterAllUIs()
     {
-        UIEntry.Clear();
+        _uIEntry.Clear();
 
         UI_Base[] list = GetComponentsInChildren<UI_Base>(includeInactive: true);
 
@@ -63,36 +62,36 @@ public class UIManager : MonoBehaviour
 
             string key = ui.gameObject.name;
 
-            if (UIEntry.ContainsKey(key))
+            if (_uIEntry.ContainsKey(key))
             {
                 Debug.LogWarning($"Duplicate popup detected ' {key}");
                 continue;
             }
 
-            UIEntry.Add(key, ui);
+            _uIEntry.Add(key, ui);
         }
     }
     
     public UI_Popup PeekCurPopup()
     {
-        return popupStack.Count > 0 ? popupStack.Peek() : null;
+        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
     }
 
     public T FindUI<T>() where T : UI_Base
     {
-        return UIEntry[typeof(T).Name] as T;
+        return _uIEntry[typeof(T).Name] as T;
     }
 
     public UI_Popup GetPopup()
     {
-        return popupStack.Count > 0 ? popupStack.Peek() : null;
+        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
     }
 
     public void ChangeSceneUI<T>(Action<T> callback = null) where T : UI_Scene
     {
         string key = typeof(T).Name;
 
-        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
             Debug.LogError($"UI Not registered : {key}");
         }
@@ -107,7 +106,7 @@ public class UIManager : MonoBehaviour
     
     public void ChangeSceneUI(string key, Action callback = null)
     {
-        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
             Debug.LogError($"UI Not registered : {key}");
         }
@@ -123,19 +122,19 @@ public class UIManager : MonoBehaviour
     {
         string key = typeof(T).Name;
 
-        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
             Debug.LogError($"UI Not registered : {key}");
         }
 
-        popupStack.Push(ui as T);
+        _popupStack.Push(ui as T);
     }
 
     public void ShowPopupUI(Action callback = null, Transform parent = null)
     {
-        if (popupStack.Count > 0)
+        if (_popupStack.Count > 0)
         {
-            UI_Popup top = popupStack.Peek();
+            UI_Popup top = _popupStack.Peek();
             callback?.Invoke();
             top?.transform.SetParent(parent);
         }
@@ -145,7 +144,7 @@ public class UIManager : MonoBehaviour
     {
         String key = typeof(T).Name;
 
-        if (UIEntry.TryGetValue(key, out UI_Base ui) == false)
+        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
             Debug.LogError($"Popup not registered: {key}");
         }
@@ -153,11 +152,11 @@ public class UIManager : MonoBehaviour
         T popupUI = ui as T;
 
         
-        popupStack.Push(popupUI);
+        _popupStack.Push(popupUI);
 
-        if (popupStack.Count <= 0) return;
+        if (_popupStack.Count <= 0) return;
 
-        T top = (T)popupStack.Peek();
+        T top = (T)_popupStack.Peek();
         top.gameObject.SetActive(true);
 
         callback?.Invoke(top);
@@ -168,17 +167,17 @@ public class UIManager : MonoBehaviour
 
     public void CloseAllPopupUI()
     {
-        while (popupStack.Count > 0)
+        while (_popupStack.Count > 0)
             ClosePopupUI();
     }
 
     public void ClosePopupUI()
     {
-        if (popupStack.Count == 0) return;
-        popupStack.Pop().gameObject.SetActive(false);
+        if (_popupStack.Count == 0) return;
+        _popupStack.Pop().gameObject.SetActive(false);
 
-        if (popupStack.Count > 0)
-            popupStack.Peek().gameObject.SetActive(true);
+        if (_popupStack.Count > 0)
+            _popupStack.Peek().gameObject.SetActive(true);
     }
 
     #endregion

@@ -110,7 +110,7 @@ public class ClickSystem : Singleton<ClickSystem>
             }
 
             // 자동낚시 간격 계산
-            float autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
+            long autoIntervalBonus = GameManager.Instance.GetUpgradeAmount(StringNameSpace.UpgradeIDs.Aria);
             float autoInterval = Mathf.Max(0.1f, baseAutoInterval - autoIntervalBonus * 0.01f);
 
             yield return new WaitForSeconds(autoInterval);

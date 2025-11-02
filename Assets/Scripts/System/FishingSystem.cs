@@ -100,7 +100,7 @@ public class FishingSystem : Singleton<FishingSystem>
         _legendaryPercent = baseLegendaryPercent;
         _mythicPercent = baseMythicPercent;
 
-        float extra = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
+        float extra = GameManager.Instance.GetUpgradeAmount("Aria");
 
         // Enum 기반으로 수정
         Dictionary<FishRarity, float> newValues = new Dictionary<FishRarity, float>

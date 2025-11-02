@@ -50,7 +50,7 @@ public class StageData
 public class MapManager : Singleton<MapManager>
 {
     private MapDatabase _mapDB;
-    private List<MapData> _mapCache = new();
+    private readonly List<MapData> _mapCache = new();
     
     private int _currentMapIndex = 0;
     private MapData _currentMap;
@@ -104,7 +104,7 @@ public class MapManager : Singleton<MapManager>
     private void LoadMapSheet()
     {
         _mapDB = Resources.Load<MapDatabase>(StringNameSpace.ResourcePaths.MapDataPath);
-        if (_mapDB == null) { Debug.LogError ("MapDatabase asset not found in Resources!"); return; }
+        if (_mapDB == null) { Debug.LogError ("MapDatabase asset not found in Resources"); return; }
 
         int defaultStageCount = 10;
         int defaultStageCleared = 0;
@@ -144,8 +144,9 @@ public class MapManager : Singleton<MapManager>
 
     public void ChangeStage(int index)
     {
-        if (_currentMap == null) return;
         int targetIndex = index - 1;
+        
+        if (_currentMap == null) return;
         if (targetIndex < 0 || targetIndex >= _currentMap.stages.Count) { Debug.Log("Stage index out of range!"); return; }
 
         _currentStageIndex = targetIndex;

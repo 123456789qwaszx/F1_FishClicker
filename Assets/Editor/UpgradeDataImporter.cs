@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -21,18 +22,26 @@ public class UpgradeDataImporter
 
         foreach (var row in csvData)
         {
+            // UpgradeData 객체 생성
             UpgradeData upgrade = new UpgradeData();
 
-            // Enum 파싱 (string → UpgradeType, UpgradeEffectType)
-            if (System.Enum.TryParse(row["statType"], out UpgradeType parsedType))
-                upgrade.statType = parsedType;
+            // UpgradeType 생성 및 null-safe 초기화
+            string statType = row.ContainsKey("statType") ? row["statType"] : "";
+            string effectStr = row.ContainsKey("effectType") ? row["effectType"] : "";
+            UpgradeEffectType effect = UpgradeEffectType.Additive;
 
-            if (System.Enum.TryParse(row["effectType"], out UpgradeEffectType parsedEffect))
-                upgrade.effectType = parsedEffect;
-            else
-                upgrade.effectType = UpgradeEffectType.Additive;
+            if (!string.IsNullOrEmpty(effectStr))
+            {
+                if (!Enum.TryParse(effectStr, out effect))
+                {
+                    Debug.LogWarning($"Unknown effectType '{effectStr}' for statType '{statType}', defaulting to Additive.");
+                    effect = UpgradeEffectType.Additive;
+                }
+            }
 
-            // 숫자 변환
+            upgrade.Type = new UpgradeData.UpgradeType(statType, effect);
+
+            // 숫자 값 파싱
             upgrade.level = ParseInt(row, "level", 0);
             upgrade.baseStatValue = ParseLong(row, "baseStatValue", 0);
             upgrade.valueIncrease = ParseLong(row, "valueIncrease", 0);
@@ -52,11 +61,11 @@ public class UpgradeDataImporter
 
     private static int ParseInt(Dictionary<string, string> row, string key, int defaultValue)
     {
-        return int.TryParse(row[key], out var result) ? result : defaultValue;
+        return row.ContainsKey(key) && int.TryParse(row[key], out int result) ? result : defaultValue;
     }
 
     private static long ParseLong(Dictionary<string, string> row, string key, long defaultValue)
     {
-        return long.TryParse(row[key], out var result) ? result : defaultValue;
+        return row.ContainsKey(key) && long.TryParse(row[key], out long result) ? result : defaultValue;
     }
 }
