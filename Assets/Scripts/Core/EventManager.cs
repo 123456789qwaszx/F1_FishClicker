@@ -19,6 +19,8 @@ public enum EEventType
     MoneyChanged,
     Upgraded,
     OnMapChanged,
+    OnStartBossStage,
+    OnAttackBoss,
     OnMapChangedWithData,
     
     OnStageChanged,
