@@ -1,6 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum FishRarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary,
+    Mythic
+}
+
+[System.Serializable]
+public class FishData
+{
+    public int id;
+    public string fishName;
+    public FishRarity rarity;
+    public long baseValue;
+    public string spritePath;
+    public string description;
+    public string region;
+}
 public class FishingSystem : Singleton<FishingSystem>
 {
     private FishDatabase _fishDB;
@@ -129,7 +149,6 @@ public class FishingSystem : Singleton<FishingSystem>
         _mythicPercent = adjusted["Mythic"];
     }
     
-
     private void UpdateFishListsForCurrentMap()
     {
         _commonFishes.Clear();
@@ -137,29 +156,29 @@ public class FishingSystem : Singleton<FishingSystem>
         _epicFishes.Clear();
         _legendaryFishes.Clear();
         _mythicFishes.Clear();
-        
+    
         string currentRegion = MapManager.Instance.GetCurrentMap().region;
-        
+    
         foreach (FishData fish in _fishCache.Values)
         {
             if (fish.region != currentRegion)
                 continue;
-            
-            switch (fish.rarity)
+        
+            switch (fish.rarity) // 이제 문자열이 아니라 enum 사용
             {
-                case "Common":
+                case FishRarity.Common:
                     _commonFishes.Add(fish);
                     break;
-                case "Rare":
+                case FishRarity.Rare:
                     _rareFishes.Add(fish);
                     break;
-                case "Epic":
+                case FishRarity.Epic:
                     _epicFishes.Add(fish);
                     break;
-                case "Legendary":
+                case FishRarity.Legendary:
                     _legendaryFishes.Add(fish);
                     break;
-                case "Mythic":
+                case FishRarity.Mythic:
                     _mythicFishes.Add(fish);
                     break;
                 default:
