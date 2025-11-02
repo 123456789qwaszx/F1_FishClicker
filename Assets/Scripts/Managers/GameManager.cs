@@ -96,6 +96,14 @@ public class GameManager : Singleton<GameManager>
     {
         _upgradeInfo.Clear();
     }
+    
+    public void SyncUpgrades(IEnumerable<UpgradeData> upgrades)
+    {
+        ClearUpgradeInfo();
+        foreach (UpgradeData upgrade in upgrades)
+            SetUpgradeResult(upgrade);
+    }
+
     #endregion
     
     #region Money

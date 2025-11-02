@@ -53,7 +53,7 @@ public class UI_UpgradePanel : UI_Popup
     {
         _curIndex = slotIndex;
         
-        UpgradeSystem.Instance.TryUpgrade(slots[_curIndex].UpgradeType);
+        UpgradeManager.Instance.TryUpgrade(slots[_curIndex].UpgradeType);
         UpdateSlots();
 
         EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
