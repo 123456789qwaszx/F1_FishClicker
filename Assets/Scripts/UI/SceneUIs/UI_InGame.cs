@@ -125,12 +125,12 @@ public class UI_InGame : UI_Scene
     
     public void OnChangeNextMap()
     {
-        MapManager.Instance.ChangeMapToNext();
+        MapManager.Instance.OnChangeMapToNext();
     }
     
     public void OnChangePrevMap()
     {
-        MapManager.Instance.ChangeMapToPrev();
+        MapManager.Instance.OnChangeMapToPrev();
     }
     
     public void OnShowPhone(PointerEventData _)

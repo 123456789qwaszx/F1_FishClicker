@@ -12,7 +12,7 @@ public class MapData
     public string description;
     
     public List<StageData> stages;
-    public int lastCleared = -1;
+    public int highestCleared = -1;
     
     public void GenerateStages(int stageCount = 10)
     {
@@ -27,8 +27,8 @@ public class MapData
     {
         if (stageIndex < 0 || stageIndex >= stages.Count) return;
 
-        if (stageIndex > lastCleared)
-            lastCleared = stageIndex;
+        if (stageIndex > highestCleared)
+            highestCleared = stageIndex;
     }
 }
 
@@ -43,7 +43,7 @@ public class StageData
     {
         StageId = id;
         StageName = $"{mapName} Stage {id + 1}";
-        requiredCatchCount = 100 + id * 500;
+        requiredCatchCount = Formula.GetStageCatchLinear(id);
     }
 }
 
@@ -58,6 +58,37 @@ public class MapManager : Singleton<MapManager>
     
     private int _currentStageIndex = 0;
     public StageData CurrentStage() => _currentMap.stages[_currentStageIndex];
+    
+    public bool CanGoToNextMap()
+    {
+        if (_currentMapIndex >= _mapCache.Count - 1) { Debug.Log($"Map index {_currentMapIndex} out of range!"); return false; }
+
+        MapData nextMap = _mapCache[_currentMapIndex + 1];
+        StageData firstStage = nextMap.stages[0];
+
+        if (GameManager.Instance.fishCaughtCount < firstStage.requiredCatchCount)
+        {
+            Debug.Log($"Cannot go to next map: need at least {firstStage.requiredCatchCount} fish caught, current count is {GameManager.Instance.fishCaughtCount}");
+            return false;
+        }
+
+        return true;
+    }
+    
+    public bool CanGoToNextStage()
+    {
+        if (_currentStageIndex >= _currentMap.stages.Count - 1) { Debug.Log($"Stage index {_currentStageIndex} out of range!"); return false; }
+
+        StageData nextStage = _currentMap.stages[_currentStageIndex + 1];
+
+        if (GameManager.Instance.fishCaughtCount < nextStage.requiredCatchCount)
+        {
+            Debug.Log($"Cannot go to next stage: need at least {nextStage.requiredCatchCount} fish caught, current count is {GameManager.Instance.fishCaughtCount}");
+            return false;
+        }
+
+        return true;
+    }
 
     
     void Awake()
@@ -106,7 +137,7 @@ public class MapManager : Singleton<MapManager>
         
         _currentMap = _mapCache[index];
         _currentMapIndex = index;
-        _currentStageIndex = _currentMap.lastCleared + 1;
+        _currentStageIndex = _currentMap.highestCleared + 1;
         
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
         
@@ -125,20 +156,8 @@ public class MapManager : Singleton<MapManager>
         Debug.Log($"Moved to stage: {CurrentStage().StageName}");
     }
     
-
-    public bool CanGoToNextStage()
-    {
-        if (_currentStageIndex < _currentMap.stages.Count - 1)
-            return false;
-        
-        if(GameManager.Instance.fishCaughtCount < CurrentStage().requiredCatchCount)
-            return false;
-        
-        return true;
-    }
-    
-    
-    public void ChangeMapToNext()
+    #region Button
+    public void OnChangeMapToNext()
     {
         int nextIndex = _currentMapIndex + 1;
         if (nextIndex > _mapCache.Count) { Debug.Log("Already at last map!"); return; }
@@ -146,7 +165,7 @@ public class MapManager : Singleton<MapManager>
         ChangeMap(nextIndex);
     }
 
-    public void ChangeMapToPrev()
+    public void OnChangeMapToPrev()
     {
         int prevIndex = _currentMapIndex - 1;
         if (prevIndex < 0) { Debug.Log("Already at first map!"); return; }
@@ -154,7 +173,7 @@ public class MapManager : Singleton<MapManager>
         ChangeMap(prevIndex);
     }
     
-    public void ChangeStageToNext()
+    public void OnChangeStageToNext()
     {
         int nextIndex = _currentStageIndex + 1;
         if (nextIndex >= _currentMap.stages.Count) { Debug.Log("Already at last stage!"); return; }
@@ -162,11 +181,12 @@ public class MapManager : Singleton<MapManager>
         ChangeStage(nextIndex);
     }
 
-    public void ChangeStageToPrev()
+    public void OnChangeStageToPrev()
     {
         int prevIndex = _currentStageIndex;
         if (prevIndex <= 0) { Debug.Log("Already at first stage!"); return; }
 
         ChangeStage(prevIndex - 1);
     }
+    #endregion
 }

@@ -41,7 +41,6 @@ public class UI_SelectStageScene : UI_Scene
     ScrollRect scroll;
 
 
-    public UI_InventoryPopup InventoryPopupUI;
 
     int _selectedChapter = 1;
     public int SelectedChapter { get { return _selectedChapter; } }
