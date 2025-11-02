@@ -10,6 +10,7 @@ public enum FishRarity
     Mythic
 }
 
+
 [System.Serializable]
 public class FishData
 {
@@ -21,6 +22,8 @@ public class FishData
     public string description;
     public string region;
 }
+
+
 public class FishingSystem : Singleton<FishingSystem>
 {
     private FishDatabase _fishDB;
@@ -96,58 +99,67 @@ public class FishingSystem : Singleton<FishingSystem>
         _epicPercent = baseEpicPercent;
         _legendaryPercent = baseLegendaryPercent;
         _mythicPercent = baseMythicPercent;
-        
+
         float extra = GameManager.Instance.GetUpgradeAmount(UpgradeType.Aria);
 
-        Dictionary<string, float> newValues = new Dictionary<string, float>
+        // Enum 기반으로 수정
+        Dictionary<FishRarity, float> newValues = new Dictionary<FishRarity, float>
         {
-            { "Common", Mathf.Max(0f, baseCommonPercent - extra) }
+            { FishRarity.Common, Mathf.Max(0f, baseCommonPercent - extra) }
         };
 
         RedistributeProbabilities(newValues);
     }
-    private void RedistributeProbabilities(Dictionary<string, float> newValues)
+
+    private void RedistributeProbabilities(Dictionary<FishRarity, float> newValues)
     {
-        var baseValues = new Dictionary<string, float>
+        // Enum 기반
+        var baseValues = new Dictionary<FishRarity, float>
         {
-            { "Common", baseCommonPercent },
-            { "Rare", baseRarePercent },
-            { "Epic", baseEpicPercent },
-            { "Legendary", baseLegendaryPercent },
-            { "Mythic", baseMythicPercent }
+            { FishRarity.Common, baseCommonPercent },
+            { FishRarity.Rare, baseRarePercent },
+            { FishRarity.Epic, baseEpicPercent },
+            { FishRarity.Legendary, baseLegendaryPercent },
+            { FishRarity.Mythic, baseMythicPercent }
         };
 
-        var adjusted = new Dictionary<string, float>(baseValues);
+        var adjusted = new Dictionary<FishRarity, float>(baseValues);
+
         foreach (var kvp in newValues)
+        {
             if (adjusted.ContainsKey(kvp.Key))
                 adjusted[kvp.Key] = Mathf.Clamp(kvp.Value, 0f, 100f);
+        }
 
         float totalNew = 0f;
         foreach (var kvp in adjusted)
+        {
             if (newValues.ContainsKey(kvp.Key))
                 totalNew += kvp.Value;
+        }
 
         float remaining = 100f - totalNew;
 
         float sumOtherBase = 0f;
         foreach (var kvp in baseValues)
+        {
             if (!newValues.ContainsKey(kvp.Key))
                 sumOtherBase += kvp.Value;
+        }
 
         foreach (var kvp in baseValues)
         {
             if (!newValues.ContainsKey(kvp.Key))
-            {
                 adjusted[kvp.Key] = (kvp.Value / sumOtherBase) * remaining;
-            }
         }
 
-        _commonPercent = adjusted["Common"];
-        _rarePercent = adjusted["Rare"];
-        _epicPercent = adjusted["Epic"];
-        _legendaryPercent = adjusted["Legendary"];
-        _mythicPercent = adjusted["Mythic"];
+        _commonPercent = adjusted[FishRarity.Common];
+        _rarePercent = adjusted[FishRarity.Rare];
+        _epicPercent = adjusted[FishRarity.Epic];
+        _legendaryPercent = adjusted[FishRarity.Legendary];
+        _mythicPercent = adjusted[FishRarity.Mythic];
     }
+
     
     private void UpdateFishListsForCurrentMap()
     {
@@ -164,7 +176,7 @@ public class FishingSystem : Singleton<FishingSystem>
             if (fish.region != currentRegion)
                 continue;
         
-            switch (fish.rarity) // 이제 문자열이 아니라 enum 사용
+            switch (fish.rarity)
             {
                 case FishRarity.Common:
                     _commonFishes.Add(fish);
@@ -222,6 +234,7 @@ public class FishingSystem : Singleton<FishingSystem>
 
         return GetRandomFish(_commonFishes);
     }
+    
     private FishData GetRandomFish(List<FishData> list)
     {
         if (list == null || list.Count == 0) return null;

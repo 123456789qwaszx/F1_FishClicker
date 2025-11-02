@@ -25,9 +25,14 @@ public class FishDataImporter
             FishData fish = new FishData();
             fish.id = int.Parse(row["id"]);
             fish.fishName = row["fishName"];
-            fish.rarity = Enum.TryParse<FishRarity>(row["rarity"], out var rarity) 
-                ? rarity 
-                : FishRarity.Common; // 기본값
+            if (!Enum.TryParse<FishRarity>(row["rarity"], out var rarity))
+            {
+                Debug.LogWarning($"Invalid rarity '{row["rarity"]}' in CSV. Defaulting to Common.");
+                rarity = FishRarity.Common;
+            }
+
+            fish.rarity = rarity;
+
             fish.baseValue = long.Parse(row["baseValue"]);
             fish.spritePath = row["spritePath"];
             fish.description = row["description"];

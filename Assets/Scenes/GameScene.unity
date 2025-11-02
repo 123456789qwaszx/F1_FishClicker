@@ -904,7 +904,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  InventoryPopupUI: {fileID: 0}
 --- !u!1 &423415180
 GameObject:
   m_ObjectHideFlags: 0
@@ -4495,7 +4494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d08d77b38feb84aa8c259daa7f7e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  fishDatabase: {fileID: 11400000, guid: d99c19ae5cfbfb74e9b9628aa95e10b4, type: 2}
+  fishDatabase: {fileID: 0}
 --- !u!114 &1413158865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4522,21 +4521,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6a170fbdcc4a34aa0c1599d9da2b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingSystem
-  commonFishes: []
-  rareFishes: []
-  epicFishes: []
-  legendaryFishes: []
-  mythicFishes: []
   baseCommonPercent: 60
   baseRarePercent: 25
   baseEpicPercent: 10
   baseLegendaryPercent: 5
   baseMythicPercent: 1
-  commonPercent: 0
-  rarePercent: 0
-  epicPercent: 0
-  legendaryPercent: 0
-  mythicPercent: 0
 --- !u!114 &1413158867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4549,15 +4538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72686b4e242ee8648b8a98634359db88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapManager
-  mapBackgroundImage: {fileID: 0}
-  _mapDB: {fileID: 0}
-  _currentMap:
-    id: 0
-    mapName: 
-    region: 
-    backgroundSprite: 
-    description: 
-  stages: []
 --- !u!114 &1413158868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4570,8 +4550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a12143d95da45847a465ecc89287cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSystem
-  _upgradeDB: {fileID: 0}
-  upgradeData: []
+  upgradeDatas: []
 --- !u!1 &1483109745
 GameObject:
   m_ObjectHideFlags: 0
