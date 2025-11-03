@@ -14,7 +14,7 @@ public class UI_FishingGame : UI_Popup
     void OnEnable()
     {
         // EventManager.Instance.AddEvent(EEventType.OnNewFishSpawn, InitFishUI);
-        // EventManager.Instance.AddEvent(EEventType.OnAttackFish, UpdateFishHpUI);
+        EventManager.Instance.AddEvent(EEventType.OnAttackFish, UpdateFishHpUI);
         // EventManager.Instance.AddEvent(EEventType.OnFishDefeated, OnFishDefeated);
 
         // 초기 물고기 스폰
@@ -24,33 +24,44 @@ public class UI_FishingGame : UI_Popup
     void OnDisable()
     {
         // EventManager.Instance.RemoveEvent(EEventType.OnNewFishSpawn, InitFishUI);
-        // EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, UpdateFishHpUI);
+        EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, UpdateFishHpUI);
         // EventManager.Instance.RemoveEvent(EEventType.OnFishDefeated, OnFishDefeated);
     }
 
     public void InitFishUI()
     {
-        //FishData fish = FishManager.Instance.GetCurrentFish();
+        FishData fish = FishingManager.Instance.CurrentFish;
         Img_Fish.sprite = Resources.Load<Sprite>("Trash/Char/Img_Juno000"); //fish.fishSprite;
-        // Txt_FishName.text = fish.fishName;
+        Txt_FishName.text = fish.fishName;
         // Txt_RewardPreview.text = $"{fish.reward} G";
-        // Slider_FishHP.maxValue = fish.maxHP;
-        // Slider_FishHP.value = fish.maxHP;
-        // Txt_FishHP.text = $"{fish.maxHP}/{fish.maxHP}";
+        
+        double curHp = FishingManager.Instance.CurrentHp;
+        double maxHp = FishingManager.Instance.MaxHP;
+        
+        float ratio = (float)(curHp / maxHp);
+        
+        Slider_FishHP.maxValue = 1;
+        Slider_FishHP.value = ratio;
+        Txt_FishHP.text = $"{curHp}/{maxHp}";
     }
 
     public void OnClickFish()
     {
-        //FishManager.Instance.OnClickFish();
+        FishingManager.Instance.OnClickFish();
     }
 
     void UpdateFishHpUI()
     {
-        // int curHp = FishManager.Instance.currentHP;
-        // int maxHp = FishManager.Instance.GetCurrentFish().maxHP;
+        double curHp = FishingManager.Instance.CurrentHp;
+        double maxHp = FishingManager.Instance.MaxHP;
+        float ratio = (float)(curHp / maxHp);
 
-        // Slider_FishHP.value = curHp;
-        // Txt_FishHP.text = $"{curHp}/{maxHp}";
+        Slider_FishHP.value = ratio;
+        Txt_FishHP.text = $"{curHp}/{maxHp}";
+        
+        
+        FishData fish = FishingManager.Instance.CurrentFish;
+        Txt_FishName.text = fish.fishName;
     }
 
     void OnFishDefeated()

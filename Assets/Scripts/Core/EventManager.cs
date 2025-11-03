@@ -21,6 +21,7 @@ public enum EEventType
     OnMapChanged,
     OnStartBossStage,
     OnAttackBoss,
+    OnAttackFish,
     OnMapChangedWithData,
     
     OnStageChanged,
