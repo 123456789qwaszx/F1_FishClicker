@@ -1,20 +1,23 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_BossStage : UI_Scene
 {
-    [Header("UI")]
-    public RectTransform hpBar;
-    public TextMeshProUGUI hpText;
-    public GameObject clickBlocker;
-    public GameObject healText;
-    public Canvas mainCanvas;
-    public GameObject miniGameClearUI;
+    [Header("Boss UI")]
+    public TextMeshProUGUI Txt_BossName;
+    public Image Img_Boss;
+    public Slider Slider_BossHP;
+    public TextMeshProUGUI Txt_BossHP;
 
-    private int maxHP;
-    private int currentHP;
-    private float originalHPBarWidth;
+    [Header("Timer UI")]
+    public Slider Slider_Timer;
+    public TextMeshProUGUI Txt_MaxTime;
+    public TextMeshProUGUI Txt_RemainingTime;
+
+    private float bossTimer;
+    private float maxTime;
 
     void OnEnable()
     {
@@ -28,69 +31,60 @@ public class UI_BossStage : UI_Scene
         EventManager.Instance.RemoveEvent(EEventType.OnAttackBoss, OnBossAttacked);
     }
 
-    // 초기 UI 설정
     void InitUI()
     {
-        clickBlocker.SetActive(false);
-        healText.SetActive(false);
+        if (BossMiniGameManager.Instance.BossData == null) return;
 
-        maxHP = BossMiniGameManager.Instance.BossData.maxHP;
-        currentHP = maxHP;
-        originalHPBarWidth = hpBar.sizeDelta.x;
+        BossMiniGameData bossData = BossMiniGameManager.Instance.BossData;
 
-        UpdateHPUI();
+        Txt_BossName.text = bossData.bossName;
+        Slider_BossHP.maxValue = bossData.maxHP;
+        Slider_BossHP.value = BossMiniGameManager.Instance.currentHP;
+
+        UpdateBossHp();
+
+        Img_Boss.sprite = bossData.bossImagePrefab;
+
+        // 타이머 초기화
+        maxTime = 60f; // 예시 최대 시간
+        bossTimer = maxTime;
+
+        Slider_Timer.maxValue = maxTime;
+        Slider_Timer.value = bossTimer;
+        Txt_MaxTime.text = Mathf.CeilToInt(maxTime).ToString();
+        Txt_RemainingTime.text = Mathf.CeilToInt(bossTimer).ToString();
+
+        StartCoroutine(BossTimerCoroutine());
     }
+    
 
-    // 보스가 공격받았을 때
     void OnBossAttacked()
     {
-        currentHP = BossMiniGameManager.Instance.CurrentHP;
-        UpdateHPUI();
-        PlayCrackEffect();
+        UpdateBossHp();
     }
 
-    // 보스가 회복했을 때
-    void OnBossHealed()
+    void UpdateBossHp()
     {
-        currentHP = BossMiniGameManager.Instance.CurrentHP;
-        UpdateHPUI();
-        // 필요 시 힐 이펙트
+        int hp = BossMiniGameManager.Instance.currentHP;
+        int maxHp = BossMiniGameManager.Instance.maxHP;
+
+        Slider_BossHP.value = hp;
+        Txt_BossHP.text = $"{hp}/{maxHp}";
     }
 
-    // HP Bar, Text 업데이트
-    void UpdateHPUI()
+    private IEnumerator BossTimerCoroutine()
     {
-        float ratio = (float)currentHP / maxHP;
-        hpBar.sizeDelta = new Vector2(originalHPBarWidth * ratio, hpBar.sizeDelta.y);
-        hpText.text = $"{currentHP} / {maxHP}";
-    }
-
-    // 공격 이펙트 재생
-    void PlayCrackEffect()
-    {
-        // 예: Particle, 사운드 등
-    }
-
-    void ShowClearUI()
-    {
-        GameObject clearUI = Instantiate(miniGameClearUI, mainCanvas.transform);
-        clearUI.transform.localScale = Vector3.zero;
-        StartCoroutine(ScaleUp(clearUI.GetComponent<RectTransform>(), 0.5f));
-    }
-
-    IEnumerator ScaleUp(RectTransform rect, float duration)
-    {
-        float time = 0f;
-        Vector3 from = Vector3.zero;
-        Vector3 to = Vector3.one;
-
-        while (time < duration)
+        while (bossTimer > 0)
         {
-            time += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, time / duration);
-            rect.localScale = Vector3.Lerp(from, to, t);
+            bossTimer -= Time.deltaTime;
+            Slider_Timer.value = bossTimer;
+            Txt_RemainingTime.text = Mathf.CeilToInt(bossTimer).ToString();
             yield return null;
         }
-        rect.localScale = to;
+
+        bossTimer = 0;
+        Slider_Timer.value = 0;
+        Txt_RemainingTime.text = "0";
+        // TODO: 타임 오버 처리
     }
 }
