@@ -55,7 +55,7 @@ public class ClickSystem : Singleton<ClickSystem>
 
         InventoryManager.Instance.AddFish(fishCaught);
 
-        long totalClickValue = (long)GameManager.Instance.GetTotalClickStat(fishCaught.baseValue);
+        long totalClickValue = (long)GameManager.Instance.GetTotalClickStat();
 
         CreateGoldText(totalClickValue);
         GameManager.Instance.ChangeMoney(totalClickValue);
@@ -97,7 +97,7 @@ public class ClickSystem : Singleton<ClickSystem>
                 try
                 {
                     InventoryManager.Instance.AddFish(caughtFish);
-                    long value = (long)GameManager.Instance.GetTotalClickStat(caughtFish.baseValue);
+                    long value = (long)GameManager.Instance.GetTotalClickStat();
                     GameManager.Instance.ChangeMoney(value);
                     EventManager.Instance.TriggerEvent(EEventType.MoneyChanged);
 

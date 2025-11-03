@@ -200,6 +200,9 @@ public class UI_SelectStageScene : UI_Scene
 		if (CheckChapter(chapter) == false)
 			return;
 
+        UIManager.Instance.ChangeSceneUI<UI_BossStage>();
+        BossMiniGameManager.Instance.PrepareGame();
+
 		_selectedChapter = chapter;
 		_selectedStage = 1;
 		Refresh();

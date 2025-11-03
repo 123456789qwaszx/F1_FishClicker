@@ -18,35 +18,35 @@ public class UI_BossStage : UI_Scene
 
     private float bossTimer;
     private float maxTime;
+    private Coroutine timerCoroutine;
 
     void OnEnable()
     {
-        EventManager.Instance.AddEvent(EEventType.OnStartBossStage, InitUI);
+        //EventManager.Instance.AddEvent(EEventType.OnStartBossStage, InitUI);
         EventManager.Instance.AddEvent(EEventType.OnAttackBoss, OnBossAttacked);
     }
 
     void OnDisable()
     {
-        EventManager.Instance.RemoveEvent(EEventType.OnStartBossStage, InitUI);
+        //EventManager.Instance.RemoveEvent(EEventType.OnStartBossStage, InitUI);
         EventManager.Instance.RemoveEvent(EEventType.OnAttackBoss, OnBossAttacked);
     }
 
-    void InitUI()
+    /// <summary>
+    /// 보스 UI 초기화 및 타이머 재시작
+    /// </summary>
+    public void InitUI(BossMiniGameData bossData)
     {
-        if (BossMiniGameManager.Instance.BossData == null) return;
-
-        BossMiniGameData bossData = BossMiniGameManager.Instance.BossData;
-
         Txt_BossName.text = bossData.bossName;
-        Slider_BossHP.maxValue = bossData.maxHP;
-        Slider_BossHP.value = BossMiniGameManager.Instance.currentHP;
-
-        UpdateBossHp();
-
         Img_Boss.sprite = bossData.bossImagePrefab;
 
+        // 보스 HP 초기화
+        Slider_BossHP.maxValue = bossData.maxHP;
+        Slider_BossHP.value = BossMiniGameManager.Instance.currentHP;
+        UpdateBossHp();
+
         // 타이머 초기화
-        maxTime = 60f; // 예시 최대 시간
+        maxTime = 60f; // 필요시 데이터 기반으로 설정 가능
         bossTimer = maxTime;
 
         Slider_Timer.maxValue = maxTime;
@@ -54,8 +54,13 @@ public class UI_BossStage : UI_Scene
         Txt_MaxTime.text = Mathf.CeilToInt(maxTime).ToString();
         Txt_RemainingTime.text = Mathf.CeilToInt(bossTimer).ToString();
 
-        StartCoroutine(BossTimerCoroutine());
+        // 기존 코루틴이 돌고 있으면 중지 후 재시작
+        if (timerCoroutine != null)
+            StopCoroutine(timerCoroutine);
+
+        timerCoroutine = StartCoroutine(BossTimerCoroutine());
     }
+    
     
 
     void OnBossAttacked()
@@ -85,6 +90,8 @@ public class UI_BossStage : UI_Scene
         bossTimer = 0;
         Slider_Timer.value = 0;
         Txt_RemainingTime.text = "0";
+
         // TODO: 타임 오버 처리
+        Debug.Log("Boss time over!");
     }
 }

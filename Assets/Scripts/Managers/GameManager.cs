@@ -72,9 +72,9 @@ public class GameManager : Singleton<GameManager>
         _upgradeInfo[data.type.id] = data;
     }
     
-    public double GetTotalClickStat(double baseValue)
+    public double GetTotalClickStat()
     {
-        double result = baseValue;
+        double result = 1;
 
         foreach (UpgradeData data in _upgradeInfo.Values)
         {
