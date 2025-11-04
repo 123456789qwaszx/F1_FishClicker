@@ -11,6 +11,8 @@ public class MapData
     public string region;
     public string backgroundSprite;
     public string description;
+    
+    public BossMiniGameData bossData;
 
     public List<StageData> stages;
     public int highestCleared = -1;
@@ -20,7 +22,8 @@ public class MapData
         stages = new List<StageData>();
         for (int i = 0; i < stageCount; i++)
         {
-            stages.Add(new StageData(i, mapName));
+            bool isBossStage = (i == stageCount - 1);
+            stages.Add(new StageData(i, mapName, isBossStage));
         }
     }
 
@@ -40,11 +43,14 @@ public class StageData
     public int StageId { get; private set; }
     public string StageName { get; private set; }
     public int requiredCatchCount;
+    public bool IsBossStage { get; private set; }
 
-    public StageData(int id, string mapName)
+    public StageData(int id, string mapName, bool isBoss = false)
     {
         StageId = id;
-        StageName = $"{mapName} Stage {id + 1}";
+        IsBossStage = isBoss;
+        StageName = isBoss ? $"{mapName} Boss Stage"
+            : $"{mapName} Stage {id + 1}";
         requiredCatchCount = Formula.GetStageCatchLinear(id);
     }
 }
@@ -76,8 +82,7 @@ public class MapManager : Singleton<MapManager>
 
         if (GameManager.Instance.fishCaughtCount < firstStage.requiredCatchCount)
         {
-            Debug.Log(
-                $"Cannot go to next map: need at least {firstStage.requiredCatchCount} fish caught, current count is {GameManager.Instance.fishCaughtCount}");
+            Debug.Log($"Cannot go to next map: need at least {firstStage.requiredCatchCount} fish caught, current count is {GameManager.Instance.fishCaughtCount}");
             return false;
         }
 
@@ -112,7 +117,7 @@ public class MapManager : Singleton<MapManager>
         BuildMapCache();
 
         int defaultIndex = 0;
-        ChangeMap(defaultIndex); // 기본 맵
+        SetCurrentMap(defaultIndex); // 기본 맵
     }
 
 
@@ -127,10 +132,26 @@ public class MapManager : Singleton<MapManager>
 
         int defaultStageCount = 10;
         int defaultStageCleared = 0;
+        
+        BossMiniGameData[] allBosses = Resources.LoadAll<BossMiniGameData>("Data/Bosses");
+        
         foreach (MapData map in _mapDB.mapList)
         {
             map.GenerateStages(defaultStageCount);
             map.SetHighestClearedStage(defaultStageCleared);
+            
+            if (map.bossData == null)
+            {
+                BossMiniGameData foundBoss = System.Array.Find(allBosses,
+                    boss => boss.name.Equals($"Boss_{map.mapName}", System.StringComparison.OrdinalIgnoreCase));
+                //boss => boss.name.Equals($"Boss_Tropical Bay", System.StringComparison.OrdinalIgnoreCase));
+
+                if (foundBoss == null) { Debug.LogWarning($"No Boss data found for map '{map.mapName}'."); }
+                else
+                {
+                    map.bossData = foundBoss;
+                }
+            }
         }
     }
 
@@ -147,7 +168,7 @@ public class MapManager : Singleton<MapManager>
     }
 
 
-    public void ChangeMap(int index)
+    public void SetCurrentMap(int index)
     {
         if (_mapCache == null || _mapCache.Count == 0) return;
         if (index < 0 || index >= _mapCache.Count)
@@ -166,7 +187,7 @@ public class MapManager : Singleton<MapManager>
     }
 
 
-    public void ChangeStage(int index)
+    public void SetCurrentStage(int index)
     {
         int targetIndex = index - 1;
 
@@ -221,7 +242,7 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        ChangeMap(nextIndex);
+        SetCurrentMap(nextIndex);
     }
 
     public void OnChangeMapToPrev()
@@ -233,7 +254,7 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        ChangeMap(prevIndex);
+        SetCurrentMap(prevIndex);
     }
 
     public void OnChangeStageToNext()
@@ -245,7 +266,7 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        ChangeStage(nextIndex);
+        SetCurrentStage(nextIndex);
     }
 
     public void OnChangeStageToPrev()
@@ -257,7 +278,7 @@ public class MapManager : Singleton<MapManager>
             return;
         }
 
-        ChangeStage(prevIndex - 1);
+        SetCurrentStage(prevIndex - 1);
     }
 
     #endregion

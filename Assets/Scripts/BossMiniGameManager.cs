@@ -21,19 +21,24 @@ public class BossMiniGameManager : Singleton<BossMiniGameManager>
     
     void OnEnable()
     {
+        EventManager.Instance.AddEvent<BossMiniGameData>(EEventTypePayload.OnBossSpawn, SpawnBoss);
+    }
+    void OnDisable()
+    {
+        EventManager.Instance.RemoveEvent<BossMiniGameData>(EEventTypePayload.OnBossSpawn, SpawnBoss);
     }
 
-    public void SpawnBoss()
+    public void SpawnBoss(BossMiniGameData bossData)
     {
-        if (BossData == null) { Debug.LogError("BossMiniGameData is missing!"); return; }
+        if (bossData == null) { Debug.LogError("BossMiniGameData is missing!"); return; }
 
-        maxHP = BossData.maxHP;
+        maxHP = bossData.maxHP;
         currentHP = maxHP;
 
         //EventManager.Instance.TriggerEvent(EEventType.OnStartBossStage);
         
         UI_BossStage bossUI = UIManager.Instance.CurSceneUI as UI_BossStage;
-        bossUI.InitUI(BossData);
+        bossUI?.SetupBossUI(bossData);
     }
 
     /// <summary>
@@ -57,10 +62,5 @@ public class BossMiniGameManager : Singleton<BossMiniGameManager>
             // 원하는 경우, 보스를 재시작하려면 StartBoss 호출 가능
             // StartBoss(); // 자동 재생성
         }
-    }
-
-    public void PrepareGame()
-    {
-        SpawnBoss();
     }
 }

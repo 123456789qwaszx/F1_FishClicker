@@ -9,7 +9,6 @@ public enum UIEventType
     UpdatePopup,
     FadeInStore,
     FadeOutStore,
-    
     ChangeScene,
 }
 
@@ -19,12 +18,15 @@ public enum EEventType
     MoneyChanged,
     Upgraded,
     OnMapChanged,
-    OnStartBossStage,
     OnAttackBoss,
     OnAttackFish,
-    OnMapChangedWithData,
-    
     OnStageChanged,
+}
+
+
+public enum EEventTypePayload
+{
+    OnBossSpawn,
 }
 
 public class EventManager
@@ -37,15 +39,13 @@ public class EventManager
         {
             if (instance == null)
                 instance = new EventManager();
-
             return instance;
         }
     }
     #endregion
 
-    private Dictionary<EEventType, Action> _events = new Dictionary<EEventType, Action>();
-    private Dictionary<EEventType, Action<object>> _paramEvents = new();
-    
+    private readonly Dictionary<EEventType, Action> _events = new();
+
     public void AddEvent(EEventType eventType, Action listener)
     {
         if (_events.ContainsKey(eventType) == false)
@@ -62,65 +62,83 @@ public class EventManager
 
     public void TriggerEvent(EEventType eventType)
     {
-        if (_events.ContainsKey(eventType))
-            _events[eventType].Invoke();
+        if (_events.TryGetValue(eventType, out Action action))
+            action?.Invoke();
     }
 
     public void Clear()
     {
         _events.Clear();
+        _payloadEvents.Clear();
     }
     
+    private readonly Dictionary<EEventTypePayload, List<Action<object>>> _payloadEvents = new();
+    private readonly Dictionary<EEventTypePayload, Dictionary<Delegate, Action<object>>> _wrappers = new();
     
-    // -----------------------------
-    // 🔹 리스너 등록 (payload 버전)
-    // -----------------------------
-    public void AddEvent<T>(EEventType eventType, Action<T> listener)
+    public void AddEvent<T>(EEventTypePayload eventType, Action<T> listener)
     {
-        if (!_paramEvents.ContainsKey(eventType))
-            _paramEvents[eventType] = delegate { };
+        if (!_payloadEvents.TryGetValue(eventType, out List<Action<object>> list))
+        {
+            list = new List<Action<object>>();
+            _payloadEvents[eventType] = list;
+            _wrappers[eventType] = new Dictionary<Delegate, Action<object>>();
+        }
 
-        // object → T 캐스팅
-        _paramEvents[eventType] += (obj) => listener((T)obj);
+        void wrapper(object obj)
+        {
+            if (obj is T tObj)
+                listener(tObj);
+            else Debug.LogError($"EventManager: Type mismatch! Expected {typeof(T)}, but got {(obj == null ? "null" : obj.GetType().ToString())}");
+            
+        }
+
+        list.Add(wrapper);
+        _wrappers[eventType][listener] = wrapper;
+        
+#if UNITY_EDITOR
+        var method = new System.Diagnostics.StackTrace(false).GetFrame(1).GetMethod();
+        Debug.Log($"AddEvent<{typeof(T)}> called for {eventType} by {method.DeclaringType.Name}.{method.Name}");
+#endif
     }
 
-    public void RemoveEvent<T>(EEventType eventType, Action<T> listener)
+    public void RemoveEvent<T>(EEventTypePayload eventType, Action<T> listener)
     {
-        if (_paramEvents.ContainsKey(eventType))
-            _paramEvents[eventType] -= (obj) => listener((T)obj);
+        if (!_payloadEvents.TryGetValue(eventType, out List<Action<object>> list))
+            return;
+
+        if (_wrappers.TryGetValue(eventType, out var dict) && dict.TryGetValue(listener, out var wrapper))
+        {
+            list.Remove(wrapper);
+            dict.Remove(listener);
+        }
     }
-    
-    // -----------------------------
-    // 🔹 이벤트 호출 (payload 버전)
-    // -----------------------------
-    public void TriggerEvent<T>(EEventType eventType, T payload)
+
+    public void TriggerEvent<T>(EEventTypePayload eventType, T payload, bool debug = false)
     {
-        if (_paramEvents.ContainsKey(eventType))
-            _paramEvents[eventType]?.Invoke(payload);
+        if (!_payloadEvents.TryGetValue(eventType, out List<Action<object>> list))
+            return; 
+
+        foreach (Action<object> listener in list.ToArray())
+        {
+            listener?.Invoke(payload);
+        }
+        
+        if (debug) { Debug.Log($"EventManager: Triggering event {eventType} with {list.Count} listener(s)"); }
     }
-    
+
     
     #region UIHandler
 
-    private List<IUIEventHandler> uiHandlers = new();
+    private readonly List<IUIEventHandler> uiHandlers = new();
     public Action<UIEventType, object> OnUIEvent;
-    
-    private void OnEnable()
-    {
-        OnUIEvent += HandleUIEvent;
-    }
 
-    private void OnDisable()
-    {
-        OnUIEvent -= HandleUIEvent;
-    }
-    
-    
+    private void OnEnable() => OnUIEvent += HandleUIEvent;
+    private void OnDisable() => OnUIEvent -= HandleUIEvent;
+
     public void Raise(UIEventType eventType, object payload = null)
     {
         OnUIEvent?.Invoke(eventType, payload);
     }
-
 
     private void HandleUIEvent(UIEventType ui, object payload)
     {
@@ -130,22 +148,22 @@ public class EventManager
                 break;
         }
     }
-    
-    
+
     private void RegisterHandlersForScene(string sceneName)
     {
         uiHandlers.Clear();
-        
-        //공통 핸들러 (항상 등록)
-        
-        uiHandlers.Add(new TitleSceneUIHandler());
-        //추가
 
+        // 공통 핸들러 등록
+        uiHandlers.Add(new TitleSceneUIHandler());
+
+        // 씬별 핸들러 추가
         switch (sceneName)
         {
-            // 씬별 핸들러 추가
-            // case 
+            // case "LobbyScene":
+            //     uiHandlers.Add(new LobbyUIHandler());
+            //     break;
         }
     }
+
     #endregion
 }

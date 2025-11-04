@@ -42,11 +42,11 @@ public class UI_SelectStageScene : UI_Scene
 
 
 
-    int _selectedChapter = 1;
-    public int SelectedChapter { get { return _selectedChapter; } }
+    private int _selectedChapterIndex = 1;
+    public int SelectedChapter { get { return _selectedChapterIndex; } }
 
-    int _selectedStage = 1;
-    public int SelectedStage { get { return _selectedStage; } }
+    private int _selectedStageIndex = 1;
+    public int SelectedStage { get { return _selectedStageIndex; } }
 
     UI_SelectStageSceneTop _topUI;
     public UI_SelectStageSceneTop TopUI { get { return _topUI; } }
@@ -79,7 +79,7 @@ public class UI_SelectStageScene : UI_Scene
         // _bottomUI.SetInfo(this);
 
         scroll = ComponentHelper.FindChildObject<ScrollRect>(gameObject, recursive: true);
-        _selectedStage = 0;
+        _selectedStageIndex = 0;
 
         for (int i = 0; i < _stageBlockUI.Length; i++)
         {
@@ -94,7 +94,7 @@ public class UI_SelectStageScene : UI_Scene
     public void SetInfo(int chapter)
     {
         // 챕터 이미지 데이터 세팅해줘야함
-        _selectedChapter = chapter;
+        _selectedChapterIndex = chapter;
 
         Refresh();
     }
@@ -123,7 +123,7 @@ public class UI_SelectStageScene : UI_Scene
 
     void EnableButtonSelectedImage()
     {
-        switch (_selectedChapter)
+        switch (_selectedChapterIndex)
         {
             case 1:
                 GetObject((int)GameObjects.SelectedChapter1).SetActive(true);
@@ -158,7 +158,7 @@ public class UI_SelectStageScene : UI_Scene
         scroll.verticalNormalizedPosition = (stageNum - 1f) / ((float)_stageBlockUI.Length - 1f);
     }
 
-    void MovePlayer(int stage)
+    void UpdatePlayerMarkerUI(int stage)
     {
         GetObject((int)GameObjects.Player).SetActive(false);
 
@@ -166,54 +166,39 @@ public class UI_SelectStageScene : UI_Scene
         GetObject((int)GameObjects.Player).transform.position = _stageBlockUI[index].transform.position;
 
         GetObject((int)GameObjects.Player).SetActive(true);
-    }    
-
-    bool CheckChapter(int chapter)
-    {
-        //if (chapter > Managers.Game.HighestChapter)
-            //return false;
-        
-        if (chapter == _selectedChapter)
-            return false;
-        
-        _selectedStage = 0;
-        return true;
     }
 
 
+
     #region EventHandler
-    public void OnSelectStage(int stage)
+    public void OnSelectStage(int stageIndex)
     {
         for (int i = 0; i < _stageBlockUI.Length; i++)
         {
-            if( i+1 != stage )
+            if( i + 1 != stageIndex )
                 _stageBlockUI[i].SelectStage(false);
         }
 
-        _selectedStage = stage;
-        MovePlayer(_selectedStage);
+        _selectedStageIndex = stageIndex;
+        UpdatePlayerMarkerUI(_selectedStageIndex);
     }
 
     
 	void OnClickChapterButton(PointerEventData eventData, int chapter)
 	{
-		if (CheckChapter(chapter) == false)
-			return;
+        if (chapter == _selectedChapterIndex)
+            return;
 
         UIManager.Instance.ChangeSceneUI<UI_BossStage>();
-        BossMiniGameManager.Instance.PrepareGame();
-
-		_selectedChapter = chapter;
-		_selectedStage = 1;
-		Refresh();
-        MovePlayer(_selectedStage);
+        GameEventHelper.TriggerBossSpawnEvent();
         
-        MapManager.Instance.ChangeMap(_selectedChapter);
+		_selectedChapterIndex = chapter;
+		_selectedStageIndex = 1;
+        
+        MapManager.Instance.SetCurrentMap(_selectedChapterIndex-1);
+        
+        Refresh();
+        UpdatePlayerMarkerUI(_selectedStageIndex);
 	}
-
-    void OnClickOptionButton(PointerEventData eventData)
-    {
-        //UIManager.Instance.ShowPopup<UI_Option>();
-    }
     #endregion
 }

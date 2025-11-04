@@ -22,20 +22,18 @@ public class UI_BossStage : UI_Scene
 
     void OnEnable()
     {
-        //EventManager.Instance.AddEvent(EEventType.OnStartBossStage, InitUI);
         EventManager.Instance.AddEvent(EEventType.OnAttackBoss, OnBossAttacked);
     }
 
     void OnDisable()
     {
-        //EventManager.Instance.RemoveEvent(EEventType.OnStartBossStage, InitUI);
         EventManager.Instance.RemoveEvent(EEventType.OnAttackBoss, OnBossAttacked);
     }
 
     /// <summary>
     /// 보스 UI 초기화 및 타이머 재시작
     /// </summary>
-    public void InitUI(BossMiniGameData bossData)
+    public void SetupBossUI(BossMiniGameData bossData)
     {
         Txt_BossName.text = bossData.bossName;
         Img_Boss.sprite = bossData.bossImagePrefab;
