@@ -213,7 +213,7 @@ public class UI_SelectStageScene : UI_Scene
 
     void OnClickOptionButton(PointerEventData eventData)
     {
-        UIManager.Instance.ShowPopup<UI_Option>();
+        //UIManager.Instance.ShowPopup<UI_Option>();
     }
     #endregion
 }

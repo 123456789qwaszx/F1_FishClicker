@@ -14,7 +14,7 @@ public class UI_FishingGame : UI_Popup
     void OnEnable()
     {
         // EventManager.Instance.AddEvent(EEventType.OnNewFishSpawn, InitFishUI);
-        EventManager.Instance.AddEvent(EEventType.OnAttackFish, UpdateFishHpUI);
+        EventManager.Instance.AddEvent(EEventType.OnAttackFish, UpdateEnemyHpUI);
         // EventManager.Instance.AddEvent(EEventType.OnFishDefeated, OnFishDefeated);
 
         // 초기 물고기 스폰
@@ -24,11 +24,11 @@ public class UI_FishingGame : UI_Popup
     void OnDisable()
     {
         // EventManager.Instance.RemoveEvent(EEventType.OnNewFishSpawn, InitFishUI);
-        EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, UpdateFishHpUI);
+        EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, RefreshFishUI);
         // EventManager.Instance.RemoveEvent(EEventType.OnFishDefeated, OnFishDefeated);
     }
 
-    public void InitFishUI()
+    public void RefreshFishUI()
     {
         FishData fish = FishingManager.Instance.CurrentFish;
         Img_Fish.sprite = Resources.Load<Sprite>("Trash/Char/Img_Juno000"); //fish.fishSprite;
@@ -50,7 +50,7 @@ public class UI_FishingGame : UI_Popup
         FishingManager.Instance.OnClickFish();
     }
 
-    void UpdateFishHpUI()
+    void UpdateEnemyHpUI()
     {
         double curHp = FishingManager.Instance.CurrentHp;
         double maxHp = FishingManager.Instance.MaxHP;

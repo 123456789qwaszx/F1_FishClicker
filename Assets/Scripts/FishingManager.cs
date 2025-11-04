@@ -38,14 +38,16 @@ public class FishingManager : Singleton<FishingManager>
         if (_currentHp <= 0)
         {
             _currentHp = 0;
-            OnFishDefeated();
+            OnFishCaught();
         }
     }
 
-    void OnFishDefeated()
+    void OnFishCaught()
     {
         Debug.Log($"물고기 {_currentFish.fishName} 처치!");
-        // GameManager.Instance.AddGold(_currentFish.reward);
+        
+        long reward = _currentFish.baseValue;
+        GameManager.Instance.ChangeMoney(reward);
         // EventManager.Instance.TriggerEvent(EEventType.OnFishDefeated);
 
         // 다음 물고기 소환

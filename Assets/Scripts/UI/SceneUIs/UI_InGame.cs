@@ -101,15 +101,15 @@ public class UI_InGame : UI_Scene
 
     public void OnEnable()
     {
-        EventManager.Instance.AddEvent(EEventType.MoneyChanged, RefreshUI);
+        EventManager.Instance.AddEvent(EEventType.MoneyChanged, UpdateMapUI);
     }
     
     public void OnDisable()
     {
-        EventManager.Instance.RemoveEvent(EEventType.MoneyChanged, RefreshUI);
+        EventManager.Instance.RemoveEvent(EEventType.MoneyChanged, UpdateMapUI);
     }
 
-    public void RefreshUI()
+    public void UpdateMapUI()
     {
         var fishes = FishingSystem.Instance.GetCurrentMapFishList();
         
