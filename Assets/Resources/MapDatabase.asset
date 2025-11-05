@@ -13,51 +13,139 @@ MonoBehaviour:
   m_Name: MapDatabase
   m_EditorClassIdentifier: Assembly-CSharp::MapDatabase
   mapList:
-  - id: 1
+  - id: 0
     mapName: Tropical Bay
     region: Tropical
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/tropicalbay
     description: "\uBC1D\uACE0 \uD3C9\uD654\uB85C\uC6B4 \uC5F4\uB300 \uBC14\uB2E4"
-  - id: 2
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 1
     mapName: Ocean
     region: Ocean
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/oceandeep
     description: "\uB113\uC740 \uBC14\uB2E4"
-  - id: 3
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 2
     mapName: Deep Sea Abyss
     region: DeepSea
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/deepsea
     description: "\uAE4A\uC740 \uC2EC\uD574\uC758 \uC5B4\uB450\uC6B4 \uACF5\uAC04"
-  - id: 4
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 3
     mapName: Lake Serenity
     region: Lake
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/lakeserenity
     description: "\uC870\uC6A9\uD55C \uD638\uC218"
-  - id: 5
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 4
     mapName: River Flow
     region: River
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/riverflow
     description: "\uBE60\uB974\uAC8C \uD750\uB974\uB294 \uAC15"
-  - id: 6
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 5
     mapName: CoralReef
     region: CoralReef
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/coralreef
     description: "\uC0B0\uD638\uC9C0\uB300"
-  - id: 7
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 6
     mapName: Shore
     region: Shore
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/shore
     description: "\uC5F0\uC548\uAC00"
-  - id: 8
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600
+  - id: 7
     mapName: Polar
     region: Polar
-    fishPool: []
     backgroundSprite: Assets/Sprites/Map/polar
     description: "\uBD81\uADF9"
+    bossData: {fileID: 0}
+    stages:
+    - requiredCatchCount: 100
+    - requiredCatchCount: 600
+    - requiredCatchCount: 1100
+    - requiredCatchCount: 1600
+    - requiredCatchCount: 2100
+    - requiredCatchCount: 2600
+    - requiredCatchCount: 3100
+    - requiredCatchCount: 3600
+    - requiredCatchCount: 4100
+    - requiredCatchCount: 4600

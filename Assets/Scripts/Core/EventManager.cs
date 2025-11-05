@@ -2,16 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UIEventType
-{
-    OpenPopup,
-    ClosePopup,
-    UpdatePopup,
-    FadeInStore,
-    FadeOutStore,
-    ChangeScene,
-}
-
 public enum EEventType
 {
     OnFishCaught,
@@ -127,45 +117,4 @@ public class EventManager
         
         if (debug) { Debug.Log($"EventManager: Triggering event {eventType} with {list.Count} listener(s)"); }
     }
-
-    
-    #region UIHandler
-
-    private readonly List<IUIEventHandler> uiHandlers = new();
-    public Action<UIEventType, object> OnUIEvent;
-
-    private void OnEnable() => OnUIEvent += HandleUIEvent;
-    private void OnDisable() => OnUIEvent -= HandleUIEvent;
-
-    public void Raise(UIEventType eventType, object payload = null)
-    {
-        OnUIEvent?.Invoke(eventType, payload);
-    }
-
-    private void HandleUIEvent(UIEventType ui, object payload)
-    {
-        foreach (var handler in uiHandlers)
-        {
-            if (handler.Handle(ui, payload))
-                break;
-        }
-    }
-
-    private void RegisterHandlersForScene(string sceneName)
-    {
-        uiHandlers.Clear();
-
-        // 공통 핸들러 등록
-        uiHandlers.Add(new TitleSceneUIHandler());
-
-        // 씬별 핸들러 추가
-        switch (sceneName)
-        {
-            // case "LobbyScene":
-            //     uiHandlers.Add(new LobbyUIHandler());
-            //     break;
-        }
-    }
-
-    #endregion
 }

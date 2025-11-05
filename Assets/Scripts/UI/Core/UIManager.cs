@@ -5,6 +5,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum UIEventType
+{
+    OpenPopup,
+    ClosePopup,
+    UpdatePopup,
+    FadeInStore,
+    FadeOutStore,
+    ChangeScene,
+}
+public static class UITypeCache<T>
+{
+    // 제너릭 타입별로 단 한 번만 계산됨
+    public static readonly string Name = typeof(T).Name;
+}
+
 public class UIManager : MonoBehaviour
 {
     #region Singleton
@@ -26,7 +41,7 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region UI
-    private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
+    private Stack<UI_Popup> _popupStack = new ();
 
     private UI_Scene _sceneUI;
     public UI_Scene CurSceneUI
@@ -41,6 +56,8 @@ public class UIManager : MonoBehaviour
     public void Init()
     {
         RegisterAllUIs();
+
+        RegisterHandlers();
         
         ChangeSceneUI<UI_Title>();
         UpgradeManager.Instance.Init();
@@ -51,6 +68,38 @@ public class UIManager : MonoBehaviour
         FindUI<UI_SelectStageScene>().Init();
         FishingSystem.Instance.Init();
     }
+    
+    
+    #region UIHandler
+
+    private readonly List<IUIEventHandler> uiHandlers = new();
+    public Action<UIEventType, object> OnUIEvent;
+
+    private void OnEnable() => OnUIEvent += HandleUIEvent;
+    private void OnDisable() => OnUIEvent -= HandleUIEvent;
+
+    public void Raise(UIEventType eventType, object payload = null)
+    {
+        OnUIEvent?.Invoke(eventType, payload);
+    }
+
+    private void HandleUIEvent(UIEventType ui, object payload)
+    {
+        foreach (var handler in uiHandlers)
+        {
+            if (handler.Handle(ui, payload))
+                break;
+        }
+    }
+
+    private void RegisterHandlers()
+    {
+        uiHandlers.Clear();
+
+        uiHandlers.Add(new TitleSceneUIHandler());
+    }
+
+    #endregion
 
     
     private void RegisterAllUIs()
@@ -84,7 +133,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangeSceneUI<T>(Action<T> callback = null) where T : UI_Scene
     {
-        string key = typeof(T).Name;
+        string key = UITypeCache<T>.Name;
 
         if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
@@ -101,22 +150,19 @@ public class UIManager : MonoBehaviour
     
     public void ChangeSceneUI(string key, Action callback = null)
     {
-        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
-        {
-            Debug.LogError($"UI Not registered : {key}");
-        }
-
-        ui?.gameObject.SetActive(true);
-        callback?.Invoke();
-
         CurSceneUI?.gameObject.SetActive(false);
+        
+        _uIEntry.TryGetValue(key, out UI_Base ui);
         CurSceneUI = ui as UI_Scene;
+        
+        CurSceneUI?.gameObject.SetActive(true);
+        callback?.Invoke();
     }
 
     
     public void ShowPopup<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
     {
-        String key = typeof(T).Name;
+        String key = UITypeCache<T>.Name;
 
         if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
@@ -160,4 +206,15 @@ public class UIManager : MonoBehaviour
         return _popupStack.Count > 0 ? _popupStack.Peek() : null;
     }
     #endregion
+    
+    public void CloseUI<T>() where T : UI_Base
+    {
+        String key = UITypeCache<T>.Name;
+
+        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
+        {
+            Debug.LogError($"Popup not registered: {key}");
+        }
+        ui?.gameObject.SetActive(false);
+    }
 }

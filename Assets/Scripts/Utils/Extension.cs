@@ -13,7 +13,8 @@ public static class Extension
     }
 
     //public static void BindEvent(this GameObject go, Action action, Define.UIEvent type = Define.UIEvent.Click)
-    public static void BindEvent(this GameObject go, Action<PointerEventData> action = null, ETouchEvent type = ETouchEvent.Click)
+    public static void BindEvent(this GameObject go, Action<PointerEventData> action = null,
+        ETouchEvent type = ETouchEvent.Click)
     {
         UI_Base.BindEvent(go, action);
     }

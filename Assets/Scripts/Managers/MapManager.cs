@@ -219,6 +219,9 @@ public class MapManager : Singleton<MapManager>
     
     public void ChangeMap(int mapId)
     {
+        if (_mapProgress == null)
+            _mapProgress = new MapProgress();
+        
         CurrentMapData = GetMapById(mapId);
         _mapProgress.SetStageCount(CurrentMapData);
         
