@@ -44,7 +44,7 @@ public class MapProgress
     public int HighestClearedIndex { get; private set; } = -1;
 
     public int CurrentStageIndex { get; private set; } = 0;
-    public int NextStageIndex => Mathf.Clamp(CurrentStageIndex + 1, 0, _maxStageIndex);
+    private int NextStageIndex => Mathf.Clamp(CurrentStageIndex + 1, 0, _maxStageIndex);
 
 
     public void SetStageCount(MapData mapData)
@@ -52,7 +52,6 @@ public class MapProgress
         int stageCount = mapData.stages.Count;
 
         _maxStageIndex = stageCount > 0 ? stageCount - 1 : 0;
-        Debug.Log(_maxStageIndex);
 
         if (HighestClearedIndex > _maxStageIndex)
             HighestClearedIndex = _maxStageIndex;
@@ -71,7 +70,6 @@ public class MapProgress
 
     public void GoToStage(int stageIndex)
     {
-        Debug.Log(_maxStageIndex);
         if (_maxStageIndex <= 0)
         {
             Debug.Log("Cannot set current stage: _maxStageIndex is negative.");
@@ -80,8 +78,7 @@ public class MapProgress
 
         if (stageIndex < 0 || stageIndex > _maxStageIndex)
         {
-            Debug.Log(
-                $"Requested stageIndex {stageIndex} is out of range. Clamping to valid range 0~{_maxStageIndex}.");
+            Debug.Log($"Requested stageIndex {stageIndex} is out of range. Clamping to valid range 0~{_maxStageIndex}.");
         }
 
         CurrentStageIndex = Mathf.Clamp(stageIndex, 0, _maxStageIndex);

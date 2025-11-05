@@ -37,6 +37,6 @@ public class UpgradeSlot : MonoBehaviour
     
     public void OnSlotClicked()
     {
-        UIManager.Instance.FindUI<UI_UpgradePanel>()?.OnSlotClicked(Index);
+        UIManager.Instance.GetUI<UI_UpgradePanel>()?.OnSlotClicked(Index);
     }
 }

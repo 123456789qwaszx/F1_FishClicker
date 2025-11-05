@@ -72,20 +72,20 @@ public class UI_Phone : UI_Popup
     #region Button
     void OnBackPannel(PointerEventData eventData)
     {
-        if (UIManager.Instance.PeekCurPopup() is UI_UpgradePanel)
+        if (UIManager.Instance.GetTopPopup() is UI_UpgradePanel)
         {
-            UIManager.Instance.ClosePopupUI();
+            UIManager.Instance.CloseTopPopup();
             UIManager.Instance.ShowPopup<UI_AppMenuPanel>(null, AppMenuPanelBox);
         }
         else
         {
-            UIManager.Instance.CloseAllPopupUI();
+            UIManager.Instance.CloseAllPopups();
         }
     }
 
     void OnHomeButton(PointerEventData eventData)
     {
-        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.CloseAllPopups();
     }
     #endregion
 }

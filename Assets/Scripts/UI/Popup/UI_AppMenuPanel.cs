@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class UI_AppMenuPanel : UI_Popup
 {
-
     #region enum
     enum Buttons
     {
@@ -40,12 +39,12 @@ public class UI_AppMenuPanel : UI_Popup
     #region Button
     public void OnShowStageSelectPopup(PointerEventData eventData)
     {
-        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.CloseAllPopups();
         UIManager.Instance.ChangeSceneUI<UI_SelectStageScene>();
     }
     public void OnShowShop(PointerEventData eventData)
     {
-        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.CloseAllPopups();
         //UIManager.Instance.ChangeSceneUI<UI_Shop>();
     }
 
@@ -57,13 +56,13 @@ public class UI_AppMenuPanel : UI_Popup
             {
                 popup.UpdateSlots();
             },
-        UIManager.Instance.FindUI<UI_Phone>()?.UpgradePanelBox
+        UIManager.Instance.GetUI<UI_Phone>()?.UpgradePanelBox
             );
     }
 
     void OnShowSetting(PointerEventData eventData)
     {
-        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.CloseAllPopups();
         //MainMenuUIManager.Instance.ChangePanel(MainMenuUIManager.Instance.SettingPanel);
     }
     #endregion

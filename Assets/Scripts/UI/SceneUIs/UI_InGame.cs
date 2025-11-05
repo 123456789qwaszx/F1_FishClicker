@@ -135,9 +135,9 @@ public class UI_InGame : UI_Scene
     
     public void OnShowPhone(PointerEventData _)
     {
-        UIManager.Instance.CloseAllPopupUI();
+        UIManager.Instance.CloseAllPopups();
         UIManager.Instance.ShowPopup<UI_Phone>(popup => { popup.UpdateSlots(); });
-        UIManager.Instance.ShowPopup<UI_AppMenuPanel>(null, UIManager.Instance.FindUI<UI_Phone>()?.AppMenuPanelBox);
+        UIManager.Instance.ShowPopup<UI_AppMenuPanel>(null, UIManager.Instance.GetUI<UI_Phone>()?.AppMenuPanelBox);
     }
     
 }

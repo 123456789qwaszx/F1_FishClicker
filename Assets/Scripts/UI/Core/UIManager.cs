@@ -22,6 +22,11 @@ public static class UITypeCache<T>
 
 public class UIManager : MonoBehaviour
 {
+    private readonly Dictionary<string, UI_Base> _uIEntry = new();
+    private readonly Stack<UI_Popup> _popupStack = new ();
+
+    public UI_Scene CurSceneUI { get; private set; }
+    
     #region Singleton
     public static UIManager Instance { get; private set; }
     
@@ -40,18 +45,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    #region UI
-    private Stack<UI_Popup> _popupStack = new ();
-
-    private UI_Scene _sceneUI;
-    public UI_Scene CurSceneUI
-    {
-        set { _sceneUI = value; }
-        get { return _sceneUI; }
-    }
-
-    private readonly Dictionary<string, UI_Base> _uIEntry = new();
-
+    #region Init
     
     public void Init()
     {
@@ -62,45 +56,12 @@ public class UIManager : MonoBehaviour
         ChangeSceneUI<UI_Title>();
         UpgradeManager.Instance.Init();
         GameManager.Instance.SyncUpgrades(UpgradeManager.Instance.GetAllUpgrades());
-        FindUI<UI_UpgradePanel>().SetUp();
+        GetUI<UI_UpgradePanel>().SetUp();
         
         MapManager.Instance.Init();
-        FindUI<UI_SelectStageScene>().Init();
+        GetUI<UI_SelectStageScene>().Init();
         FishingSystem.Instance.Init();
     }
-    
-    
-    #region UIHandler
-
-    private readonly List<IUIEventHandler> uiHandlers = new();
-    public Action<UIEventType, object> OnUIEvent;
-
-    private void OnEnable() => OnUIEvent += HandleUIEvent;
-    private void OnDisable() => OnUIEvent -= HandleUIEvent;
-
-    public void Raise(UIEventType eventType, object payload = null)
-    {
-        OnUIEvent?.Invoke(eventType, payload);
-    }
-
-    private void HandleUIEvent(UIEventType ui, object payload)
-    {
-        foreach (var handler in uiHandlers)
-        {
-            if (handler.Handle(ui, payload))
-                break;
-        }
-    }
-
-    private void RegisterHandlers()
-    {
-        uiHandlers.Clear();
-
-        uiHandlers.Add(new TitleSceneUIHandler());
-    }
-
-    #endregion
-
     
     private void RegisterAllUIs()
     {
@@ -124,13 +85,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #endregion
     
-    public T FindUI<T>() where T : UI_Base
+    #region Getter
+    public UI_Popup GetTopPopup()
     {
-        return _uIEntry[typeof(T).Name] as T;
+        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
     }
-
-
+    
+    public T GetUI<T>() where T : UI_Base
+    {
+        if (!_uIEntry.TryGetValue(UITypeCache<T>.Name, out UI_Base ui))
+            return null;
+        
+        return ui as T;
+    }
+    #endregion
+    
+    #region SceneUI / Popup Control
     public void ChangeSceneUI<T>(Action<T> callback = null) where T : UI_Scene
     {
         string key = UITypeCache<T>.Name;
@@ -147,74 +119,77 @@ public class UIManager : MonoBehaviour
         callback?.Invoke(ui as T);
     }
     
-    
-    public void ChangeSceneUI(string key, Action callback = null)
-    {
-        CurSceneUI?.gameObject.SetActive(false);
-        
-        _uIEntry.TryGetValue(key, out UI_Base ui);
-        CurSceneUI = ui as UI_Scene;
-        
-        CurSceneUI?.gameObject.SetActive(true);
-        callback?.Invoke();
-    }
-
-    
     public void ShowPopup<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
     {
-        String key = UITypeCache<T>.Name;
+        string key = UITypeCache<T>.Name;
 
-        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
+        if (!_uIEntry.TryGetValue(key, out UI_Base ui))
         {
-            Debug.LogError($"Popup not registered: {key}");
+            Debug.Log($"Popup not registered: {key}");
+            return;
         }
 
         T popupUI = ui as T;
 
+        if (!_popupStack.Contains(popupUI))
+            _popupStack.Push(popupUI);
         
-        _popupStack.Push(popupUI);
-
-        if (_popupStack.Count <= 0) return;
-
-        T top = (T)_popupStack.Peek();
-        top.gameObject.SetActive(true);
-
-        callback?.Invoke(top);
-
         if (parent != null)
-            top.transform.SetParent(parent);
+            popupUI?.transform.SetParent(parent);
+        
+        popupUI?.gameObject.SetActive(true);
+
+        callback?.Invoke(popupUI);
     }
 
-    public void CloseAllPopupUI()
+    
+    public void CloseAllPopups()
     {
         while (_popupStack.Count > 0)
-            ClosePopupUI();
+            CloseTopPopup();
     }
 
-    public void ClosePopupUI()
+    public void CloseTopPopup()
     {
-        if (_popupStack.Count == 0) return;
+        if (_popupStack.Count == 0)
+            return;
+        
         _popupStack.Pop().gameObject.SetActive(false);
 
         if (_popupStack.Count > 0)
             _popupStack.Peek().gameObject.SetActive(true);
     }
-
     
-    public UI_Popup PeekCurPopup()
-    {
-        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
-    }
     #endregion
     
-    public void CloseUI<T>() where T : UI_Base
-    {
-        String key = UITypeCache<T>.Name;
+    #region UIHandler
 
-        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
-        {
-            Debug.LogError($"Popup not registered: {key}");
-        }
-        ui?.gameObject.SetActive(false);
+    private readonly List<IUIEventHandler> _uiHandlers = new();
+    private Action<UIEventType, object> _onUIEvent;
+
+    private void OnEnable() => _onUIEvent += HandleUIEvent;
+    private void OnDisable() => _onUIEvent -= HandleUIEvent;
+
+    public void Raise(UIEventType eventType, object payload = null)
+    {
+        _onUIEvent?.Invoke(eventType, payload);
     }
+
+    private void HandleUIEvent(UIEventType ui, object payload)
+    {
+        foreach (var handler in _uiHandlers)
+        {
+            if (handler.Handle(ui, payload))
+                break;
+        }
+    }
+
+    private void RegisterHandlers()
+    {
+        _uiHandlers.Clear();
+
+        _uiHandlers.Add(new TitleSceneUIHandler());
+    }
+
+    #endregion
 }
