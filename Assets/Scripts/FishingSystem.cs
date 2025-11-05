@@ -169,7 +169,7 @@ public class FishingSystem : Singleton<FishingSystem>
         _legendaryFishes.Clear();
         _mythicFishes.Clear();
     
-        string currentRegion = MapManager.Instance.GetCurrentMap().region;
+        string currentRegion = MapManager.Instance.CurrentMapData.region;
     
         foreach (FishData fish in _fishCache.Values)
         {

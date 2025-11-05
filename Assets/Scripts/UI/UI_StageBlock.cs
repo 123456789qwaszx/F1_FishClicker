@@ -115,7 +115,7 @@ public class UI_StageBlock : UI_Base
          if (!IsReachableStage())
              return;
 
-         MapManager.Instance.SetCurrentStage(_stage);
+         MapManager.Instance.MoveToStage(_stage);
         _selectStageSceneUI?.OnSelectStage(_stage);
         Debug.Log(_stage);
         SelectStage(true);

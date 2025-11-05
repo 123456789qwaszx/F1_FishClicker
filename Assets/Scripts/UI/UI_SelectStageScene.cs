@@ -84,7 +84,7 @@ public class UI_SelectStageScene : UI_Scene
 
     void RefreshUI()
     {
-        MapData currentMap = MapManager.Instance.GetCurrentMap();
+        MapData currentMap = MapManager.Instance.CurrentMapData;
 
         if (currentMap == null) return;
 
@@ -143,7 +143,7 @@ public class UI_SelectStageScene : UI_Scene
 
     void OnClickChapterButton(PointerEventData eventData, int chapter)
     {
-        MapManager.Instance.SetCurrentMap(chapter - 1); // MapManager에서 처리, UI는 이벤트로 갱신
+        MapManager.Instance.ChangeMap(chapter - 1); // MapManager에서 처리, UI는 이벤트로 갱신
         UIManager.Instance.ChangeSceneUI<UI_BossStage>();
         GameEventHelper.TriggerBossSpawnEvent();
     }

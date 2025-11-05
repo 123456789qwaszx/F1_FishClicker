@@ -17,7 +17,7 @@ public class FishingManager : Singleton<FishingManager>
     public void SpawnNewFish()
     {
         _currentFish = FishingSystem.Instance.CatchFish();
-        _maxHP = MapManager.Instance.CurrentStage().requiredCatchCount * 0.01;
+        _maxHP = MapManager.Instance.CurrentStageData.requiredCatchCount * 0.01;
         _currentHp = MaxHP;
         _clickPower = GameManager.Instance.GetTotalClickStat();
     }
