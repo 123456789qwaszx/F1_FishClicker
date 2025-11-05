@@ -27,6 +27,8 @@ public enum EEventType
 public enum EEventTypePayload
 {
     OnBossSpawn,
+    OnMapChanged,
+    
 }
 
 public class EventManager

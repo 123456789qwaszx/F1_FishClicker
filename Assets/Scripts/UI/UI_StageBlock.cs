@@ -117,6 +117,7 @@ public class UI_StageBlock : UI_Base
 
          MapManager.Instance.SetCurrentStage(_stage);
         _selectStageSceneUI?.OnSelectStage(_stage);
+        Debug.Log(_stage);
         SelectStage(true);
     }
 }

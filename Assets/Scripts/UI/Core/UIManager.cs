@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
 
     private readonly Dictionary<string, UI_Base> _uIEntry = new();
 
+    
     public void Init()
     {
         RegisterAllUIs();
@@ -47,9 +48,11 @@ public class UIManager : MonoBehaviour
         FindUI<UI_UpgradePanel>().SetUp();
         
         MapManager.Instance.Init();
+        FindUI<UI_SelectStageScene>().Init();
         FishingSystem.Instance.Init();
     }
 
+    
     private void RegisterAllUIs()
     {
         _uIEntry.Clear();
@@ -71,21 +74,13 @@ public class UIManager : MonoBehaviour
             _uIEntry.Add(key, ui);
         }
     }
-    
-    public UI_Popup PeekCurPopup()
-    {
-        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
-    }
 
+    
     public T FindUI<T>() where T : UI_Base
     {
         return _uIEntry[typeof(T).Name] as T;
     }
 
-    public UI_Popup GetPopup()
-    {
-        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
-    }
 
     public void ChangeSceneUI<T>(Action<T> callback = null) where T : UI_Scene
     {
@@ -96,11 +91,11 @@ public class UIManager : MonoBehaviour
             Debug.LogError($"UI Not registered : {key}");
         }
 
-        ui?.gameObject.SetActive(true);
-        callback?.Invoke(ui as T);
-
         CurSceneUI?.gameObject.SetActive(false);
         CurSceneUI = ui as T;
+        
+        ui?.gameObject.SetActive(true);
+        callback?.Invoke(ui as T);
     }
     
     
@@ -118,28 +113,7 @@ public class UIManager : MonoBehaviour
         CurSceneUI = ui as UI_Scene;
     }
 
-    public void AddPopupUI<T>() where T : UI_Popup
-    {
-        string key = typeof(T).Name;
-
-        if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
-        {
-            Debug.LogError($"UI Not registered : {key}");
-        }
-
-        _popupStack.Push(ui as T);
-    }
-
-    public void ShowPopupUI(Action callback = null, Transform parent = null)
-    {
-        if (_popupStack.Count > 0)
-        {
-            UI_Popup top = _popupStack.Peek();
-            callback?.Invoke();
-            top?.transform.SetParent(parent);
-        }
-    }
-
+    
     public void ShowPopup<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
     {
         String key = typeof(T).Name;
@@ -180,5 +154,10 @@ public class UIManager : MonoBehaviour
             _popupStack.Peek().gameObject.SetActive(true);
     }
 
+    
+    public UI_Popup PeekCurPopup()
+    {
+        return _popupStack.Count > 0 ? _popupStack.Peek() : null;
+    }
     #endregion
 }
