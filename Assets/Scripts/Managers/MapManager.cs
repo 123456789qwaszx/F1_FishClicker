@@ -12,7 +12,7 @@ public class MapData
     public string backgroundSprite;
     public string description;
     public BossMiniGameData bossData;
-    
+
     public List<StageData> stages;
 }
 
@@ -29,7 +29,8 @@ public class StageData
     {
         StageId = id;
         IsBossStage = isBoss;
-        StageName = isBoss ? $"{mapName} Boss Stage"
+        StageName = isBoss
+            ? $"{mapName} Boss Stage"
             : $"{mapName} Stage {id + 1}";
         requiredCatchCount = Formula.GetStageCatchLinear(id);
     }
@@ -45,12 +46,13 @@ public class MapProgress
     public int CurrentStageIndex { get; private set; } = 0;
     public int NextStageIndex => Mathf.Clamp(CurrentStageIndex + 1, 0, _maxStageIndex);
 
-    
+
     public void SetStageCount(MapData mapData)
     {
         int stageCount = mapData.stages.Count;
-        
+
         _maxStageIndex = stageCount > 0 ? stageCount - 1 : 0;
+        Debug.Log(_maxStageIndex);
 
         if (HighestClearedIndex > _maxStageIndex)
             HighestClearedIndex = _maxStageIndex;
@@ -59,7 +61,7 @@ public class MapProgress
     }
 
     // 스테이지 클리어 시 호출
-    public void SetCleared(int stageIndex)
+    public void ApplyUserClearedStage(int stageIndex)
     {
         if (stageIndex < 0 || stageIndex > _maxStageIndex) return;
 
@@ -69,12 +71,22 @@ public class MapProgress
 
     public void GoToStage(int stageIndex)
     {
-        if (_maxStageIndex <= 0) { Debug.Log("Cannot set current stage: _maxStageIndex is negative."); return; }
-        if (stageIndex < 0 || stageIndex > _maxStageIndex) { Debug.Log($"Requested stageIndex {stageIndex} is out of range. Clamping to valid range 0~{_maxStageIndex}."); }
+        Debug.Log(_maxStageIndex);
+        if (_maxStageIndex <= 0)
+        {
+            Debug.Log("Cannot set current stage: _maxStageIndex is negative.");
+            return;
+        }
+
+        if (stageIndex < 0 || stageIndex > _maxStageIndex)
+        {
+            Debug.Log(
+                $"Requested stageIndex {stageIndex} is out of range. Clamping to valid range 0~{_maxStageIndex}.");
+        }
 
         CurrentStageIndex = Mathf.Clamp(stageIndex, 0, _maxStageIndex);
     }
-    
+
     public bool GoToNextStage()
     {
         if (CurrentStageIndex < _maxStageIndex)
@@ -82,8 +94,9 @@ public class MapProgress
             CurrentStageIndex++;
             return true; // 스테이지 이동 완료
         }
-        else Debug.Log("Already at the last stage of this map. Need to go to next map."); return false; // 다음 맵 이동 필요
-        
+        else Debug.Log("Already at the last stage of this map. Need to go to next map.");
+
+        return false; // 다음 맵 이동 필요
     }
 
     public bool GoToPrevStage()
@@ -93,7 +106,9 @@ public class MapProgress
             CurrentStageIndex--;
             return true; // 이전 스테이지 이동 완료
         }
-        else Debug.Log("Already at the first stage of this map."); return false; // 이전 스테이지 없음
+        else Debug.Log("Already at the first stage of this map.");
+
+        return false; // 이전 스테이지 없음
     }
 }
 
@@ -104,7 +119,7 @@ public class MapManager : Singleton<MapManager>
 
     private readonly Dictionary<int, MapData> _mapByIdCache = new();
     private readonly Dictionary<int, StageData> _stageByIdCache = new();
-    
+
     private MapProgress _mapProgress;
 
 
@@ -116,10 +131,11 @@ public class MapManager : Singleton<MapManager>
         BuildMapCache();
         BuildStageCache();
         
+        if (_mapProgress == null)
+            _mapProgress = new MapProgress();
         ChangeMap(0);
-        InitProgress();
     }
-    
+
     private void LoadMapSheet()
     {
         _mapDB = Resources.Load<MapDatabase>(StringNameSpace.ResourcePaths.MapDataPath);
@@ -133,8 +149,10 @@ public class MapManager : Singleton<MapManager>
         {
             GenerateStages(map);
         }
+        
+        AssignBossDataToMaps();
     }
-    
+
     public void GenerateStages(MapData map, int stageCount = 10)
     {
         map.stages = new List<StageData>();
@@ -144,7 +162,32 @@ public class MapManager : Singleton<MapManager>
             map.stages.Add(new StageData(i, map.mapName, isBossStage));
         }
     }
-    
+
+    private void AssignBossDataToMaps()
+    {
+        BossMiniGameData[] allBosses = Resources.LoadAll<BossMiniGameData>("Data/Bosses");
+
+        foreach (MapData map in _mapDB.mapList)
+        {
+            if (map.bossData == null)
+            {
+                BossMiniGameData foundBoss = System.Array.Find(
+                    allBosses,
+                    boss => boss.name.Equals($"Boss_{map.mapName}", System.StringComparison.OrdinalIgnoreCase)
+                );
+
+                if (foundBoss == null)
+                {
+                    Debug.LogWarning($"No Boss data found for map '{map.mapName}'.");
+                }
+                else
+                {
+                    map.bossData = foundBoss;
+                }
+            }
+        }
+    }
+
     private void BuildMapCache()
     {
         _mapByIdCache.Clear();
@@ -158,7 +201,7 @@ public class MapManager : Singleton<MapManager>
             }
         }
     }
-    
+
     private void BuildStageCache()
     {
         _stageByIdCache.Clear();
@@ -174,26 +217,14 @@ public class MapManager : Singleton<MapManager>
             }
         }
     }
-    
-    private void InitProgress()
-    {
-        if (CurrentMapData == null)
-        {
-            Debug.LogError("Cannot initialize MapProgress: CurrentMap is null.");
-            return;
-        }
-
-        _mapProgress = new MapProgress();
-    }
-
     #endregion
-    
-    
+
+
     #region Getter
 
     public MapData CurrentMapData { get; private set; }
     public StageData CurrentStageData => GetStageById(CurrentMapData.id, _mapProgress.CurrentStageIndex);
-    
+
     public MapData GetMapById(int mapId)
     {
         if (_mapByIdCache.TryGetValue(mapId, out var map))
@@ -214,25 +245,22 @@ public class MapManager : Singleton<MapManager>
     }
 
     #endregion
-    
+
     #region Map/Stage Control
-    
+
     public void ChangeMap(int mapId)
     {
-        if (_mapProgress == null)
-            _mapProgress = new MapProgress();
-        
         CurrentMapData = GetMapById(mapId);
         _mapProgress.SetStageCount(CurrentMapData);
-        
+
         //유저데이터로 가져오기... 여기보단 Init 권장
-        _mapProgress.SetCleared(5);
+        _mapProgress.ApplyUserClearedStage(5);
         _mapProgress.GoToStage(_mapProgress.HighestClearedIndex + 1);
         // 완료
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
-    
+
     public void MoveToNextMap()
     {
         int nextMapId = CurrentMapData.id + 1;
@@ -251,7 +279,7 @@ public class MapManager : Singleton<MapManager>
             Debug.Log("Already at the last stage of the last map. Cannot move to next map.");
         }
     }
-    
+
     public void MoveToPrevMap()
     {
         int prevMapId = CurrentMapData.id - 1;
@@ -270,29 +298,29 @@ public class MapManager : Singleton<MapManager>
             Debug.Log("Already at the first stage of the first map. Cannot move to previous map.");
         }
     }
-    
+
     public void MoveToStage(int stageIndex)
     {
         _mapProgress.GoToStage(stageIndex);
-        
+
         EventManager.Instance.TriggerEvent(EEventType.OnStageChanged);
     }
 
-    
+
     public void MoveToNextStage()
     {
         bool moved = _mapProgress.GoToNextStage();
-        
+
         if (moved)
             EventManager.Instance.TriggerEvent(EEventType.OnStageChanged);
         else
             MoveToNextMap(); // 필요 시 다음 맵 이동 처리
     }
-    
+
     public void MoveToPrevStage()
     {
         bool moved = _mapProgress.GoToPrevStage();
-        
+
         if (!moved)
         {
             // 이전 맵 존재 여부 확인
@@ -313,5 +341,6 @@ public class MapManager : Singleton<MapManager>
             EventManager.Instance.TriggerEvent(EEventType.OnStageChanged);
         }
     }
+
     #endregion
 }
