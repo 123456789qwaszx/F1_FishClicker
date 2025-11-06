@@ -9,6 +9,7 @@ public enum UIEventType
 {
     OpenPopup,
     ClosePopup,
+    CloseAllPopup,
     UpdatePopup,
     FadeInStore,
     FadeOutStore,
@@ -16,7 +17,6 @@ public enum UIEventType
 }
 public static class UITypeCache<T>
 {
-    // 제너릭 타입별로 단 한 번만 계산됨
     public static readonly string Name = typeof(T).Name;
 }
 
@@ -103,15 +103,16 @@ public class UIManager : MonoBehaviour
     #endregion
     
     #region SceneUI / Popup Control
+    
     public void ChangeSceneUI<T>(Action<T> callback = null) where T : UI_Scene
     {
         string key = UITypeCache<T>.Name;
-
+    
         if (_uIEntry.TryGetValue(key, out UI_Base ui) == false)
         {
             Debug.LogError($"UI Not registered : {key}");
         }
-
+    
         CurSceneUI?.gameObject.SetActive(false);
         CurSceneUI = ui as T;
         
@@ -122,15 +123,15 @@ public class UIManager : MonoBehaviour
     public void ShowPopup<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
     {
         string key = UITypeCache<T>.Name;
-
+    
         if (!_uIEntry.TryGetValue(key, out UI_Base ui))
         {
             Debug.Log($"Popup not registered: {key}");
             return;
         }
-
+    
         T popupUI = ui as T;
-
+    
         if (!_popupStack.Contains(popupUI))
             _popupStack.Push(popupUI);
         
@@ -138,7 +139,7 @@ public class UIManager : MonoBehaviour
             popupUI?.transform.SetParent(parent);
         
         popupUI?.gameObject.SetActive(true);
-
+    
         callback?.Invoke(popupUI);
     }
 

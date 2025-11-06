@@ -44,19 +44,13 @@ public class MapProgress
     public int HighestClearedIndex { get; private set; } = -1;
 
     public int CurrentStageIndex { get; private set; } = 0;
-    private int NextStageIndex => Mathf.Clamp(CurrentStageIndex + 1, 0, _maxStageIndex);
-
+    public int NextStageIndex => Mathf.Clamp(CurrentStageIndex + 1, 0, _maxStageIndex);
 
     public void SetStageCount(MapData mapData)
     {
         int stageCount = mapData.stages.Count;
 
         _maxStageIndex = stageCount > 0 ? stageCount - 1 : 0;
-
-        if (HighestClearedIndex > _maxStageIndex)
-            HighestClearedIndex = _maxStageIndex;
-
-        CurrentStageIndex = Mathf.Clamp(NextStageIndex, 0, _maxStageIndex);
     }
 
     // 스테이지 클리어 시 호출
@@ -127,10 +121,8 @@ public class MapManager : Singleton<MapManager>
         LoadMapSheet();
         BuildMapCache();
         BuildStageCache();
-        
-        if (_mapProgress == null)
-            _mapProgress = new MapProgress();
-        ChangeMap(0);
+
+        InitializeFromPlayer();
     }
 
     private void LoadMapSheet()
@@ -214,13 +206,71 @@ public class MapManager : Singleton<MapManager>
             }
         }
     }
+    
+    private Dictionary<int, int> _mapClearedStageCache;
+    
+    public void InitializeFromPlayer()
+    {
+        // 1. Player 데이터 null 방어
+        if (Player.Instance == null || Player.Instance.Data == null)
+        {
+            Debug.LogWarning("Player data not initialized yet. Creating empty progress cache.");
+            _mapClearedStageCache = new Dictionary<int, int>();
+            InitializeMapProgress(0); // 맵 0으로 기본 세팅
+            return;
+        }
+
+        // 2. Player 데이터의 MapClearedStageIndices 가져오기
+        var playerMapData = Player.Instance.Data.MapClearedStageIndices;
+        if (playerMapData == null || playerMapData.Count == 0)
+        {
+            Debug.Log("No cleared map data found in player data. Initializing with default map.");
+            _mapClearedStageCache = new Dictionary<int, int>();
+            InitializeMapProgress(0);
+            return;
+        }
+
+        // 3. 캐시 복사
+        _mapClearedStageCache = new Dictionary<int, int>(playerMapData);
+        
+        int highestMapId = -1;
+        foreach (int key in _mapClearedStageCache.Keys)
+        {
+            if (key > highestMapId) highestMapId = key;
+        }
+
+        // 초기 맵 세팅 (예: 맵 0)
+        InitializeMapProgress(highestMapId);
+    }
+    
+    
+    public void InitializeMapProgress(int globalMapId)
+    {
+        int globalStageID = _mapClearedStageCache.GetValueOrDefault(globalMapId);
+        
+        int mapId = globalMapId;
+        int stageId = globalStageID % 1000; 
+        
+        MapData mapData = GetMapById(mapId);
+
+        if (_mapProgress == null)
+            _mapProgress = new MapProgress();
+
+        _mapProgress.SetStageCount(mapData);
+        _mapProgress.ApplyUserClearedStage(stageId);
+        _mapProgress.GoToStage(stageId);
+
+        CurrentMapData = mapData;
+
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+    }
     #endregion
 
 
     #region Getter
 
     public MapData CurrentMapData { get; private set; }
-    public StageData CurrentStageData => GetStageById(CurrentMapData.id, _mapProgress.CurrentStageIndex);
+    public StageData CurrentStageData => GetStageByMapAndStage(CurrentMapData.id, _mapProgress.CurrentStageIndex);
 
     public MapData GetMapById(int mapId)
     {
@@ -230,8 +280,17 @@ public class MapManager : Singleton<MapManager>
         Debug.LogWarning($"Map ID {mapId} not found in cache.");
         return null;
     }
+    
+    public StageData GetStageById(int stageId)
+    {
+        if (_stageByIdCache.TryGetValue(stageId, out var stage))
+            return stage;
 
-    public StageData GetStageById(int mapId, int stageId)
+        Debug.LogWarning($"Stage {stageId} not founded.");
+        return null;
+    }
+
+    public StageData GetStageByMapAndStage(int mapId, int stageId)
     {
         int globalStageId = mapId * 1000 + stageId;
         if (_stageByIdCache.TryGetValue(globalStageId, out var stage))
@@ -247,13 +306,30 @@ public class MapManager : Singleton<MapManager>
 
     public void ChangeMap(int mapId)
     {
-        CurrentMapData = GetMapById(mapId);
-        _mapProgress.SetStageCount(CurrentMapData);
+        MapData mapData = GetMapById(mapId);
+        if (mapData == null)
+        {
+            Debug.LogError($"[MapManager] Cannot initialize MapProgress: Map ID {mapId} not found.");
+            return;
+        }
 
-        //유저데이터로 가져오기... 여기보단 Init 권장
-        _mapProgress.ApplyUserClearedStage(5);
-        _mapProgress.GoToStage(_mapProgress.HighestClearedIndex + 1);
-        // 완료
+        _mapProgress.SetStageCount(mapData);
+
+        int startStageIndex = 0;
+
+        if (_mapClearedStageCache != null && _mapClearedStageCache.TryGetValue(mapId, out int globalStageId))
+        {
+            startStageIndex = globalStageId % 1000;
+            Debug.Log($"[MapManager] Restoring progress for Map {mapId}, Stage {startStageIndex}");
+        }
+        else
+        {
+            Debug.Log($"[MapManager] No cached progress found for Map {mapId}. Starting from Stage 0");
+        }
+
+        MoveToStage(startStageIndex);
+
+        CurrentMapData = mapData;
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }

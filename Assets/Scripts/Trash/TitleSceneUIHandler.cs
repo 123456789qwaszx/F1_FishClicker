@@ -12,7 +12,6 @@ public class TitleSceneUIHandler : IUIEventHandler
     {
         _sceneActions = new Dictionary<string, Action>
         {
-            { UITypeCache<UI_Scene>.Name, () => UIManager.Instance.ChangeSceneUI<UI_Scene>() },
             { UITypeCache<UI_InGame>.Name, () => UIManager.Instance.ChangeSceneUI<UI_InGame>() },
             { UITypeCache<UI_Title>.Name, () => UIManager.Instance.ChangeSceneUI<UI_Title>() },
             { UITypeCache<UI_SelectStageScene>.Name, () => UIManager.Instance.ChangeSceneUI<UI_SelectStageScene>() },
@@ -21,7 +20,6 @@ public class TitleSceneUIHandler : IUIEventHandler
 
         _popupActions = new Dictionary<string, Action>
         {
-            { UITypeCache<UI_Popup>.Name, () => UIManager.Instance.ShowPopup<UI_Popup>() },
             { UITypeCache<UI_AppMenuPanel>.Name, () => UIManager.Instance.ShowPopup<UI_AppMenuPanel>() },
             { UITypeCache<UI_Phone>.Name, () => UIManager.Instance.ShowPopup<UI_Phone>() },
             { UITypeCache<UI_UpgradePanel>.Name, () => UIManager.Instance.ShowPopup<UI_UpgradePanel>() },
@@ -51,6 +49,9 @@ public class TitleSceneUIHandler : IUIEventHandler
 
             case UIEventType.ClosePopup:
                 UIManager.Instance.CloseTopPopup();
+                return true;
+            case UIEventType.CloseAllPopup:
+                UIManager.Instance.CloseAllPopups();
                 return true;
         }
 
