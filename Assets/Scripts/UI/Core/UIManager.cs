@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
         
         MapManager.Instance.Init();
         GetUI<UI_SelectStageScene>().Init();
-        FishingSystem.Instance.Init();
+        FishingManager.Instance.Init();
     }
     
     private void RegisterAllUIs()

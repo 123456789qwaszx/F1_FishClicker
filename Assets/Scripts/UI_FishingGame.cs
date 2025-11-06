@@ -30,13 +30,13 @@ public class UI_FishingGame : UI_Popup
 
     public void RefreshFishUI()
     {
-        FishData fish = FishingManager.Instance.CurrentFish;
+        FishData fish = FishingManager.Instance.Controller.CurFish;
         Img_Fish.sprite = Resources.Load<Sprite>("Trash/Char/Img_Juno000"); //fish.fishSprite;
         Txt_FishName.text = fish.fishName;
         // Txt_RewardPreview.text = $"{fish.reward} G";
         
-        double curHp = FishingManager.Instance.CurrentHp;
-        double maxHp = FishingManager.Instance.MaxHP;
+        double curHp = FishingManager.Instance.Controller.CurFishHp;
+        double maxHp = FishingManager.Instance.Controller.CurFishMaxHp;
         
         float ratio = (float)(curHp / maxHp);
         
@@ -47,20 +47,20 @@ public class UI_FishingGame : UI_Popup
 
     public void OnClickFish()
     {
-        FishingManager.Instance.OnClickFish();
+        FishingManager.Instance.Controller.AttackCurrentFish();
     }
 
     void UpdateEnemyHpUI()
     {
-        double curHp = FishingManager.Instance.CurrentHp;
-        double maxHp = FishingManager.Instance.MaxHP;
+        double curHp = FishingManager.Instance.Controller.CurFishHp;
+        double maxHp = FishingManager.Instance.Controller.CurFishMaxHp;
         float ratio = (float)(curHp / maxHp);
 
         Slider_FishHP.value = ratio;
         Txt_FishHP.text = $"{curHp}/{maxHp}";
         
         
-        FishData fish = FishingManager.Instance.CurrentFish;
+        FishData fish = FishingManager.Instance.Controller.CurFish;
         Txt_FishName.text = fish.fishName;
     }
 

@@ -68,7 +68,7 @@ public class UI_Title : UI_Scene
     void Btn_StartClick(PointerEventData _)
     {
         UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.UpdateMapUI(); });
-        FishingManager.Instance.SpawnNewFish();
+        FishingManager.Instance.Controller.SpawnNewFish();
         UIManager.Instance.ShowPopup<UI_FishingGame>(popup => { popup.RefreshFishUI(); });
         
         UIManager.Instance.ChangeSceneUI<UI_InGame>();

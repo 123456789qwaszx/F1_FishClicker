@@ -93,41 +93,4 @@ public class Player : MonoBehaviour
     public long GetTotalGold() => Data.TotalGold;
 
     #endregion
-
-    #region Upgrade
-
-    public void SetUpgradeLevel(string upgradeId, int level)
-    {
-        Data.UpgradeLevels[upgradeId] = level;
-        EventManager.Instance.TriggerEvent(EEventType.Upgraded);
-    }
-
-    public int GetUpgradeLevel(string upgradeId)
-    {
-        return Data.UpgradeLevels.TryGetValue(upgradeId, out int level) ? level : 0;
-    }
-
-    #endregion
-
-    #region Map & Stage
-
-    public int GetHighestClearedStage(int mapId)
-    {
-        if (!Data.MapClearedStageIndices.TryGetValue(mapId, out int clearedIndex))
-        {
-            clearedIndex = -1; // 처음 시작
-            Data.MapClearedStageIndices[mapId] = clearedIndex;
-        }
-        return clearedIndex;
-    }
-
-    public void SetStageCleared(int mapId, int stageIndex)
-    {
-        if (!Data.MapClearedStageIndices.ContainsKey(mapId))
-            Data.MapClearedStageIndices[mapId] = stageIndex;
-        else
-            Data.MapClearedStageIndices[mapId] = Mathf.Max(Data.MapClearedStageIndices[mapId], stageIndex);
-    }
-
-    #endregion
 }

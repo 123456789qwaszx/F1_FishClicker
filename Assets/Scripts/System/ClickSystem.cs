@@ -19,7 +19,7 @@ public class ClickSystem : Singleton<ClickSystem>
     private IEnumerator WaitAndInitClickSystem()
     {
         // FishingSystem 준비될 때까지 대기
-        while (FishingSystem.Instance == null)
+        while (FishingManager.Instance == null)
             yield return null;
 
         if (autoFishingCoroutine != null)
@@ -50,7 +50,7 @@ public class ClickSystem : Singleton<ClickSystem>
     // 클릭 시 호출
     public void OnClickFishing()
     {
-        FishData fishCaught = FishingSystem.Instance.CatchFish();
+        FishData fishCaught = FishingManager.Instance.GetRandomFishByRarity();
         if (fishCaught == null) return;
 
         InventoryManager.Instance.AddFish(fishCaught);
@@ -75,7 +75,7 @@ public class ClickSystem : Singleton<ClickSystem>
         while (true)
         {
             // 안전하게 null 체크
-            if (FishingSystem.Instance == null || GameManager.Instance == null || InventoryManager.Instance == null)
+            if (FishingManager.Instance == null || GameManager.Instance == null || InventoryManager.Instance == null)
             {
                 yield return null;
                 continue;
@@ -85,7 +85,7 @@ public class ClickSystem : Singleton<ClickSystem>
             FishData caughtFish = null;
             try
             {
-                caughtFish = FishingSystem.Instance.CatchFish();
+                caughtFish = FishingManager.Instance.GetRandomFishByRarity();
             }
             catch (System.Exception ex)
             {
