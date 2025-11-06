@@ -111,6 +111,7 @@ public class MapManager : Singleton<MapManager>
     private readonly Dictionary<int, MapData> _mapByIdCache = new();
     private readonly Dictionary<int, StageData> _stageByIdCache = new();
 
+    private Dictionary<int, int> _mapClearedStages;
     private MapProgress _mapProgress;
 
 
@@ -121,7 +122,6 @@ public class MapManager : Singleton<MapManager>
         LoadMapSheet();
         BuildMapCache();
         BuildStageCache();
-
         InitializeFromPlayer();
     }
 
@@ -207,46 +207,39 @@ public class MapManager : Singleton<MapManager>
         }
     }
     
-    private Dictionary<int, int> _mapClearedStageCache;
-    
     public void InitializeFromPlayer()
     {
-        // 1. Player 데이터 null 방어
         if (Player.Instance == null || Player.Instance.Data == null)
         {
             Debug.LogWarning("Player data not initialized yet. Creating empty progress cache.");
-            _mapClearedStageCache = new Dictionary<int, int>();
+            _mapClearedStages = new Dictionary<int, int>();
             InitializeMapProgress(0); // 맵 0으로 기본 세팅
             return;
         }
 
-        // 2. Player 데이터의 MapClearedStageIndices 가져오기
-        var playerMapData = Player.Instance.Data.MapClearedStageIndices;
+        Dictionary<int, int> playerMapData = Player.Instance.Data.MapClearedStageIndices;
         if (playerMapData == null || playerMapData.Count == 0)
         {
             Debug.Log("No cleared map data found in player data. Initializing with default map.");
-            _mapClearedStageCache = new Dictionary<int, int>();
+            _mapClearedStages = new Dictionary<int, int>();
             InitializeMapProgress(0);
             return;
         }
 
-        // 3. 캐시 복사
-        _mapClearedStageCache = new Dictionary<int, int>(playerMapData);
+        _mapClearedStages = new Dictionary<int, int>(playerMapData);
         
         int highestMapId = -1;
-        foreach (int key in _mapClearedStageCache.Keys)
+        foreach (int key in _mapClearedStages.Keys)
         {
             if (key > highestMapId) highestMapId = key;
         }
 
-        // 초기 맵 세팅 (예: 맵 0)
         InitializeMapProgress(highestMapId);
     }
     
-    
     public void InitializeMapProgress(int globalMapId)
     {
-        int globalStageID = _mapClearedStageCache.GetValueOrDefault(globalMapId);
+        int globalStageID = _mapClearedStages.GetValueOrDefault(globalMapId);
         
         int mapId = globalMapId;
         int stageId = globalStageID % 1000; 
@@ -264,6 +257,7 @@ public class MapManager : Singleton<MapManager>
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
+    
     #endregion
 
 
@@ -307,28 +301,17 @@ public class MapManager : Singleton<MapManager>
     public void ChangeMap(int mapId)
     {
         MapData mapData = GetMapById(mapId);
-        if (mapData == null)
-        {
-            Debug.LogError($"[MapManager] Cannot initialize MapProgress: Map ID {mapId} not found.");
-            return;
-        }
-
-        _mapProgress.SetStageCount(mapData);
+        if (mapData == null) { return; }
 
         int startStageIndex = 0;
 
-        if (_mapClearedStageCache != null && _mapClearedStageCache.TryGetValue(mapId, out int globalStageId))
+        if (_mapClearedStages != null && _mapClearedStages.TryGetValue(mapId, out int globalStageId))
         {
             startStageIndex = globalStageId % 1000;
-            Debug.Log($"[MapManager] Restoring progress for Map {mapId}, Stage {startStageIndex}");
-        }
-        else
-        {
-            Debug.Log($"[MapManager] No cached progress found for Map {mapId}. Starting from Stage 0");
         }
 
+        _mapProgress.SetStageCount(mapData);
         MoveToStage(startStageIndex);
-
         CurrentMapData = mapData;
 
         EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
@@ -415,5 +398,13 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    #endregion
+    
+    #region SyncToPlayerData
+    public void SyncToPlayerData()
+    {
+        if (Player.Instance?.Data == null) return;
+        Player.Instance.Data.MapClearedStageIndices = new Dictionary<int, int>(_mapClearedStages);
+    }
     #endregion
 }
