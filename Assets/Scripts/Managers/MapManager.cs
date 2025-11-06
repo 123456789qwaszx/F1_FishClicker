@@ -53,7 +53,6 @@ public class MapProgress
         _maxStageIndex = stageCount > 0 ? stageCount - 1 : 0;
     }
 
-    // 스테이지 클리어 시 호출
     public void ApplyUserClearedStage(int stageIndex)
     {
         if (stageIndex < 0 || stageIndex > _maxStageIndex) return;

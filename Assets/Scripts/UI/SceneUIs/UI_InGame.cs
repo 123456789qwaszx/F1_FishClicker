@@ -118,7 +118,7 @@ public class UI_InGame : UI_Scene
         Txt_FishAmount1.text = (fishes.Count > 1) ? fishes[1].fishName : "";
         Txt_FishAmount2.text = (fishes.Count > 2) ? fishes[2].fishName : "";
         Txt_FishAmount3.text = (fishes.Count > 3) ? fishes[3].fishName : "";
-        Txt_AutoGainPerSec.text = $"1 / {1 - GameManager.Instance.GetUpgradeAmount(StringNameSpace.UpgradeIDs.Aria)}Sec";
+        Txt_AutoGainPerSec.text = $"1 / {1 - UpgradeManager.Instance.GetUpgradeAmount(StringNameSpace.UpgradeIDs.Aria)}Sec";
         Txt_CurrentStage.text =  $"현재 지역  {MapManager.Instance.CurrentMapData.region}";
     }
     

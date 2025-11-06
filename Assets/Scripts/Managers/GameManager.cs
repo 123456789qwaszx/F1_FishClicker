@@ -39,38 +39,6 @@ public class GameManager : Singleton<GameManager>
     //private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
     private readonly Dictionary<string, UpgradeData> _upgradeInfo = new();
     
-    public List<UpgradeData> GetAllUpgradeData()
-    {
-        return new List<UpgradeData>(_upgradeInfo.Values);
-    }
-    
-    public long GetUpgradeAmount(string upgradeId)
-    {
-        if (_upgradeInfo.TryGetValue(upgradeId, out var data))
-            return data.GetCurStatValue();
-
-        return 0;
-    }
-    
-    public int GetUpgradeLevel(string upgradeId)
-    {
-        if (_upgradeInfo.TryGetValue(upgradeId, out UpgradeData upgrade))
-            return upgrade.level;
-        return 0;
-    }
-    
-    public long GetUpgradeCost(string upgradeId)
-    {
-        if (_upgradeInfo.TryGetValue(upgradeId, out UpgradeData upgrade))
-            return upgrade.GetUpgradeCost();
-        return 0;
-    }
-
-    public void SetUpgradeResult(UpgradeData data)
-    {
-        if (data == null || string.IsNullOrEmpty(data.type.id)) return;
-        _upgradeInfo[data.type.id] = data;
-    }
     
     public double GetTotalClickStat()
     {
@@ -90,19 +58,6 @@ public class GameManager : Singleton<GameManager>
 
         return result;
     }
-
-    public void ClearUpgradeInfo()
-    {
-        _upgradeInfo.Clear();
-    }
-    
-    public void SyncUpgrades(IEnumerable<UpgradeData> upgrades)
-    {
-        ClearUpgradeInfo();
-        foreach (UpgradeData upgrade in upgrades)
-            SetUpgradeResult(upgrade);
-    }
-
     #endregion
     
     #region Money

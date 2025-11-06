@@ -41,12 +41,13 @@ public class UpgradeData
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     private UpgradeDatabase _upgradeDB;
+    
     private readonly List<UpgradeData> _upgradeDataList = new();
+    
     private readonly List<UpgradeData.UpgradeType> _upgradeTypes = new();
     private readonly Dictionary<string, UpgradeData> _upgradeCache = new();
     
-    public IEnumerable<UpgradeData> GetAllUpgrades() => _upgradeCache.Values;
-
+    #region Init
     
     public void Init()
     {
@@ -54,6 +55,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         CollectUpgradeTypes();
         EnsureAllType();
         BuildUpgradeCache();
+        LoadUpgradeLevels();
     }
 
     
@@ -121,23 +123,76 @@ public class UpgradeManager : Singleton<UpgradeManager>
                 _upgradeCache[upgrade.type.id] = upgrade;
         }
     }
+    
+    #endregion
+    
+    #region Getter
+    
+    public List<UpgradeData> GetAllUpgradeData()
+    {
+        return new List<UpgradeData>(_upgradeCache.Values);
+    }
+    
+    
+    public long GetUpgradeAmount(string upgradeId)
+    {
+        if (_upgradeCache.TryGetValue(upgradeId, out var data))
+            return data.GetCurStatValue();
 
+        return 0;
+    }
+    
+    #endregion
+
+    #region Upgrade Control
     
     public void TryUpgrade(UpgradeData.UpgradeType upgradeType)
     {
-        if (upgradeType == null || string.IsNullOrEmpty(upgradeType.id)) return;
+        if (upgradeType == null || string.IsNullOrEmpty(upgradeType.id))
+            return;
 
-        if (!_upgradeCache.TryGetValue(upgradeType.id, out UpgradeData upgradeData)) return;
+        if (!_upgradeCache.TryGetValue(upgradeType.id, out UpgradeData upgradeData))
+            return;
 
         long cost = upgradeData.GetUpgradeCost();
-        if (cost > GameManager.Instance.Money) return;
-
+        
+        if (cost > GameManager.Instance.Money)
+            return;
+        
+        upgradeData.level++;
+        
         GameManager.Instance.ChangeMoney(-cost);
         GameManager.Instance.IncreaseUsedMoneyAmount(cost);
 
-        upgradeData.level++;
-        GameManager.Instance.SetUpgradeResult(upgradeData);
-
         EventManager.Instance.TriggerEvent(EEventType.Upgraded);
     }
+    
+    #endregion
+    
+    #region Save / Load
+    public Dictionary<string, int> SaveUpgradeLevels()
+    {
+        Dictionary<string, int> saveDict = new();
+        foreach (var kvp in _upgradeCache)
+        {
+            saveDict[kvp.Key] = kvp.Value.level;
+        }
+        return saveDict;
+    }
+
+    private void LoadUpgradeLevels()
+    {
+        if (Player.Instance == null || Player.Instance.Data == null || Player.Instance.Data.UpgradeLevels.Count == 0)
+            return;
+
+        Dictionary<string, int> savedDict = Player.Instance.Data.UpgradeLevels;
+
+        foreach (var kvp in _upgradeCache)
+        {
+            if (savedDict.TryGetValue(kvp.Key, out int level))
+                kvp.Value.level = level;
+        }
+    }
+    
+    #endregion
 }
