@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,28 @@ using UnityEngine;
 /// </summary>
 public static class Formula
 {
+    public static int GetDifficultyLevel_FromMapManager()
+    {
+        int mapLevel  = MapManager.Instance.CurrentMapId;
+        int stageLevel  = MapManager.Instance.CurrentStageId + 1;
+        
+        int difficultyLevel = mapLevel * 10 + stageLevel;
+        
+        return difficultyLevel;
+    }
+
+    public static double GetCurFishHp(FishData fish, int difficultyLevel)
+    {
+        double defaultHp = fish.baseValue;
+        double hpMultiplier = 1.12;   // 단계당 12% 증가
+        double linearBonus = 2.0;     // 추가 선형 보정
+
+        double maxHp = defaultHp * Math.Pow(hpMultiplier, difficultyLevel * linearBonus);
+        
+        return maxHp;
+    }
+    
+    
     // -----------------------
     // 🔹 Stage 관련 수식
     // -----------------------
@@ -101,4 +124,21 @@ public static class Formula
     {
         return (long)(50 * Mathf.Pow(1.2f, stageId));
     }
+    
+    public static long RoundToTwoMostSignificantDigits(long number)
+    {
+        if (number < 10) return number; // 1자리 수는 그대로
+
+        // 자릿수 계산
+        int digits = (int)Mathf.Floor(Mathf.Log10(number)) + 1;
+
+        // 가장 큰 두 자리 숫자
+        int divisor = (int)Mathf.Pow(10, digits - 2);
+
+        // 나머지는 0으로
+        long rounded = (number / divisor) * divisor;
+
+        return rounded;
+    }
+
 }

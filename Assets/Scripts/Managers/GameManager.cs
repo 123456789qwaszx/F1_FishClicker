@@ -39,6 +39,9 @@ public class GameManager : Singleton<GameManager>
     
     private double _cachedTotalClickStat = 1;
     
+    
+    public double ClickPower => GetTotalClickStat();
+    
     // 외부에서 최종 수치 가져갈 때 사용
     public double GetTotalClickStat()
     {

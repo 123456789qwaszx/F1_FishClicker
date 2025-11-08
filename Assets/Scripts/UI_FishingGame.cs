@@ -63,10 +63,4 @@ public class UI_FishingGame : UI_Popup
         FishData fish = FishingManager.Instance.Controller.CurFish;
         Txt_FishName.text = fish.fishName;
     }
-
-    void OnFishDefeated()
-    {
-        // 애니메이션이나 효과 넣고 싶으면 여기서
-        Debug.Log("UI: 물고기 잡음, 다음 물고기 스폰 예정");
-    }
 }

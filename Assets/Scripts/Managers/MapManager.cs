@@ -112,6 +112,9 @@ public class MapManager : Singleton<MapManager>
 
     private Dictionary<int, int> _mapClearedStages;
     private MapProgress _mapProgress;
+    
+    public int CurrentMapId => CurrentMapData.id;
+    public int CurrentStageId => _mapProgress.CurrentStageIndex;
 
 
     #region Init
