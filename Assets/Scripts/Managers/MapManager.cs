@@ -11,7 +11,6 @@ public class MapData
     public string region;
     public string backgroundSprite;
     public string description;
-    public BossMiniGameData bossData;
 
     public List<StageData> stages;
 }
@@ -140,8 +139,6 @@ public class MapManager : Singleton<MapManager>
         {
             GenerateStages(map);
         }
-        
-        AssignBossDataToMaps();
     }
 
     public void GenerateStages(MapData map, int stageCount = 10)
@@ -153,32 +150,7 @@ public class MapManager : Singleton<MapManager>
             map.stages.Add(new StageData(i, map.mapName, isBossStage));
         }
     }
-
-    private void AssignBossDataToMaps()
-    {
-        BossMiniGameData[] allBosses = Resources.LoadAll<BossMiniGameData>("Data/Bosses");
-
-        foreach (MapData map in _mapDB.mapList)
-        {
-            if (map.bossData == null)
-            {
-                BossMiniGameData foundBoss = System.Array.Find(
-                    allBosses,
-                    boss => boss.name.Equals($"Boss_{map.mapName}", System.StringComparison.OrdinalIgnoreCase)
-                );
-
-                if (foundBoss == null)
-                {
-                    Debug.LogWarning($"No Boss data found for map '{map.mapName}'.");
-                }
-                else
-                {
-                    map.bossData = foundBoss;
-                }
-            }
-        }
-    }
-
+    
     private void BuildMapCache()
     {
         _mapByIdCache.Clear();

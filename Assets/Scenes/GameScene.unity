@@ -9587,7 +9587,6 @@ GameObject:
   - component: {fileID: 1413158866}
   - component: {fileID: 1413158867}
   - component: {fileID: 1413158868}
-  - component: {fileID: 1413158869}
   - component: {fileID: 1413158870}
   m_Layer: 0
   m_Name: GameManager
@@ -9679,22 +9678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a12143d95da45847a465ecc89287cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
---- !u!114 &1413158869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413158860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eda49afc6ac95a46bdd6e4c4e902c79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossMiniGameManager
-  BossData: {fileID: 11400000, guid: b3c5308daabb92c4eb3063e11ca66edd, type: 2}
-  currentHP: 0
-  maxHP: 0
-  hitDamage: 4000
 --- !u!114 &1413158870
 MonoBehaviour:
   m_ObjectHideFlags: 0
