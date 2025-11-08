@@ -38,6 +38,14 @@ public class FishDataImporter
             fish.description = row["description"];
             fish.region = row["region"];
 
+            if (!bool.TryParse(row["isBoss"], out var isBoss))
+            {
+                Debug.LogWarning($"Invalid isBoss value '{row["isBoss"]}' in CSV. Defaulting to false.");
+                isBoss = false;
+            }
+        
+            fish.isBoss = isBoss;
+
             database.fishList.Add(fish);
         }
 

@@ -17,7 +17,7 @@ public static class Formula
         return difficultyLevel;
     }
 
-    public static double GetCurFishHp(FishData fish, int difficultyLevel)
+    public static double CalculateFishMaxHp(FishData fish, int difficultyLevel)
     {
         double defaultHp = fish.baseValue;
         double hpMultiplier = 1.12;   // 단계당 12% 증가

@@ -66,7 +66,7 @@ public class CurrentFishController : MonoBehaviour
 
         int difficultyLevel = Formula.GetDifficultyLevel_FromMapManager();
         
-        double maxHp = Formula.GetCurFishHp(fish, difficultyLevel);
+        double maxHp = Formula.CalculateFishMaxHp(fish, difficultyLevel);
 
         CurrentFishState.Initialize(fish, maxHp);
     }

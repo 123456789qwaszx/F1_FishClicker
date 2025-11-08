@@ -76,6 +76,7 @@ public class FishData
     public string spritePath;
     public string description;
     public string region;
+    public bool isBoss;
 }
 
 
