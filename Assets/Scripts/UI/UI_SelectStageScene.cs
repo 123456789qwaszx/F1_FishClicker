@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_SelectStageScene : UI_Scene
 {
     enum GameObjects
-    { 
+    {
         Player,
         SelectedChapter1,
         SelectedChapter2,
@@ -28,7 +28,7 @@ public class UI_SelectStageScene : UI_Scene
         ChapterButton_6,
         ChapterButton_7,
     }
-    
+
     enum Images
     {
         MapTop,
@@ -50,14 +50,13 @@ public class UI_SelectStageScene : UI_Scene
 
     void OnDisable()
     {
-        
         EventManager.Instance.RemoveEvent<MapData>(EEventTypePayload.OnMapChanged, OnMapChanged);
     }
 
     protected override void Awake()
     {
         base.Init();
-        
+
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
         BindObjects(typeof(GameObjects));
@@ -66,14 +65,16 @@ public class UI_SelectStageScene : UI_Scene
         for (int i = 1; i <= 7; i++)
         {
             int chapter = i; // 클로저 문제 방지
-            GetButton((int)(Buttons)chapter - 1).gameObject.BindEvent((eventData) => OnClickChapterButton(eventData, chapter));
+            GetButton((int)(Buttons)chapter - 1).gameObject
+                .BindEvent((eventData) => OnClickChapterButton(eventData, chapter));
         }
 
         scroll = ComponentHelper.FindChildObject<ScrollRect>(gameObject, recursive: true);
 
         for (int i = 0; i < _stageBlockUI.Length; i++)
         {
-            _stageBlockUI[i] = ComponentHelper.FindChildObject<UI_StageBlock>(gameObject, $"UI_StageBlock{i+1}", recursive: true);
+            _stageBlockUI[i] =
+                ComponentHelper.FindChildObject<UI_StageBlock>(gameObject, $"UI_StageBlock{i + 1}", recursive: true);
         }
     }
 
@@ -107,7 +108,7 @@ public class UI_SelectStageScene : UI_Scene
     {
         for (int i = 0; i < 7; i++)
         {
-            GetObject((int)(GameObjects) i + 1).SetActive(false);
+            GetObject((int)(GameObjects)i + 1).SetActive(false);
         }
     }
 
@@ -144,8 +145,12 @@ public class UI_SelectStageScene : UI_Scene
     void OnClickChapterButton(PointerEventData eventData, int chapter)
     {
         MapManager.Instance.ChangeMap(chapter - 1); // MapManager에서 처리, UI는 이벤트로 갱신
-        UIManager.Instance.ChangeSceneUI<UI_BossStage>();
-        GameEventHelper.TriggerBossSpawnEvent();
+        
+        MapManager.Instance.MoveToStage(9);
+        FishingManager.Instance.Controller.SpawnNewFish();
+        UIManager.Instance.ChangeSceneUI<UI_BossStage>(stage =>
+            stage.SetupBossUI(FishingManager.Instance.Controller.CurFish)
+        );
     }
 
     void OnMapChanged(MapData mapData)

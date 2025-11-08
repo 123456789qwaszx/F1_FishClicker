@@ -1701,9 +1701,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1413158869}
-        m_TargetAssemblyTypeName: BossMiniGameManager, Assembly-CSharp
-        m_MethodName: OnBossClicked
+      - m_Target: {fileID: 1644834082}
+        m_TargetAssemblyTypeName: UI_FishingGame, Assembly-CSharp
+        m_MethodName: OnClickFish
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9707,7 +9707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf96900437bf004587f7464ce481ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishManager
-  _clickPower: 0
 --- !u!1 &1430375297
 GameObject:
   m_ObjectHideFlags: 0

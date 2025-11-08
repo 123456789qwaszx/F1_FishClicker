@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,25 +23,23 @@ public class UI_BossStage : UI_Scene
 
     void OnEnable()
     {
-        EventManager.Instance.AddEvent(EEventType.OnAttackBoss, OnBossAttacked);
+        EventManager.Instance.AddEvent(EEventType.OnAttackFish, UpdateBossHp);
     }
 
     void OnDisable()
     {
-        EventManager.Instance.RemoveEvent(EEventType.OnAttackBoss, OnBossAttacked);
+        EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, UpdateBossHp);
     }
 
     /// <summary>
     /// 보스 UI 초기화 및 타이머 재시작
     /// </summary>
-    public void SetupBossUI(BossMiniGameData bossData)
+    public void SetupBossUI(FishData fishData)
     {
-        Txt_BossName.text = bossData.bossName;
-        Img_Boss.sprite = bossData.bossImagePrefab;
-
+        Txt_BossName.text = FishingManager.Instance.Controller.CurFish.fishName;
+        //Img_Boss.sprite = Resources.Load(fishData.spritePath);
+        
         // 보스 HP 초기화
-        Slider_BossHP.maxValue = bossData.maxHP;
-        Slider_BossHP.value = BossMiniGameManager.Instance.currentHP;
         UpdateBossHp();
 
         // 타이머 초기화
@@ -58,21 +57,17 @@ public class UI_BossStage : UI_Scene
 
         timerCoroutine = StartCoroutine(BossTimerCoroutine());
     }
-    
-    
-
-    void OnBossAttacked()
-    {
-        UpdateBossHp();
-    }
 
     void UpdateBossHp()
     {
-        int hp = BossMiniGameManager.Instance.currentHP;
-        int maxHp = BossMiniGameManager.Instance.maxHP;
-
-        Slider_BossHP.value = hp;
-        Txt_BossHP.text = $"{hp}/{maxHp}";
+        double curHp = FishingManager.Instance.Controller.CurFishHp;
+        double maxHp = FishingManager.Instance.Controller.CurFishMaxHp;
+        
+        float ratio = (float)(curHp / maxHp);
+        
+        Slider_BossHP.maxValue = 1;
+        Slider_BossHP.value = ratio;
+        Txt_BossHP.text = $"{curHp}/{maxHp}";
     }
 
     private IEnumerator BossTimerCoroutine()

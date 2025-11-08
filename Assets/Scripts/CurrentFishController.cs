@@ -42,26 +42,17 @@ public class CurrentFishController : MonoBehaviour
     }
     
     
-    #region Fetch
-
-    private double FetchMaxHp(int difficultyLevel, double baseHp)
-    {
-        baseHp = 10.0;
-        double hpMultiplier = 1.12;   // 단계당 12% 증가
-        double linearBonus = 2.0;     // 추가 선형 보정
-
-        double maxHp = baseHp * Math.Pow(hpMultiplier, difficultyLevel * linearBonus);
-        
-        return maxHp;
-    }
-    
-    #endregion
-    
     #region Fish Control
     
     public void SpawnNewFish()
     {
-        FishData fish = FishingManager.Instance.GetRandomFishByRarity();
+        FishData fish;
+        if (MapManager.Instance.CurrentStageData.IsBossStage)
+        {
+            fish = FishingManager.Instance.GetRandomBossFish();
+        }
+        else fish = FishingManager.Instance.GetRandomFishByRarity();
+        
         if (fish == null) return;
 
         int difficultyLevel = Formula.GetDifficultyLevel_FromMapManager();

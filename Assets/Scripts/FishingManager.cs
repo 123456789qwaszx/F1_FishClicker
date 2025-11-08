@@ -91,6 +91,8 @@ public class FishingManager : Singleton<FishingManager>
     private readonly List<FishData> _legendaryFishes = new();
     private readonly List<FishData> _mythicFishes = new();
     
+    private readonly List<FishData> _bossFishes = new();
+    
     [SerializeField] [Range(0, 100)] private float baseCommonPercent = 60f;
     [SerializeField] [Range(0, 100)] private float baseRarePercent = 25f;
     [SerializeField] [Range(0, 100)] private float baseEpicPercent = 10f;
@@ -167,6 +169,9 @@ public class FishingManager : Singleton<FishingManager>
         {
             if (fish.region != currentRegion)
                 continue;
+            
+            if(fish.isBoss)
+                _bossFishes.Add(fish);
 
             switch (fish.rarity)
             {
@@ -242,6 +247,14 @@ public class FishingManager : Singleton<FishingManager>
     {
         if (list == null || list.Count == 0) return null;
         return list[Random.Range(0, list.Count)];
+    }
+    
+    
+    public FishData GetRandomBossFish()
+    {
+        _bossFishes.Shuffle();
+        
+        return _bossFishes[0];
     }
 
     #endregion
