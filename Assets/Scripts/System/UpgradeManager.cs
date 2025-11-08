@@ -128,6 +128,12 @@ public class UpgradeManager : Singleton<UpgradeManager>
     
     #region Getter
     
+    
+    public Dictionary<string, UpgradeData> GetUpgradeCache()
+    {
+        return _upgradeCache;
+    }
+    
     public List<UpgradeData> GetAllUpgradeData()
     {
         return new List<UpgradeData>(_upgradeCache.Values);
@@ -160,6 +166,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
             return;
         
         upgradeData.level++;
+        _isDirty = true;
         
         GameManager.Instance.ChangeMoney(-cost);
         GameManager.Instance.IncreaseUsedMoneyAmount(cost);
@@ -167,6 +174,12 @@ public class UpgradeManager : Singleton<UpgradeManager>
         EventManager.Instance.TriggerEvent(EEventType.Upgraded);
     }
     
+    private bool _isDirty = true;
+    public bool IsUpgradeStatDirty => _isDirty;
+    public void MarkUpgradeStatClean()
+    {
+        _isDirty = false;
+    }
     #endregion
     
     #region Save / Load

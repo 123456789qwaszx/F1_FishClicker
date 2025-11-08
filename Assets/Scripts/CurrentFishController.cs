@@ -4,25 +4,25 @@ using UnityEngine;
 public class CurrentFishState
 {
     public FishData Fish { get; private set; }
-    public double MaxHP { get; private set; }
-    public double CurrentHP { get; private set; }
+    public double MaxHp { get; private set; }
+    public double CurrentHp { get; private set; }
     public double ClickPower { get; private set; }
 
-    public CurrentFishState(FishData fish, double maxHP, double clickPower)
+    public CurrentFishState(FishData fish, double maxHp, double clickPower)
     {
         Fish = fish;
-        MaxHP = maxHP;
-        CurrentHP = maxHP;
+        MaxHp = maxHp;
+        CurrentHp = maxHp;
         ClickPower = clickPower;
     }
 
     public void TakeDamage(double damage)
     {
-        CurrentHP -= damage;
-        if (CurrentHP < 0) CurrentHP = 0;
+        CurrentHp -= damage;
+        if (CurrentHp < 0) CurrentHp = 0;
     }
 
-    public bool IsDefeated() => CurrentHP <= 0;
+    public bool IsDefeated() => CurrentHp <= 0;
 }
 
 
@@ -33,16 +33,16 @@ public class CurrentFishController : MonoBehaviour
     
     public FishData CurFish => CurrentFishState?.Fish;
     
-    public double CurFishHp => CurrentFishState.CurrentHP;
+    public double CurFishHp => CurrentFishState.CurrentHp;
 
-    public double CurFishMaxHp =>CurrentFishState.MaxHP;
+    public double CurFishMaxHp =>CurrentFishState.MaxHp;
     
     public void SpawnNewFish()
     {
         FishData fish = FishingManager.Instance.GetRandomFishByRarity();
         if (fish == null) return;
 
-        double maxHp = MapManager.Instance.CurrentStageData.requiredCatchCount * 0.01;
+        double maxHp = MapManager.Instance.CurrentStageData.requiredCatchCount * 0.1;
         double clickPower = GameManager.Instance.GetTotalClickStat();
 
         CurrentFishState = new CurrentFishState(fish, maxHp, clickPower);

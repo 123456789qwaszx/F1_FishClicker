@@ -36,28 +36,44 @@ public class GameManager : Singleton<GameManager>
     #endregion
     
     #region Upgrade
-    //private readonly Dictionary<UpgradeType, UpgradeData> _upgradeInfo = new();
-    private readonly Dictionary<string, UpgradeData> _upgradeInfo = new();
     
+    private double _cachedTotalClickStat = 1;
     
+    // 외부에서 최종 수치 가져갈 때 사용
     public double GetTotalClickStat()
     {
+        if (UpgradeManager.Instance.IsUpgradeStatDirty)
+            RecalculateTotalClickStat();
+
+        return _cachedTotalClickStat;
+    }
+
+    // 실제 계산을 담당하는 메서드
+    private void RecalculateTotalClickStat()
+    {
+        Dictionary<string, UpgradeData> upgradeCache = UpgradeManager.Instance.GetUpgradeCache(); 
+        if (upgradeCache == null || upgradeCache.Count == 0)
+        {
+            _cachedTotalClickStat = 1;
+            UpgradeManager.Instance.MarkUpgradeStatClean();
+            return;
+        }
+        
         double result = 1;
 
-        foreach (UpgradeData data in _upgradeInfo.Values)
+        foreach (var data in upgradeCache.Values)
         {
             if (data.type.effectType == UpgradeEffectType.Additive)
                 result += data.GetCurStatValue();
-        }
-
-        foreach (UpgradeData data in _upgradeInfo.Values)
-        {
+            
             if (data.type.effectType == UpgradeEffectType.Multiplicative)
-                result *= (1.0 + data.GetCurStatValue() / 100.0); // 퍼센트 적용 가정
+                result *= (1.0 + data.GetCurStatValue() / 100.0);
         }
 
-        return result;
+        _cachedTotalClickStat = result;
+        UpgradeManager.Instance.MarkUpgradeStatClean();
     }
+
     #endregion
     
     #region Money

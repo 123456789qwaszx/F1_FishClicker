@@ -103,13 +103,13 @@ public class FishingManager : Singleton<FishingManager>
     private void OnEnable()
     {
         EventManager.Instance.AddEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
-        EventManager.Instance.AddEvent(EEventType.OnMapChanged, UpdateFishListsForCurrentMap);
+        EventManager.Instance.AddEvent(EEventType.OnMapChanged, RefreshFishListsFromCurrentMap);
     }
 
     private void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
-        EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, UpdateFishListsForCurrentMap);
+        EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, RefreshFishListsFromCurrentMap);
     }
 
     #region Init
@@ -120,7 +120,7 @@ public class FishingManager : Singleton<FishingManager>
         BuildFishCache();
         InitRarityProbability();
         ApplyRareOrAboveBonus();
-        UpdateFishListsForCurrentMap();
+        RefreshFishListsFromCurrentMap();
         EnsureControllerAssigned();
     }
 
@@ -152,7 +152,7 @@ public class FishingManager : Singleton<FishingManager>
         _rarityProb.ApplyRareBonus(extra);
     }
 
-    private void UpdateFishListsForCurrentMap()
+    private void RefreshFishListsFromCurrentMap()
     {
         _commonFishes.Clear();
         _rareFishes.Clear();
