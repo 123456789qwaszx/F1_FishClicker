@@ -80,6 +80,7 @@ public class UI_Phone : UI_Popup
         else
         {
             UIManager.Instance.CloseAllPopups();
+            UIManager.Instance.ShowPopup<UI_FishingGame>(popup => popup.RefreshFishUI());
         }
     }
 
