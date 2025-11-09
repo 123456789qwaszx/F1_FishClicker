@@ -217,6 +217,15 @@ public class FishingManager : Singleton<FishingManager>
 
     #region Getter
 
+    public FishData GetFishById(int id)
+    {
+        foreach (FishData fish in _fishCache.Values)
+        {
+            if (fish.id == id) return fish;
+        }
+        return null;
+    }
+    
     public List<FishData> GetAvailableFishes()
     {
         var allFishes = new List<FishData>(

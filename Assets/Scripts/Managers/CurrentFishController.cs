@@ -86,6 +86,9 @@ public class CurrentFishController : MonoBehaviour
         }
         
         Debug.Log($"물고기 {CurrentFishState.Fish.fishName} 처치!");
+
+        GameManager.Instance.RegisterCaughtFish(CurrentFishState.Fish);
+        
         long reward = CurrentFishState.Fish.baseValue;
         GameManager.Instance.ChangeMoney(reward);
         
