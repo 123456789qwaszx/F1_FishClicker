@@ -11,6 +11,8 @@ public class UI_BossStage : UI_Scene
     public Image Img_Boss;
     public Slider Slider_BossHP;
     public TextMeshProUGUI Txt_BossHP;
+    public Button Btn_Back;
+    public Button Btn_Skip;
 
     [Header("Timer UI")]
     public Slider Slider_Timer;
@@ -29,6 +31,12 @@ public class UI_BossStage : UI_Scene
     void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.OnAttackFish, UpdateBossHp);
+    }
+
+    protected override void Awake()
+    {
+        
+        gameObject.transform.localPosition = Vector3.zero;
     }
 
     /// <summary>
@@ -86,5 +94,18 @@ public class UI_BossStage : UI_Scene
 
         // TODO: 타임 오버 처리
         Debug.Log("Boss time over!");
+    }
+
+    public void OnReturnToStage()
+    {
+        MapManager.Instance.MoveToPrevStage();
+        GameEventHelper.OnReturnToStage();
+    }
+    
+    
+    public void OnSkipStage()
+    {
+        MapManager.Instance.MoveToNextMap();
+        GameEventHelper.OnReturnToStage();
     }
 }

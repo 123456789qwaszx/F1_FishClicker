@@ -46,6 +46,7 @@ public class UI_Title : UI_Scene
     protected override void Awake()
     {
         base.Awake();
+        gameObject.transform.localPosition = Vector3.zero;
 
         BindTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
@@ -67,7 +68,12 @@ public class UI_Title : UI_Scene
 
     void Btn_StartClick(PointerEventData _)
     {
-        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.UpdateMapUI(); });
+        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup =>
+        {
+            popup.UpdateHUD();
+            popup.UpdateRegionUI();
+        });
+        
         FishingManager.Instance.Controller.SpawnNewFish();
         UIManager.Instance.ShowPopup<UI_FishingGame>(popup => { popup.RefreshFishUI(); });
         

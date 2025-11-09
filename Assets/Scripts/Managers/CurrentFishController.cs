@@ -82,6 +82,21 @@ public class CurrentFishController : MonoBehaviour
     
     private void HandleFishDefeated()
     {
+        if (CurrentFishState.Fish.isBoss)
+        {
+            UIManager.Instance.ChangeSceneUI<UI_InGame>(popup =>
+            {
+                popup.UpdateRegionUI();
+                popup.UpdateHUD();
+            });
+            UIManager.Instance.ShowPopup<UI_FishingGame>(popup =>
+            {
+                popup.RefreshFishUI();
+            });
+            MapManager.Instance.MoveToNextMap();
+            EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+        }
+        
         Debug.Log($"물고기 {CurrentFishState.Fish.fishName} 처치!");
         long reward = CurrentFishState.Fish.baseValue;
         GameManager.Instance.ChangeMoney(reward);

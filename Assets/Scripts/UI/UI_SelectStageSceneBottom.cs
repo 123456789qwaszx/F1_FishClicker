@@ -30,7 +30,7 @@ public class UI_SelectStageSceneBottom : UI_Base
     #region EventHandler
     void OnClickInventoryButton(PointerEventData eventData)
     {
-        UIManager.Instance.ChangeSceneUI<UI_InGame>(popup => { popup.UpdateMapUI(); });
+        GameEventHelper.OnReturnToStage();
     }
 
     #endregion

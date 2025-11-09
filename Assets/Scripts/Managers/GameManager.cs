@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         
-        double result = 1;
+        double result = 10000;
 
         foreach (UpgradeData data in upgradeCache.Values)
         {

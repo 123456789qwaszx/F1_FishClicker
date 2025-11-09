@@ -45,6 +45,7 @@ public class UI_Phone : UI_Popup
     protected override void Awake()
     {
         base.Awake();
+        gameObject.transform.localPosition = Vector3.zero;
         
         UpgradePanelBox = ComponentHelper.TryFindChild(this, "UpgradePanelBox");
         AppMenuPanelBox = ComponentHelper.TryFindChild(this, "AppMenuPanelBox");

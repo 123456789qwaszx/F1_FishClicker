@@ -107,12 +107,18 @@ public class FishingManager : Singleton<FishingManager>
     {
         EventManager.Instance.AddEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.AddEvent(EEventType.OnMapChanged, RefreshFishListsFromCurrentMap);
+        EventManager.Instance.AddEvent(EEventType.OnStageChanged, RefreshFishListsFromCurrentMap);
+        EventManager.Instance.AddEvent(EEventType.OnMapChanged, Controller.SpawnNewFish);
+        EventManager.Instance.AddEvent(EEventType.OnStageChanged, Controller.SpawnNewFish);
     }
 
     private void OnDisable()
     {
         EventManager.Instance.RemoveEvent(EEventType.Upgraded, ApplyRareOrAboveBonus);
         EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, RefreshFishListsFromCurrentMap);
+        EventManager.Instance.RemoveEvent(EEventType.OnStageChanged, RefreshFishListsFromCurrentMap);
+        EventManager.Instance.RemoveEvent(EEventType.OnMapChanged, Controller.SpawnNewFish);
+        EventManager.Instance.RemoveEvent(EEventType.OnStageChanged, Controller.SpawnNewFish);
     }
 
     #region Init

@@ -28,6 +28,13 @@ public class UI_FishingGame : UI_Popup
         // EventManager.Instance.RemoveEvent(EEventType.OnFishDefeated, OnFishDefeated);
     }
 
+
+    protected override void Awake()
+    {
+        gameObject.transform.localPosition = Vector3.zero;
+        
+    }
+
     public void RefreshFishUI()
     {
         FishData fish = FishingManager.Instance.Controller.CurFish;
@@ -42,7 +49,7 @@ public class UI_FishingGame : UI_Popup
         
         Slider_FishHP.maxValue = 1;
         Slider_FishHP.value = ratio;
-        Txt_FishHP.text = $"{curHp}/{maxHp}";
+        Txt_FishHP.text = $"{(long)curHp}/{(long)maxHp}";
     }
 
     public void OnClickFish()
@@ -57,7 +64,7 @@ public class UI_FishingGame : UI_Popup
         float ratio = (float)(curHp / maxHp);
 
         Slider_FishHP.value = ratio;
-        Txt_FishHP.text = $"{curHp}/{maxHp}";
+        Txt_FishHP.text = $"{(long)curHp}/{(long)maxHp}";
         
         
         FishData fish = FishingManager.Instance.Controller.CurFish;

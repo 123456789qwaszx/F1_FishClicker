@@ -57,6 +57,7 @@ public class UI_SelectStageScene : UI_Scene
     {
         base.Init();
 
+        gameObject.transform.localPosition = Vector3.zero;
         BindButtons(typeof(Buttons));
         BindImages(typeof(Images));
         BindObjects(typeof(GameObjects));
