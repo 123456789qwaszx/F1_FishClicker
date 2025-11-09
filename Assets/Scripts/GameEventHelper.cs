@@ -23,6 +23,6 @@ public static class GameEventHelper
         {
             popup.RefreshFishUI();
         });
-        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
+        //EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
 }

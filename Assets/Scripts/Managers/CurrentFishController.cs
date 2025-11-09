@@ -27,20 +27,16 @@ public class CurrentFishState
 
 public class CurrentFishController : MonoBehaviour
 {
-    public CurrentFishState CurrentFishState { get; private set; }
-
+    private CurrentFishState CurrentFishState { get; set; }
     
     public FishData CurFish => CurrentFishState?.Fish;
-    
     public double CurFishHp => CurrentFishState.CurrentHp;
-
     public double CurFishMaxHp =>CurrentFishState.MaxHp;
 
     private void Awake()
     {
         CurrentFishState = new CurrentFishState();
     }
-    
     
     #region Fish Control
     
@@ -84,15 +80,7 @@ public class CurrentFishController : MonoBehaviour
     {
         if (CurrentFishState.Fish.isBoss)
         {
-            UIManager.Instance.ChangeSceneUI<UI_InGame>(popup =>
-            {
-                popup.UpdateRegionUI();
-                popup.UpdateHUD();
-            });
-            UIManager.Instance.ShowPopup<UI_FishingGame>(popup =>
-            {
-                popup.RefreshFishUI();
-            });
+            GameEventHelper.OnReturnToStage();
             MapManager.Instance.MoveToNextMap();
             EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
         }

@@ -75,7 +75,7 @@ public class UI_BossStage : UI_Scene
         
         Slider_BossHP.maxValue = 1;
         Slider_BossHP.value = ratio;
-        Txt_BossHP.text = $"{curHp}/{maxHp}";
+        Txt_BossHP.text = $"{Mathf.RoundToInt((float)curHp)}/{Mathf.RoundToInt((float)maxHp)}";
     }
 
     private IEnumerator BossTimerCoroutine()
@@ -100,6 +100,7 @@ public class UI_BossStage : UI_Scene
     {
         MapManager.Instance.MoveToPrevStage();
         GameEventHelper.OnReturnToStage();
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
     
     
@@ -107,5 +108,6 @@ public class UI_BossStage : UI_Scene
     {
         MapManager.Instance.MoveToNextMap();
         GameEventHelper.OnReturnToStage();
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
 }

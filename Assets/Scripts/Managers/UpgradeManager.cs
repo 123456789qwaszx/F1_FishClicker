@@ -6,8 +6,6 @@ public enum UpgradeEffectType
 {
     Additive,
     Multiplicative,
-    RareFishChance,
-    AutoFishingAmount,
 }
 
 [Serializable]

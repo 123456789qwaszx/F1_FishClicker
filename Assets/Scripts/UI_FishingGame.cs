@@ -49,7 +49,7 @@ public class UI_FishingGame : UI_Popup
         
         Slider_FishHP.maxValue = 1;
         Slider_FishHP.value = ratio;
-        Txt_FishHP.text = $"{(long)curHp}/{(long)maxHp}";
+        Txt_FishHP.text = $"{Mathf.RoundToInt((float)curHp)}/{Mathf.RoundToInt((float)maxHp)}";
     }
 
     public void OnClickFish()
@@ -64,7 +64,7 @@ public class UI_FishingGame : UI_Popup
         float ratio = (float)(curHp / maxHp);
 
         Slider_FishHP.value = ratio;
-        Txt_FishHP.text = $"{(long)curHp}/{(long)maxHp}";
+        Txt_FishHP.text = $"{Mathf.RoundToInt((float)curHp)}/{Mathf.RoundToInt((float)maxHp)}";
         
         
         FishData fish = FishingManager.Instance.Controller.CurFish;

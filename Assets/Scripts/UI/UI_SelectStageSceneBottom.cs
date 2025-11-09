@@ -31,6 +31,8 @@ public class UI_SelectStageSceneBottom : UI_Base
     void OnClickInventoryButton(PointerEventData eventData)
     {
         GameEventHelper.OnReturnToStage();
+        
+        EventManager.Instance.TriggerEvent(EEventType.OnMapChanged);
     }
 
     #endregion

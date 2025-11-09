@@ -10,6 +10,19 @@ public enum FishRarity
     Mythic
 }
 
+[System.Serializable]
+public class FishData
+{
+    public int id;
+    public string fishName;
+    public FishRarity rarity;
+    public long baseValue;
+    public string spritePath;
+    public string description;
+    public string region;
+    public bool isBoss;
+}
+
 
 public class FishRarityProbability
 {
@@ -63,20 +76,6 @@ public class FishRarityProbability
 
         return FishRarity.Common;
     }
-}
-
-
-[System.Serializable]
-public class FishData
-{
-    public int id;
-    public string fishName;
-    public FishRarity rarity;
-    public long baseValue;
-    public string spritePath;
-    public string description;
-    public string region;
-    public bool isBoss;
 }
 
 
