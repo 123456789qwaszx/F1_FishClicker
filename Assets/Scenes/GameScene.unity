@@ -9622,6 +9622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d08d77b38feb84aa8c259daa7f7e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  floatingTextPrefab: {fileID: 5415084614657658335, guid: a244e3d98129b5c4f8e50d07b9c37b59, type: 3}
+  canvas: {fileID: 676657372}
   fishDatabase: {fileID: 0}
 --- !u!114 &1413158865
 MonoBehaviour:
@@ -9649,11 +9651,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6a170fbdcc4a34aa0c1599d9da2b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingSystem
-  baseCommonPercent: 60
-  baseRarePercent: 25
-  baseEpicPercent: 10
-  baseLegendaryPercent: 5
-  baseMythicPercent: 1
+  baseCommonPercent: 80
+  baseRarePercent: 15
+  baseEpicPercent: 4
+  baseLegendaryPercent: 0.7
+  baseMythicPercent: 0.3
 --- !u!114 &1413158867
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -128,7 +128,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
     
     #region Getter
     
-    
     public Dictionary<string, UpgradeData> GetUpgradeCache()
     {
         return _upgradeCache;
@@ -139,10 +138,9 @@ public class UpgradeManager : Singleton<UpgradeManager>
         return new List<UpgradeData>(_upgradeCache.Values);
     }
     
-    
     public long GetUpgradeAmount(string upgradeId)
     {
-        if (_upgradeCache.TryGetValue(upgradeId, out var data))
+        if (_upgradeCache.TryGetValue(upgradeId, out UpgradeData data))
             return data.GetCurStatValue();
 
         return 0;

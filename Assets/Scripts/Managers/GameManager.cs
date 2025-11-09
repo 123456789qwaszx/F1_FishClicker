@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class GameData
 
 public class GameManager : Singleton<GameManager>
 {
+    public FloatingText floatingTextPrefab;
+    public Canvas canvas; // Canvas 참조 추가
+    
     GameData _gameData = new GameData();
     
     #region Stage
@@ -64,7 +68,7 @@ public class GameManager : Singleton<GameManager>
         
         double result = 1;
 
-        foreach (var data in upgradeCache.Values)
+        foreach (UpgradeData data in upgradeCache.Values)
         {
             if (data.type.effectType == UpgradeEffectType.Additive)
                 result += data.GetCurStatValue();
@@ -95,6 +99,60 @@ public class GameManager : Singleton<GameManager>
 
         _money += money;
     }
+    #endregion
+
+    #region FloatTexts
+
+    void CreateFloatingText(long moneyToAdd)
+    {
+        {
+            Vector2 anchoredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                Input.mousePosition,
+                canvas.worldCamera,
+                out anchoredPos
+            );
+
+            FloatingText ft = Instantiate(floatingTextPrefab, canvas.transform).GetComponent<FloatingText>();
+            ft.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+            ft.Setup(moneyToAdd);
+        }
+    }
+    
+
+    #endregion
+    
+    #region AutoFishing
+    
+    private Coroutine _autoFishingCoroutine;
+    public void AutoFishingInit()
+    {
+        StartCoroutine(WaitAndInitClickSystem());
+    }
+
+    private IEnumerator WaitAndInitClickSystem()
+    {
+        while (FishingManager.Instance == null)
+            yield return null;
+
+        if (_autoFishingCoroutine != null)
+            StopCoroutine(_autoFishingCoroutine);
+
+        _autoFishingCoroutine = StartCoroutine(AutoFishingRoutine());
+        Debug.Log("자동낚시 실행");
+    }
+    
+    private IEnumerator AutoFishingRoutine()
+    {
+        while (true)
+        {
+            FishingManager.Instance.Controller.AttackCurrentFish();
+            
+            yield return new WaitForSeconds(1);
+        }
+    }
+    
     #endregion
 
     

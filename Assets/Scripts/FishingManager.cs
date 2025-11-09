@@ -93,11 +93,11 @@ public class FishingManager : Singleton<FishingManager>
     
     private readonly List<FishData> _bossFishes = new();
     
-    [SerializeField] [Range(0, 100)] private float baseCommonPercent = 60f;
-    [SerializeField] [Range(0, 100)] private float baseRarePercent = 25f;
-    [SerializeField] [Range(0, 100)] private float baseEpicPercent = 10f;
-    [SerializeField] [Range(0, 100)] private float baseLegendaryPercent = 4f;
-    [SerializeField] [Range(0, 100)] private float baseMythicPercent = 1f;
+    [SerializeField] [Range(0, 100)] private float baseCommonPercent = 80f;
+    [SerializeField] [Range(0, 100)] private float baseRarePercent = 15f;
+    [SerializeField] [Range(0, 100)] private float baseEpicPercent = 4f;
+    [SerializeField] [Range(0, 100)] private float baseLegendaryPercent = 0.7f;
+    [SerializeField] [Range(0, 100)] private float baseMythicPercent = 0.3f;
 
     private FishRarityProbability _rarityProb;
 
